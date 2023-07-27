@@ -42,6 +42,13 @@ def parse_quotes(input_text):
     
     return quotes_data
 
+# remove any substrings
+def is_substring(quote, other_quotes):
+    for other_quote in other_quotes:
+        if quote != other_quote and quote['Quote'] in other_quote['Quote']:
+            return True
+    return False
+
 input_file = 'clippings.txt'
 
 with open(input_file, 'r' , encoding='utf-8') as file:
@@ -49,6 +56,13 @@ with open(input_file, 'r' , encoding='utf-8') as file:
 
  
 quotes_data = parse_quotes(input_text)
+
+filtered_quotes = []
+
+for quote in quotes_data:
+    if not is_substring(quote, quotes_data):
+        filtered_quotes.append(quote)
+
 
 # Save the data into a JSON file
 with open('quotes.json', 'w') as json_file:
