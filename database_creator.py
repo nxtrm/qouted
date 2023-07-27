@@ -28,7 +28,7 @@ def parse_quotes(input_text):
         data['Author'] = lines[0][(lines[0].find("(") + 1):(lines[0].find(")"))]
         data['DateAdded'] = lines[1][(lines[1].find("| Added on") +11) :]
 
-        text = quote[quote.find("\n\n"): quote.find("==========")]
+        text = quote[quote.find("\n\n")::]
 
         data['Quote'] = remove_unicode(text)
     
