@@ -24,7 +24,7 @@ def parse_quotes(input_text):
         
         data["id"] = counter
 
-        data['BookName'] = lines[0].strip()[1:lines[0].strip().find("(")-1]
+        data['BookName'] = remove_unicode(lines[0].strip()[0:lines[0].strip().find("(")-1]) 
         data['Author'] = lines[0][(lines[0].find("(") + 1):(lines[0].find(")"))]
         data['DateAdded'] = lines[1][(lines[1].find("| Added on") +11) :]
 
@@ -45,7 +45,7 @@ def parse_quotes(input_text):
 # remove any substrings
 def is_substring(quote, other_quotes):
     for other_quote in other_quotes:
-        if quote != other_quote and quote['Quote'] in other_quote['Quote']:
+        if quote != other_quote and (quote['Quote'] in other_quote['Quote'] or quote['Quote'] == other_quote['Quote']):
             return True
     return False
 
