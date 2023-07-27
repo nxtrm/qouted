@@ -45,7 +45,7 @@ def parse_quotes(input_text):
 # remove any substrings
 def is_substring(quote, other_quotes):
     for other_quote in other_quotes:
-        if quote != other_quote and (quote['Quote'] in other_quote['Quote'] or quote['Quote'] == other_quote['Quote']):
+        if quote != other_quote and quote['Quote'] in other_quote['Quote']:
             return True
     return False
 
