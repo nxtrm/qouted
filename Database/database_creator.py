@@ -1,6 +1,10 @@
 import re
 import json
 
+#remove any unicode chars
+def remove_unicode(text):
+    return text.encode('ascii', 'ignore').decode('ascii')
+
 def parse_quotes(input_text):
 
     counter = 0
@@ -20,10 +24,13 @@ def parse_quotes(input_text):
         
         data["id"] = counter
 
-        data['BookName'] = lines[0].strip()
+        data['BookName'] = lines[0].strip()[1:lines[0].strip().find("(")-1]
         data['Author'] = lines[0][(lines[0].find("(") + 1):(lines[0].find(")"))]
         data['DateAdded'] = lines[1][(lines[1].find("| Added on") +11) :]
-        data['Quote'] = quote[quote.find("\n\n"): quote.find("==========")]
+
+        text = quote[quote.find("\n\n"): quote.find("==========")]
+
+        data['Quote'] = remove_unicode(text)
     
 
         # Remove extra spaces from the quote
