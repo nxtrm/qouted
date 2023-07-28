@@ -12,46 +12,48 @@ def is_substring(quote, other_quotes):
             return True
     return False
 
+def check_book(book_data, lastBookName, lines, bookID):
+    book = {}
+    #Write the book data into a separate file
+    bookName = remove_unicode(lines[0].strip()[0:lines[0].strip().find("(")-1])
+    if bookName != lastBookName:
+            bookID = bookID+1
+            book["id"] = bookID
+            book["Name"] = bookName
+            book["Author"] = lines[0][(lines[0].find("(") + 1):(lines[0].find(")"))]
+            book_data.append(book)
+
+    return bookID, bookName, book_data
+
 #extract quotes
 def parse_data(input_text):
-
-    book_data = []
-    lastBookName = "Atomic Habits" #To fix later
-    bookID = 0
-
 
     quotes_data = []
     separator = r"\n==========\n"
     quotes = re.split(separator, input_text)
     quoteID = 0
 
+    book_data = []
+    
+    #get first book name
+    lastBookName=""
+    bookID = -1
 
     for quote in quotes:
         if not quote.strip():
             continue
-
-        book = {}
+        
         data = {}
-
         lines = quote.strip().split("\n")
-
+        
+        bookID, lastBookName, book_data = check_book(book_data, lastBookName, lines, bookID)
+        
         #Extracting/ generating metadata
         data["Id"] = quoteID
         data["bookId"] = bookID
         data['DateAdded'] = lines[1][(lines[1].find("| Added on") +11) :]
         
-        #Write the book data into a separate file
-        bookName = remove_unicode(lines[0].strip()[0:lines[0].strip().find("(")-1])
-        if bookName != lastBookName:
-            book["id"] = bookID
-            book["Name"] = bookName
-            book["Author"] = lines[0][(lines[0].find("(") + 1):(lines[0].find(")"))]
-            book_data.append(book)
-
-            bookID = bookID+1
-            lastBookName = bookName
-
-
+        
         #Extracting the quote
         text = quote[quote.find("\n\n")::]
         data['Quote'] = remove_unicode(text)
