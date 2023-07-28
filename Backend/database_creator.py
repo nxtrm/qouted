@@ -34,7 +34,7 @@ def parse_data(input_text):
     quoteID = 0
 
     book_data = []
-    
+
     #get first book name
     lastBookName=""
     bookID = -1
@@ -67,7 +67,7 @@ def parse_data(input_text):
 
 
 #1. Open the file with quotes
-input_file = 'clippings.txt'
+input_file = '../Data/clippings.txt'
 with open(input_file, 'r' , encoding='utf-8') as file:
     input_text = file.read()
 
@@ -82,10 +82,10 @@ for quote in quotes_data:
 
 
 #4. Save the data into a JSON file
-with open('books.json', 'w') as json_file:
+with open('../Data/books.json', 'w') as json_file:
     json.dump( book_data, json_file)
 
-with open('quotes.json', 'w') as json_file:
+with open('../Data/quotes.json', 'w') as json_file:
     json.dump(quotes_data, json_file)
 
 print("Quotes extracted and saved")
