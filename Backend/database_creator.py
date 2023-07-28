@@ -27,6 +27,11 @@ def parse_quotes(input_text):
         data = {}
 
         lines = quote.strip().split("\n")
+
+        #Extracting/ generating metadata
+        data["Id"] = quoteID
+        data["bookId"] = bookID
+        data['DateAdded'] = lines[1][(lines[1].find("| Added on") +11) :]
         
         #Write the book data into a separate file
         bookName = remove_unicode(lines[0].strip()[0:lines[0].strip().find("(")-1])
@@ -40,9 +45,6 @@ def parse_quotes(input_text):
             lastBookName = bookName
 
 
-        #Extracting/ generating metadata
-        data["id"] = quoteID
-        data['DateAdded'] = lines[1][(lines[1].find("| Added on") +11) :]
 
         #Extracting the quote
         text = quote[quote.find("\n\n")::]
