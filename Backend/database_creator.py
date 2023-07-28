@@ -5,16 +5,23 @@ import json
 def remove_unicode(text):
     return text.encode('ascii', 'ignore').decode('ascii')
 
-def parse_quotes(input_text):
+# remove any substrings
+def is_substring(quote, other_quotes):
+    for other_quote in other_quotes:
+        if quote != other_quote and quote['Quote'] in other_quote['Quote']:
+            return True
+    return False
+
+#extract quotes
+def parse_data(input_text):
 
     book_data = []
-    
-    lastBookName = ""
+    lastBookName = "Atomic Habits" #To fix later
     bookID = 0
 
 
-    separator = r"\n==========\n"
     quotes_data = []
+    separator = r"\n==========\n"
     quotes = re.split(separator, input_text)
     quoteID = 0
 
@@ -45,7 +52,6 @@ def parse_quotes(input_text):
             lastBookName = bookName
 
 
-
         #Extracting the quote
         text = quote[quote.find("\n\n")::]
         data['Quote'] = remove_unicode(text)
@@ -57,20 +63,14 @@ def parse_quotes(input_text):
     
     return quotes_data, book_data
 
-# remove any substrings
-def is_substring(quote, other_quotes):
-    for other_quote in other_quotes:
-        if quote != other_quote and quote['Quote'] in other_quote['Quote']:
-            return True
-    return False
 
-#1. Open the filq with quotes
+#1. Open the file with quotes
 input_file = 'clippings.txt'
 with open(input_file, 'r' , encoding='utf-8') as file:
     input_text = file.read()
 
 #2. Extract quotes
-quotes_data, book_data = parse_quotes(input_text)
+quotes_data, book_data = parse_data(input_text)
 
 #3. Filter quotes to find substrings
 filtered_quotes = []
@@ -86,4 +86,4 @@ with open('books.json', 'w') as json_file:
 with open('quotes.json', 'w') as json_file:
     json.dump(quotes_data, json_file)
 
-print("Quotes extracted and saved to 'quotes.json'")
+print("Quotes extracted and saved")
