@@ -1,5 +1,6 @@
-import { Box, Text, HStack, Heading, Button, VStack } from "@chakra-ui/react";
+import { Box, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import "./App.css";
+import LikeButton from "./Components/LikeButton";
 
 function App() {
   return (
@@ -21,9 +22,8 @@ function App() {
         </HStack>
 
         <HStack>
-          <Button />
-          <Button />
-          <Text textColor={"gray.500"} fontSize={"1xl"}>
+          <LikeButton />
+          <Text textColor={"gray.500"} fontSize={"ls"}>
             Added on 7th of April 2023
           </Text>
         </HStack>
