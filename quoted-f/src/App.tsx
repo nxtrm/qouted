@@ -1,27 +1,27 @@
-import { Box, HStack, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  Heading,
+  SimpleGrid,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import "./App.css";
-import LikeButton from "./Components/LikeButton";
 import EditButton from "./Components/EditButton";
+import LikeButton from "./Components/LikeButton";
+import BookInfo from "./Components/BookInfo";
 
 function App() {
   return (
     <Box className="centered-container">
       <VStack>
         <HStack>
-          <Text maxWidth={"500px"} fontSize={"20px"}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam feugiat
-            nunc dolor, vel tincidunt ipsum dictum et.
+          <Text maxWidth={500} fontSize={20}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id
+            enim nec nisi blandit interdum.
           </Text>
-          <VStack>
-            <Heading textColor={"gray.300"} fontSize={18}>
-              Book Name
-            </Heading>
-            <Heading textColor={"gray.500"} fontSize={17}>
-              Author Name
-            </Heading>
-          </VStack>
+          <BookInfo />
         </HStack>
-
         <HStack>
           <LikeButton />
           <EditButton />
