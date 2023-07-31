@@ -12,3 +12,4 @@ dist
 stats.html
 
 .eslintcache
+keys.py
