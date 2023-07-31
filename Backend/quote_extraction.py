@@ -59,6 +59,8 @@ def parse_data(input_text):
         data['Quote'] = remove_unicode(text)
         data['Quote'] = data['Quote'].strip()
 
+        if len(data["Quote"]) == 0:
+            pass
 
         quotes_data.append(data)
 
