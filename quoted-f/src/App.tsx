@@ -1,15 +1,9 @@
-import {
-  Box,
-  HStack,
-  Heading,
-  SimpleGrid,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import "./App.css";
+import BookInfo from "./Components/BookInfo";
 import EditButton from "./Components/EditButton";
 import LikeButton from "./Components/LikeButton";
-import BookInfo from "./Components/BookInfo";
+import DeleteButton from "./Components/DeleteButton";
 
 function App() {
   return (
@@ -25,6 +19,7 @@ function App() {
         <HStack>
           <LikeButton />
           <EditButton />
+          <DeleteButton />
           <Text textColor={"gray.500"} fontSize={"ls"}>
             Added on 7th of April 2023
           </Text>
