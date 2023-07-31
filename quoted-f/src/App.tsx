@@ -3,8 +3,7 @@ import "./App.css";
 import BookInfo from "./Components/BookInfo";
 import EditButton from "./Components/EditButton";
 import LikeButton from "./Components/LikeButton";
-import DeleteButton from "./Components/DeleteButton";
-import DeleteQuote from "./Components/DeleteQuote";
+import NextButton from "./Components/NextButton";
 
 function App() {
   return (
@@ -18,12 +17,15 @@ function App() {
           <BookInfo />
         </HStack>
         <HStack>
-          <LikeButton />
-          <EditButton />
-          <DeleteQuote />
-          <Text textColor={"gray.500"} fontSize={"ls"}>
+          <Text textColor={"gray.600"} fontSize={"15px"}>
             Added on 7th of April 2023
           </Text>
+          <Box marginX={4}>
+            <LikeButton />
+            <EditButton />
+            <NextButton />
+          </Box>
+          {/* <DeleteButton /> */}
         </HStack>
       </VStack>
     </Box>

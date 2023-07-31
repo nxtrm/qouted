@@ -37,7 +37,9 @@ function DeleteQuote() {
             <Button mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme="red">Delete</Button>
+            <Button variant={"outline"} colorScheme="red">
+              Delete
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

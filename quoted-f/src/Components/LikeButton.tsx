@@ -9,6 +9,7 @@ const LikeButton = () => {
   if (liked)
     return (
       <IconButton
+        marginX={0.5}
         color={"green.100"}
         fontSize="25px"
         onClick={() => setLiked(false)}
@@ -18,6 +19,7 @@ const LikeButton = () => {
     );
   return (
     <IconButton
+      marginX={0.5}
       bgColor="transparent"
       fontSize="25px"
       onClick={() => setLiked(true)}
