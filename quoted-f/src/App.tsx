@@ -4,6 +4,7 @@ import BookInfo from "./Components/BookInfo";
 import EditButton from "./Components/EditButton";
 import LikeButton from "./Components/LikeButton";
 import DeleteButton from "./Components/DeleteButton";
+import DeleteQuote from "./Components/DeleteQuote";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <HStack>
           <LikeButton />
           <EditButton />
-          <DeleteButton />
+          <DeleteQuote />
           <Text textColor={"gray.500"} fontSize={"ls"}>
             Added on 7th of April 2023
           </Text>
