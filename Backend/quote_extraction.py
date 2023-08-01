@@ -18,9 +18,10 @@ def check_book(book_data, lastBookName, lines, bookID):
     book = {}
     #Write the book data into a separate file
     bookName = remove_unicode(lines[0].strip()[0:lines[0].strip().find("(")-1])
-    if bookName != lastBookName:
+    if bookName != lastBookName :
+
             bookID = bookID+1
-            book["id"] = bookID
+                
             book["Name"] = bookName
             book["Author"] = lines[0][(lines[0].find("(") + 1):(lines[0].find(")"))]
             book_data.append(book)
@@ -51,7 +52,7 @@ def parse_data(input_text):
         bookID, lastBookName, book_data = check_book(book_data, lastBookName, lines, bookID)
         
         #Extracting/ generating metadata
-        data["Id"] = quoteID
+        # data["Id"] = quoteID
         data["bookId"] = bookID
         data['DateAdded'] = lines[1][(lines[1].find("| Added on") +11) :]
         

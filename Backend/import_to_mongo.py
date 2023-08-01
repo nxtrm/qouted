@@ -1,9 +1,9 @@
-
 import pymongo
 from pymongo import MongoClient
 
 from quote_extraction import filter_quotes, parse_data
 
+#initializing the database
 client=pymongo.MongoClient("mongodb://localhost:27017/")
 mydb=client["quotes"]
 
@@ -14,10 +14,10 @@ input_file = './Data/clippings.txt'
 with open(input_file, 'r' , encoding='utf-8') as file:
     input_text = file.read()
 
-#2. Extract quotes
+#2. Extracting quotes
 quotes_data, book_data = parse_data(input_text)
 
-#3. Filter quotes to find substrings 
+#3. Filtering quotes 
 filtered_quotes = []
 for quote in quotes_data:
     if not filter_quotes(quote, quotes_data):
