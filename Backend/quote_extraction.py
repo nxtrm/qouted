@@ -6,9 +6,11 @@ def remove_unicode(text):
     return text.encode('ascii', 'ignore').decode('ascii')
 
 # remove any substrings
-def is_substring(quote, other_quotes):
+def filter_quotes(quote, other_quotes):
     for other_quote in other_quotes:
         if quote != other_quote and quote['Quote'] in other_quote['Quote']:
+            return True
+        elif len(quote["Quote"]) == 0:
             return True
     return False
 
@@ -58,9 +60,6 @@ def parse_data(input_text):
         text = quote[quote.find("\n\n")::]
         data['Quote'] = remove_unicode(text)
         data['Quote'] = data['Quote'].strip()
-
-        if len(data["Quote"]) == 0:
-            pass
 
         quotes_data.append(data)
 

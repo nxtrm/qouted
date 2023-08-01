@@ -1,8 +1,8 @@
+
 import pymongo
 from pymongo import MongoClient
-import json
 
-from quote_extraction import is_substring, parse_data 
+from quote_extraction import filter_quotes, parse_data
 
 client=pymongo.MongoClient("mongodb://localhost:27017/")
 mydb=client["quotes"]
@@ -17,10 +17,10 @@ with open(input_file, 'r' , encoding='utf-8') as file:
 #2. Extract quotes
 quotes_data, book_data = parse_data(input_text)
 
-#3. Filter quotes to find substrings
+#3. Filter quotes to find substrings 
 filtered_quotes = []
 for quote in quotes_data:
-    if not is_substring(quote, quotes_data):
+    if not filter_quotes(quote, quotes_data):
         filtered_quotes.append(quote)
 
 quotes.insert_many(filtered_quotes)
