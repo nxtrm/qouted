@@ -68,27 +68,3 @@ def parse_data(input_text):
     
     return quotes_data, book_data
 
-
-#1. Open the file with quotes
-input_file = './Data/clippings.txt'
-with open(input_file, 'r' , encoding='utf-8') as file:
-    input_text = file.read()
-
-#2. Extract quotes
-quotes_data, book_data = parse_data(input_text)
-
-#3. Filter quotes to find substrings
-filtered_quotes = []
-for quote in quotes_data:
-    if not is_substring(quote, quotes_data):
-        filtered_quotes.append(quote)
-
-
-#4. Save the data into a JSON file
-with open('./Data/books.json', 'w') as json_file:
-    json.dump( book_data, json_file)
-
-with open('./Data/quotes.json', 'w') as json_file:
-    json.dump(quotes_data, json_file)
-
-print("Quotes extracted and saved")
