@@ -3,6 +3,7 @@ import {
   Grid,
   GridItem,
   HStack,
+  SimpleGrid,
   Spinner,
   Text,
   VStack,
@@ -21,40 +22,36 @@ function App() {
 
   return (
     <Grid
-      h="200px"
+      h="600px"
       templateRows="repeat(2, 1fr)"
-      templateColumns="repeat(6, 1fr)"
+      templateColumns="repeat(7, 1fr)"
       gap={4}
     >
-      <GridItem rowSpan={2} colSpan={1} bg="tomato"></GridItem>
-      <GridItem colSpan={3}>
-        <Text maxWidth={500} fontSize={20}>
-          {quote?.Quote}
-        </Text>
+      {/* <GridItem colSpan={5} bg="tomato"></GridItem> */}
+      <GridItem rowSpan={2} colSpan={1} bg="tomato">
+        Menu
       </GridItem>
-      <GridItem colSpan={2}>
+      <GridItem className="centered-container" colSpan={4}>
         <VStack>
+          <Text maxWidth={500} fontSize={20}>
+            {quote?.Quote}
+          </Text>
+          <Text marginY={4} textColor={"gray.600"} fontSize={"15px"}>
+            Added on {quote?.DateAdded}
+          </Text>
+        </VStack>
+      </GridItem>
+      <GridItem className="centered-container" colSpan={2}>
+        <SimpleGrid columns={1} spacing={"5px"}>
           <BookInfo bookName={quote?.BookName} authorName={quote?.AuthorName} />
-          <Box marginX={4}>
+          <Box marginY={4}>
             <EditButton />
             <LikeComponent />
             <NextButton />
           </Box>
-        </VStack>
+        </SimpleGrid>
       </GridItem>
-      <GridItem colSpan={5} bg="tomato"></GridItem>
     </Grid>
-
-    //     <VStack>
-    //       <HStack>
-    //       </HStack>
-    //       <HStack>
-    //         <Text textColor={"gray.600"} fontSize={"15px"}>
-    //           {quote?.DateAdded}
-    //         </Text>
-    //         {/* <DeleteButton /> */}
-    //       </HStack>
-    //     </VStack>
   );
 }
 

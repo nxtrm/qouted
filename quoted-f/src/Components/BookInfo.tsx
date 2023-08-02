@@ -8,7 +8,7 @@ interface Props {
 const BookInfo = ({ bookName, authorName }: Props) => {
   return (
     <VStack>
-      <Heading textColor={"gray.300"} fontSize={18}>
+      <Heading maxWidth={200} textColor={"gray.300"} fontSize={18}>
         {bookName}
       </Heading>
       <Heading textColor={"gray.500"} fontSize={17}>
