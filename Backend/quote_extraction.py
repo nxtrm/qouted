@@ -22,7 +22,7 @@ def filter_quotes(quote, other_quotes):
 def clean_up (quote):
         
          #Add a full stop
-        if quote["Quote"][-1] == " " or quote["Quote"][-1] == ",":
+        if quote["Quote"][-1] == " " or quote["Quote"][-1] == "," or quote["Quote"][-1] == ";" or quote["Quote"][-1] == ":":
             quote["Quote"] = quote["Quote"][:-1] + "."
         if quote["Quote"][-1] != ".":
             quote["Quote"] = quote["Quote"] + "."

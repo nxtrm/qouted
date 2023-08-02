@@ -1,4 +1,4 @@
-import { Box, HStack, Spinner, Text, VStack } from "@chakra-ui/react";
+import { Badge, Box, HStack, Spinner, Text, VStack } from "@chakra-ui/react";
 import "./App.css";
 import BookInfo from "./Components/BookInfo";
 import EditButton from "./Components/EditButton";
@@ -6,6 +6,7 @@ import LikeButton from "./Components/LikeButton";
 import NextButton from "./Components/NextButton";
 import useQuote from "./hooks/useQuotes";
 import LikeCount from "./Components/LikeCount";
+import LikeComponent from "./Components/LikeComponent";
 
 function App() {
   const { data: quote, isLoading } = useQuote();
@@ -26,9 +27,8 @@ function App() {
             {quote?.DateAdded}
           </Text>
           <Box marginX={4}>
-            <LikeCount likes={10} />
-            <LikeButton />
             <EditButton />
+            <LikeComponent />
             <NextButton />
           </Box>
           {/* <DeleteButton /> */}

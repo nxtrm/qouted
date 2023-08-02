@@ -9,9 +9,11 @@ const LikeButton = () => {
   if (liked)
     return (
       <IconButton
-        marginX={0.5}
+        height={8}
+        width={8}
+        marginY={1}
         color={"green.100"}
-        fontSize="25px"
+        fontSize="24px"
         onClick={() => setLiked(false)}
         aria-label="Like"
         icon={<AiFillLike />}
@@ -19,9 +21,11 @@ const LikeButton = () => {
     );
   return (
     <IconButton
-      marginX={0.5}
+      height={8}
+      width={8}
+      marginY={1}
       bgColor="transparent"
-      fontSize="25px"
+      fontSize="24px"
       onClick={() => setLiked(true)}
       aria-label="Like"
       icon={<AiOutlineLike />}
