@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 export interface FetchResponse<T> {
   results: T[];
@@ -12,9 +12,6 @@ const axiosInstance = axios.create({
     'Access-Control-Allow-Credentials': 'true',
     'Access-Control-Allow-Methods': ' GET'
   }
-  // params: {
-  //   key: '',
-  // },
 });
 
 
@@ -32,7 +29,6 @@ class APIClient<T> {
   // };
 
   getRandomQuote = () => {
-    // console.log(this.endpoint)
     return axiosInstance
       .get<T>(this.endpoint)
       .then((res) => res.data);

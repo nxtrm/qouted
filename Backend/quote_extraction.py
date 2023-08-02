@@ -8,11 +8,28 @@ def remove_unicode(text):
 # remove any substrings
 def filter_quotes(quote, other_quotes):
     for other_quote in other_quotes:
+        if len(quote["Quote"]) > 200:
+             return True
+
         if quote != other_quote and quote['Quote'] in other_quote['Quote']:
             return True
         elif len(quote["Quote"]) == 0:
             return True
+        
     return False
+
+
+def clean_up (quote):
+        
+         #Add a full stop
+        if quote["Quote"][-1] == " " or quote["Quote"][-1] == ",":
+            quote["Quote"] = quote["Quote"][:-1] + "."
+        if quote["Quote"][-1] != ".":
+            quote["Quote"] = quote["Quote"] + "."
+        
+        #Fix casing
+        quote["Quote"] = quote["Quote"].capitalize()
+        return quote 
 
 def check_book(book_data, lastBookName, lines, bookID):
     book = {}
@@ -21,7 +38,7 @@ def check_book(book_data, lastBookName, lines, bookID):
     if bookName != lastBookName :
 
             bookID = bookID+1
-                
+            book["id"] = bookID
             book["Name"] = bookName
             book["Author"] = lines[0][(lines[0].find("(") + 1):(lines[0].find(")"))]
             book_data.append(book)

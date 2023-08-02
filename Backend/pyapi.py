@@ -31,14 +31,4 @@ if __name__ == '__main__':
   
     app.run(host="0.0.0.0", port=5000)
 
-    # quote = list(quotes.aggregate([{ '$sample': { 'size': 1 } }]))[0]
-    # book = list(books.find({"id": quote["bookId"]}))[0]
-
-    # data = {}
-    # data["Quote"] = quote["Quote"]
-    # data['DateAdded'] = quote["DateAdded"]
-    # data["BookName"] = book["Name"]
-    # data["Author"] = book["Author"]
-    # print(data)
-
   

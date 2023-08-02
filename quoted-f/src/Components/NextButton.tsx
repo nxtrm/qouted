@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 import { BsPlayFill } from "react-icons/bs";
 
 const NextButton = () => {

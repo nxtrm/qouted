@@ -2,10 +2,10 @@ import { useQuery } from "react-query";
 import APIClient from "../services/api-client";
 
 interface Quote {
-  Quote: string;
-  DateAdded: string;
-  BookName: string;
   AuthorName: string;
+  BookName: string;
+  DateAdded: string;
+  Quote: string;
 }
 
 const apiClient = new APIClient<Quote>("/getrandomquote");
