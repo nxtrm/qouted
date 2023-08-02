@@ -1,13 +1,18 @@
 import { VStack, Heading } from "@chakra-ui/react";
 
-const BookInfo = () => {
+interface Props {
+  bookName: string | undefined;
+  authorName: string | undefined;
+}
+
+const BookInfo = ({ bookName, authorName }: Props) => {
   return (
     <VStack>
       <Heading textColor={"gray.300"} fontSize={18}>
-        Book Name
+        {bookName}
       </Heading>
       <Heading textColor={"gray.500"} fontSize={17}>
-        Author Name
+        {authorName}
       </Heading>
     </VStack>
   );

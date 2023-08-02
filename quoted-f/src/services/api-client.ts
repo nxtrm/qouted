@@ -1,16 +1,20 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 export interface FetchResponse<T> {
-  count: number;
-  next: string | null;
   results: T[];
 }
 
 const axiosInstance = axios.create({
-  baseURL: 'localhost:27017',
-  params: {
-    key: '',
-  },
+  baseURL: 'http://127.0.0.1:5000',
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Methods': ' GET'
+  }
+  // params: {
+  //   key: '',
+  // },
 });
 
 
@@ -21,15 +25,16 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAll = (config: AxiosRequestConfig) => {
-    return axiosInstance
-      .get<FetchResponse<T>>(this.endpoint, config)
-      .then((res) => res.data);
-  };
+  // getAll = (config: AxiosRequestConfig) => {
+  //   return axiosInstance
+  //     .get<FetchResponse<T>>(this.endpoint, config)
+  //     .then((res) => res.data);
+  // };
 
-  get = (id: number | string) => {
+  getRandomQuote = () => {
+    // console.log(this.endpoint)
     return axiosInstance
-      .get<T>(this.endpoint + '/' + id)
+      .get<T>(this.endpoint)
       .then((res) => res.data);
   };
 }

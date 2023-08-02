@@ -1,9 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Flask
+from flask_cors import CORS
+
 import pymongo
   
 # creating a Flask app
 app = Flask(__name__)
-  
+CORS(app)
+
 client=pymongo.MongoClient("mongodb://localhost:27017/")
 mydb=client["quotes"]
 
@@ -14,13 +17,28 @@ books=mydb.book_data
 def GetRandomQuote():
     quote = list(quotes.aggregate([{ '$sample': { 'size': 1 } }]))[0]
     book = list(books.find({"id": quote["bookId"]}))[0]
-    return quote, book
+
+    data = {}
+    data["Quote"] = quote["Quote"]
+    data['DateAdded'] = quote["DateAdded"]
+    data["BookName"] = book["Name"]
+    data["AuthorName"] = book["Author"]
+
+    return data
   
 
 if __name__ == '__main__':
   
-    # app.run(debug = True)
-    quote = list(quotes.aggregate([{ '$sample': { 'size': 1 } }]))[0]
-    book = list(books.find({"id": quote["bookId"]}))[0]
-    print (quote, book)
+    app.run(host="0.0.0.0", port=5000)
+
+    # quote = list(quotes.aggregate([{ '$sample': { 'size': 1 } }]))[0]
+    # book = list(books.find({"id": quote["bookId"]}))[0]
+
+    # data = {}
+    # data["Quote"] = quote["Quote"]
+    # data['DateAdded'] = quote["DateAdded"]
+    # data["BookName"] = book["Name"]
+    # data["Author"] = book["Author"]
+    # print(data)
+
   
