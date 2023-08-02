@@ -6,6 +6,7 @@ interface Quote {
   BookName: string;
   DateAdded: string;
   Quote: string;
+  Likes: number;
 }
 
 const apiClient = new APIClient<Quote>("/getrandomquote");

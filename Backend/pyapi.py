@@ -23,7 +23,7 @@ def GetRandomQuote():
     data['DateAdded'] = quote["DateAdded"]
     data["BookName"] = book["Name"]
     data["AuthorName"] = book["Author"]
-
+    data["Likes"] = quote["Likes"]
     return data
   
 

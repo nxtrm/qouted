@@ -78,6 +78,7 @@ def parse_data(input_text):
         text = quote[quote.find("\n\n")::]
         data['Quote'] = remove_unicode(text)
         data['Quote'] = data['Quote'].strip()
+        data['Likes'] = 0
 
         quotes_data.append(data)
 

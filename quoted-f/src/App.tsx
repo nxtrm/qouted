@@ -5,6 +5,7 @@ import EditButton from "./Components/EditButton";
 import LikeButton from "./Components/LikeButton";
 import NextButton from "./Components/NextButton";
 import useQuote from "./hooks/useQuotes";
+import LikeCount from "./Components/LikeCount";
 
 function App() {
   const { data: quote, isLoading } = useQuote();
@@ -25,6 +26,7 @@ function App() {
             {quote?.DateAdded}
           </Text>
           <Box marginX={4}>
+            <LikeCount likes={10} />
             <LikeButton />
             <EditButton />
             <NextButton />
