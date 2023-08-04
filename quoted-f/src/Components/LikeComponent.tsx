@@ -2,7 +2,11 @@ import { Badge, Box, SimpleGrid } from "@chakra-ui/react";
 import LikeButton from "./LikeButton";
 import LikeCount from "./LikeCount";
 
-const LikeComponent = () => {
+interface Props {
+  likes: number;
+}
+
+const LikeComponent = ({ likes }: Props) => {
   return (
     <Badge
       bgColor={"gray.700"}
@@ -13,7 +17,7 @@ const LikeComponent = () => {
     >
       <SimpleGrid columns={2} spacing={"5px"}>
         <LikeButton />
-        <LikeCount likes={10} />
+        <LikeCount likes={likes} />
       </SimpleGrid>
     </Badge>
   );

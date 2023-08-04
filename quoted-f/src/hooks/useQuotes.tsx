@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import APIClient from "../services/api-client";
 
-interface Quote {
+export interface Quote {
   AuthorName: string;
   BookName: string;
   DateAdded: string;
@@ -15,6 +15,7 @@ const useQuote = () =>
   useQuery({
     queryKey: "quote",
     queryFn: () => apiClient.getRandomQuote(),
+    staleTime: 24 * 1000 * 60 * 60,
   });
 
 export default useQuote;

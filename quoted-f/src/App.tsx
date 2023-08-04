@@ -16,9 +16,10 @@ import NextButton from "./Components/NextButton";
 import useQuote from "./hooks/useQuotes";
 
 function App() {
-  const { data: quote, isLoading } = useQuote();
+  const { data: quote, isLoading, error } = useQuote();
 
   if (isLoading) return <Spinner />;
+  if (error || !quote) throw error;
 
   return (
     <Grid
@@ -27,7 +28,7 @@ function App() {
       templateColumns="repeat(7, 1fr)"
       gap={4}
     >
-      {/* <GridItem colSpan={5} bg="tomato"></GridItem> */}
+      {/* <GridItem colSpan={5} bg="tomato">Header</GridItem> */}
       <GridItem rowSpan={2} colSpan={1} bg="tomato">
         Menu
       </GridItem>
@@ -46,7 +47,7 @@ function App() {
           <BookInfo bookName={quote?.BookName} authorName={quote?.AuthorName} />
           <Box marginY={4}>
             <EditButton />
-            <LikeComponent />
+            <LikeComponent likes={quote?.Likes} />
             <NextButton />
           </Box>
         </SimpleGrid>
