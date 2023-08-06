@@ -2,6 +2,7 @@ import {
   Box,
   Grid,
   GridItem,
+  Heading,
   SimpleGrid,
   Spinner,
   Text,
@@ -13,6 +14,7 @@ import EditButton from "./Components/EditButton";
 import LikeComponent from "./Components/LikeComponent";
 import NextButton from "./Components/NextButton";
 import { useQuoteContext } from "./hooks/quoteProvider";
+import HeadingMenu from "./Components/HeadingMenu";
 
 function App() {
   const { quote, isLoading, error, refetch } = useQuoteContext();
@@ -27,9 +29,8 @@ function App() {
       templateColumns="repeat(7, 1fr)"
       gap={4}
     >
-      {/* <GridItem colSpan={5} bg="tomato">Header</GridItem> */}
-      <GridItem rowSpan={2} colSpan={1} bg="tomato">
-        Menu
+      <GridItem rowSpan={2} colSpan={1}>
+        <HeadingMenu />
       </GridItem>
       <GridItem className="centered-container" colSpan={4}>
         <VStack>
