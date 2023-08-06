@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import QuoteProvider from "./hooks/quoteProvidet.tsx";
 
 const queryClient = new QueryClient();
 
@@ -11,7 +12,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ChakraProvider>
-        <App />
+        <QuoteProvider>
+          <App />
+        </QuoteProvider>
       </ChakraProvider>
     </QueryClientProvider>
   </React.StrictMode>

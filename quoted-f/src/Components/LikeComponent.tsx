@@ -4,9 +4,10 @@ import LikeCount from "./LikeCount";
 
 interface Props {
   likes: number;
+  quoteId: string;
 }
 
-const LikeComponent = ({ likes }: Props) => {
+const LikeComponent = ({ likes, quoteId }: Props) => {
   return (
     <Badge
       bgColor={"gray.700"}

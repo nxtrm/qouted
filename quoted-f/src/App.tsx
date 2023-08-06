@@ -14,9 +14,10 @@ import EditButton from "./Components/EditButton";
 import LikeComponent from "./Components/LikeComponent";
 import NextButton from "./Components/NextButton";
 import useQuote from "./hooks/useQuotes";
+import { useQuoteContext } from "./hooks/quoteProvidet";
 
 function App() {
-  const { data: quote, isLoading, error, refetch } = useQuote();
+  const { quote, isLoading, error, refetch } = useQuoteContext();
 
   if (isLoading) return <Spinner />;
   if (error || !quote) throw error;
@@ -47,7 +48,7 @@ function App() {
           <BookInfo bookName={quote?.BookName} authorName={quote?.AuthorName} />
           <Box marginY={4}>
             <EditButton />
-            <LikeComponent likes={quote?.Likes} />
+            <LikeComponent quoteId={quote.id} likes={quote?.Likes} />
             <NextButton onClick={refetch} />
           </Box>
         </SimpleGrid>
