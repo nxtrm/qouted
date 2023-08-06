@@ -16,7 +16,7 @@ import NextButton from "./Components/NextButton";
 import useQuote from "./hooks/useQuotes";
 
 function App() {
-  const { data: quote, isLoading, error } = useQuote();
+  const { data: quote, isLoading, error, refetch } = useQuote();
 
   if (isLoading) return <Spinner />;
   if (error || !quote) throw error;
@@ -48,7 +48,7 @@ function App() {
           <Box marginY={4}>
             <EditButton />
             <LikeComponent likes={quote?.Likes} />
-            <NextButton />
+            <NextButton onClick={refetch} />
           </Box>
         </SimpleGrid>
       </GridItem>

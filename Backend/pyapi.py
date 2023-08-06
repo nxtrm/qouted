@@ -19,6 +19,7 @@ def GetRandomQuote():
     book = list(books.find({"id": quote["bookId"]}))[0]
 
     data = {}
+    data["id"] = str(quote["_id"])
     data["Quote"] = quote["Quote"]
     data['DateAdded'] = quote["DateAdded"]
     data["BookName"] = book["Name"]
