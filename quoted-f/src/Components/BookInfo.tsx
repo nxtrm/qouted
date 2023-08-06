@@ -1,18 +1,17 @@
 import { VStack, Heading } from "@chakra-ui/react";
+import { useQuoteContext } from "../hooks/quoteProvidet";
 
-interface Props {
-  bookName: string | undefined;
-  authorName: string | undefined;
-}
+const BookInfo = () => {
+  const { quote, error } = useQuoteContext();
+  if (error || !quote) throw error;
 
-const BookInfo = ({ bookName, authorName }: Props) => {
   return (
     <VStack>
       <Heading maxWidth={200} textColor={"gray.300"} fontSize={18}>
-        {bookName}
+        {quote.BookName}
       </Heading>
       <Heading textColor={"gray.500"} fontSize={17}>
-        {authorName}
+        {quote.AuthorName}
       </Heading>
     </VStack>
   );

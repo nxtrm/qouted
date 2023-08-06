@@ -2,7 +2,6 @@ import {
   Box,
   Grid,
   GridItem,
-  HStack,
   SimpleGrid,
   Spinner,
   Text,
@@ -13,7 +12,6 @@ import BookInfo from "./Components/BookInfo";
 import EditButton from "./Components/EditButton";
 import LikeComponent from "./Components/LikeComponent";
 import NextButton from "./Components/NextButton";
-import useQuote from "./hooks/useQuotes";
 import { useQuoteContext } from "./hooks/quoteProvidet";
 
 function App() {
@@ -36,19 +34,19 @@ function App() {
       <GridItem className="centered-container" colSpan={4}>
         <VStack>
           <Text maxWidth={500} fontSize={20}>
-            {quote?.Quote}
+            {quote.Quote}
           </Text>
           <Text marginY={4} textColor={"gray.600"} fontSize={"15px"}>
-            Added on {quote?.DateAdded}
+            Added on {quote.DateAdded}
           </Text>
         </VStack>
       </GridItem>
       <GridItem className="centered-container" colSpan={2}>
         <SimpleGrid columns={1} spacing={"5px"}>
-          <BookInfo bookName={quote?.BookName} authorName={quote?.AuthorName} />
+          <BookInfo />
           <Box marginY={4}>
             <EditButton />
-            <LikeComponent quoteId={quote.id} likes={quote?.Likes} />
+            <LikeComponent quoteId={quote.id} likes={quote.Likes} />
             <NextButton onClick={refetch} />
           </Box>
         </SimpleGrid>
