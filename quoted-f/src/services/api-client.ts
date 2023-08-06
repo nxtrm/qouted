@@ -34,9 +34,9 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
-  like = (slug: string) => {
+  like = (slug:string) => {
     return axiosInstance
-    .post<T>(this.endpoint + "/like/" + slug)
+    .post<T>(this.endpoint + slug)
     .then((res) => res.data);
 
   }
