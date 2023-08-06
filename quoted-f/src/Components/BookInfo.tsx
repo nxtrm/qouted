@@ -1,5 +1,5 @@
 import { VStack, Heading } from "@chakra-ui/react";
-import { useQuoteContext } from "../hooks/quoteProvidet";
+import { useQuoteContext } from "../hooks/quoteProvider";
 
 const BookInfo = () => {
   const { quote, error } = useQuoteContext();

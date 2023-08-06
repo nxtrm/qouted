@@ -1,34 +1,33 @@
 import { IconButton } from "@chakra-ui/react";
 import { useState } from "react";
-
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
+import { Quote } from "../hooks/quoteProvider";
+import useLike from "../hooks/useLike";
 
-const LikeButton = () => {
+interface Props {
+  quote: Quote;
+}
+
+const LikeButton = ({ quote }: Props) => {
   const [liked, setLiked] = useState(false);
+  const { refetch } = useLike(quote.id!);
 
-  if (liked)
-    return (
-      <IconButton
-        height={8}
-        width={8}
-        marginY={1}
-        color={"green.100"}
-        fontSize="24px"
-        onClick={() => setLiked(false)}
-        aria-label="Like"
-        icon={<AiFillLike />}
-      />
-    );
+  const handleLikeClick = async () => {
+    setLiked(!liked);
+    await refetch();
+    console.log(quote.Likes);
+  };
+
   return (
     <IconButton
       height={8}
       width={8}
       marginY={1}
-      bgColor="transparent"
+      color={liked ? "green.100" : undefined}
       fontSize="24px"
-      onClick={() => setLiked(true)}
+      onClick={handleLikeClick}
       aria-label="Like"
-      icon={<AiOutlineLike />}
+      icon={liked ? <AiFillLike /> : <AiOutlineLike />}
     />
   );
 };

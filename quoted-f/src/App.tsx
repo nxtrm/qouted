@@ -12,7 +12,7 @@ import BookInfo from "./Components/BookInfo";
 import EditButton from "./Components/EditButton";
 import LikeComponent from "./Components/LikeComponent";
 import NextButton from "./Components/NextButton";
-import { useQuoteContext } from "./hooks/quoteProvidet";
+import { useQuoteContext } from "./hooks/quoteProvider";
 
 function App() {
   const { quote, isLoading, error, refetch } = useQuoteContext();
@@ -46,7 +46,7 @@ function App() {
           <BookInfo />
           <Box marginY={4}>
             <EditButton />
-            <LikeComponent quoteId={quote.id} likes={quote.Likes} />
+            <LikeComponent />
             <NextButton onClick={refetch} />
           </Box>
         </SimpleGrid>

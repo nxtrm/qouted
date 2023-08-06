@@ -1,13 +1,12 @@
 import { Badge, Box, SimpleGrid } from "@chakra-ui/react";
 import LikeButton from "./LikeButton";
 import LikeCount from "./LikeCount";
+import { useQuoteContext } from "../hooks/quoteProvider";
 
-interface Props {
-  likes: number;
-  quoteId: string;
-}
+const LikeComponent = () => {
+  const { quote, error } = useQuoteContext();
+  if (error || !quote) throw error;
 
-const LikeComponent = ({ likes, quoteId }: Props) => {
   return (
     <Badge
       bgColor={"gray.700"}
@@ -17,8 +16,8 @@ const LikeComponent = ({ likes, quoteId }: Props) => {
       borderRadius={6}
     >
       <SimpleGrid columns={2} spacing={"5px"}>
-        <LikeButton />
-        <LikeCount likes={likes} />
+        <LikeButton quote={quote} />
+        <LikeCount likes={quote.Likes} />
       </SimpleGrid>
     </Badge>
   );

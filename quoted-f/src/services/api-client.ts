@@ -33,6 +33,15 @@ class APIClient<T> {
       .get<T>(this.endpoint)
       .then((res) => res.data);
   };
+
+  like = (slug: string) => {
+    return axiosInstance
+    .post<T>(this.endpoint + "/like/" + slug)
+    .then((res) => res.data);
+
+  }
+
+
 }
 
 export default APIClient;

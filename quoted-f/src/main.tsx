@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import QuoteProvider from "./hooks/quoteProvidet.tsx";
+import QuoteProvider from "./hooks/quoteProvider.tsx";
 
 const queryClient = new QueryClient();
 
