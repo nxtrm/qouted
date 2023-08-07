@@ -41,6 +41,12 @@ class APIClient<T> {
 
   }
 
+  dislike = (slug:string) => {
+    return axiosInstance
+    .post<T>(this.endpoint + slug)
+    .then((res) => res.data);
+
+  }
 
 }
 

@@ -43,6 +43,21 @@ def Like(slug):
     except Exception as e:
         return str(e), 500
 
+@app.route("/dislike/<slug>", methods=["POST"])   
+def Disike(slug):
+    try:
+        quote_id = ObjectId(slug)
+        quote = quotes.find_one({"_id": quote_id})
+
+        if quote:
+            quote["Likes"] = quote.get("Likes", 0) - 1
+            quotes.update_one({"_id": quote_id}, {"$set": quote})
+            return "Like removed"
+        else:
+            return "Quote not found", 404
+    except Exception as e:
+        return str(e), 500
+
 if __name__ == '__main__':
   
     app.run(host="0.0.0.0", port=5000)

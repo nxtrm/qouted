@@ -4,6 +4,7 @@ import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { useQuoteContext } from "../hooks/quoteProvider";
 import useLike from "../hooks/useLike";
 import LikeCount from "./LikeCount";
+import useDislike from "../hooks/useDislike";
 
 const LikeComponent = () => {
   const { quote, error } = useQuoteContext();
@@ -13,12 +14,17 @@ const LikeComponent = () => {
   const [likesCount, setLikesCount] = useState(quote.Likes);
 
   const { likeQuote } = useLike();
+  const { dislikeQuote } = useDislike();
 
   const handleLikeClick = async () => {
     if (!liked) {
       await likeQuote(quote.id);
-      setLiked(!liked);
-      setLikesCount(quote.Likes + 1);
+      setLiked(true);
+      setLikesCount(likesCount + 1);
+    } else {
+      await dislikeQuote(quote.id);
+      setLiked(false);
+      setLikesCount(likesCount - 1);
     }
   };
   useEffect(() => {
@@ -52,4 +58,5 @@ const LikeComponent = () => {
     </Badge>
   );
 };
+
 export default LikeComponent;
