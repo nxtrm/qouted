@@ -1,7 +1,7 @@
 import { Badge, HStack, IconButton } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
-import { Quote, useQuoteContext } from "../hooks/quoteProvider";
+import { useQuoteContext } from "../hooks/quoteProvider";
 import useLike from "../hooks/useLike";
 import LikeCount from "./LikeCount";
 
@@ -11,19 +11,22 @@ const LikeComponent = () => {
 
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(quote.Likes);
-  const { data: updatedQuote } = useLike(quote.id!);
+
+  const { likeQuote } = useLike();
 
   const handleLikeClick = async () => {
-    setLiked(!liked);
-    setLikesCount(quote.Likes + 1);
+    if (!liked) {
+      await likeQuote(quote.id);
+      setLiked(!liked);
+      setLikesCount(quote.Likes + 1);
+    }
   };
-
   useEffect(() => {
-    if (updatedQuote) {
+    if (quote) {
       setLiked(false);
       setLikesCount(quote.Likes);
     }
-  }, [updatedQuote]);
+  }, [quote]);
 
   return (
     <Badge
@@ -49,5 +52,4 @@ const LikeComponent = () => {
     </Badge>
   );
 };
-
 export default LikeComponent;
