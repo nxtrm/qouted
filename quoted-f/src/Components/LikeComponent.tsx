@@ -5,10 +5,11 @@ import { useQuoteContext } from "../hooks/quoteProvider";
 import useLike from "../hooks/useLike";
 import LikeCount from "./LikeCount";
 import useDislike from "../hooks/useDislike";
+import ErrorComponent from "./ErrorComponent";
 
 const LikeComponent = () => {
   const { quote, error } = useQuoteContext();
-  if (error || !quote) throw error;
+  if (error || !quote) return <ErrorComponent error={error} />;
 
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(quote.Likes);

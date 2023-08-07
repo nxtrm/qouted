@@ -15,12 +15,13 @@ import LikeComponent from "./Components/LikeComponent";
 import NextButton from "./Components/NextButton";
 import { useQuoteContext } from "./hooks/quoteProvider";
 import HeadingMenu from "./Components/HeadingMenu";
+import ErrorComponent from "./Components/ErrorComponent";
 
 function App() {
   const { quote, isLoading, error, refetch } = useQuoteContext();
 
   if (isLoading) return <Spinner />;
-  if (error || !quote) throw error;
+  if (error || !quote) return <ErrorComponent error={error} />;
 
   return (
     <Grid
@@ -32,6 +33,7 @@ function App() {
       <GridItem rowSpan={2} colSpan={1}>
         <HeadingMenu />
       </GridItem>
+
       <GridItem className="centered-container" colSpan={4}>
         <VStack>
           <Text maxWidth={500} fontSize={20}>
