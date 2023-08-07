@@ -2,7 +2,6 @@ import {
   Box,
   Grid,
   GridItem,
-  Heading,
   SimpleGrid,
   Spinner,
   Text,
@@ -11,11 +10,11 @@ import {
 import "./App.css";
 import BookInfo from "./Components/BookInfo";
 import EditButton from "./Components/EditButton";
+import ErrorComponent from "./Components/ErrorComponent";
+import HeadingMenu from "./Components/HeadingMenu";
 import LikeComponent from "./Components/LikeComponent";
 import NextButton from "./Components/NextButton";
 import { useQuoteContext } from "./hooks/quoteProvider";
-import HeadingMenu from "./Components/HeadingMenu";
-import ErrorComponent from "./Components/ErrorComponent";
 
 function App() {
   const { quote, isLoading, error, refetch } = useQuoteContext();

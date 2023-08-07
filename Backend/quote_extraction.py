@@ -12,8 +12,8 @@ def filter_quotes(quote, other_quotes):
              return True
         if quote != other_quote and quote['Quote'] in other_quote['Quote']:
             return True
-        if quote == other_quote:
-             return True
+        # if quote == other_quote:
+        #      return True
         elif len(quote["Quote"]) == 0:
             return True
         
