@@ -10,9 +10,10 @@ def filter_quotes(quote, other_quotes):
     for other_quote in other_quotes:
         if len(quote["Quote"]) > 200:
              return True
-
         if quote != other_quote and quote['Quote'] in other_quote['Quote']:
             return True
+        if quote == other_quote:
+             return True
         elif len(quote["Quote"]) == 0:
             return True
         
@@ -20,16 +21,16 @@ def filter_quotes(quote, other_quotes):
 
 
 def clean_up (quote):
-        
-         #Add a full stop
-        if quote["Quote"][-1] == " " or quote["Quote"][-1] == "," or quote["Quote"][-1] == ";" or quote["Quote"][-1] == ":":
+    # Add a full stop
+    punctuation = " ,;:"
+    if quote["Quote"][-1] in punctuation:
             quote["Quote"] = quote["Quote"][:-1] + "."
-        if quote["Quote"][-1] != ".":
-            quote["Quote"] = quote["Quote"] + "."
-        
-        #Fix casing
-        quote["Quote"] = quote["Quote"].capitalize()
-        return quote 
+    if quote["Quote"][-1] != ".":
+            quote["Quote"] += "."
+
+        # Fix casing
+    quote["Quote"] = quote["Quote"].capitalize()
+    return quote 
 
 def check_book(book_data, lastBookName, lines, bookID):
     book = {}
@@ -69,7 +70,6 @@ def parse_data(input_text):
         bookID, lastBookName, book_data = check_book(book_data, lastBookName, lines, bookID)
         
         #Extracting/ generating metadata
-        # data["Id"] = quoteID
         data["bookId"] = bookID
         data['DateAdded'] = lines[1][(lines[1].find("| Added on") +11) :]
         

@@ -22,11 +22,6 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  // getAll = (config: AxiosRequestConfig) => {
-  //   return axiosInstance
-  //     .get<FetchResponse<T>>(this.endpoint, config)
-  //     .then((res) => res.data);
-  // };
 
   getRandomQuote = () => {
     return axiosInstance
@@ -37,15 +32,11 @@ class APIClient<T> {
   like = (slug:string) => {
     return axiosInstance
     .post<T>(this.endpoint + slug)
-    .then((res) => res.data);
-
   }
 
   dislike = (slug:string) => {
     return axiosInstance
     .post<T>(this.endpoint + slug)
-    .then((res) => res.data);
-
   }
 
 }

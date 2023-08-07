@@ -19,13 +19,15 @@ def GetRandomQuote():
     quote = list(quotes.aggregate([{ '$sample': { 'size': 1 } }]))[0]
     book = list(books.find({"id": quote["bookId"]}))[0]
 
-    data = {}
-    data["id"] = str(quote["_id"])
-    data["Quote"] = quote["Quote"]
-    data['DateAdded'] = quote["DateAdded"]
-    data["BookName"] = book["Name"]
-    data["AuthorName"] = book["Author"]
-    data["Likes"] = quote["Likes"]
+    
+    data = {
+        "id": str(quote["_id"]),
+        "Quote": quote["Quote"],
+        "DateAdded": quote["DateAdded"],
+        "BookName": book["Name"],
+        "AuthorName": book["Author"],
+        "Likes": quote["Likes"]
+    }
     return data
 
 @app.route("/like/<slug>", methods=["POST"])
