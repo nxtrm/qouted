@@ -28,6 +28,12 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
+  getQuote =() => {
+    return axiosInstance
+      .get<T>(this.endpoint)
+      .then((res) => res.data);
+  };
+
   like = (slug:string) => {
     return axiosInstance
     .post<T>(this.endpoint + slug)

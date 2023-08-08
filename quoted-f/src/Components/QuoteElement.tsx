@@ -48,7 +48,7 @@ function QuoteElement() {
   return (
     <Editable
       textAlign="center"
-      defaultValue="Rasengan ⚡️"
+      defaultValue="test"
       fontSize="2xl"
       isPreviewFocusable={false}
     >

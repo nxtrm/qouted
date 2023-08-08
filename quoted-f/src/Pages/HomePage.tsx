@@ -27,11 +27,7 @@ function HomePage() {
       templateColumns="repeat(7, 1fr)"
       gap={4}
     >
-      <GridItem rowSpan={2} colSpan={1}>
-        <Box />
-      </GridItem>
-
-      <GridItem className="centered-container" colSpan={4}>
+      <GridItem gridColumnEnd={6} className="centered-container" colSpan={4}>
         <VStack>
           <Text maxWidth={500} fontSize={20}>
             {quote.Quote}
@@ -41,7 +37,7 @@ function HomePage() {
           </Text>
         </VStack>
       </GridItem>
-      <GridItem className="centered-container" colSpan={2}>
+      <GridItem gridColumnStart={6} className="centered-container" colSpan={2}>
         <SimpleGrid columns={1} spacing={"5px"}>
           <BookInfo />
           <Box marginY={4}>
