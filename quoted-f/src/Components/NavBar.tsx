@@ -14,35 +14,31 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <Menu>
-      <HStack>
-        <MenuButton
-          as={IconButton}
-          aria-label="Options"
-          icon={<RxHamburgerMenu />}
-          variant="outline"
-        />
-        <Link to={"/"}>
-          <Heading>Quoted.</Heading>
-        </Link>
-      </HStack>
+    <>
+      <Menu>
+        <HStack>
+          <MenuButton
+            as={IconButton}
+            aria-label="Options"
+            icon={<RxHamburgerMenu />}
+            variant="outline"
+          />
+          <Link to={"/"}>
+            <Heading>Quoted.</Heading>
+          </Link>
+        </HStack>
 
-      <MenuList>
-        <Link to={"/"}>
-          <MenuItem icon={<BiHome />} command="⌘H">
-            Home
-          </MenuItem>
-        </Link>
-        <Link to={"/library"}>
-          <MenuItem icon={<BiLibrary />} command="⌘L">
-            My Library
-          </MenuItem>
-        </Link>
-        <MenuItem icon={<VscAccount />} command="⌘A">
-          My Account
-        </MenuItem>
-      </MenuList>
-    </Menu>
+        <MenuList>
+          <Link to={"/"}>
+            <MenuItem icon={<BiHome />}>Home</MenuItem>
+          </Link>
+          <Link to={"/library"}>
+            <MenuItem icon={<BiLibrary />}>My Library</MenuItem>
+          </Link>
+          <MenuItem icon={<VscAccount />}>My Account</MenuItem>
+        </MenuList>
+      </Menu>
+    </>
   );
 };
 
