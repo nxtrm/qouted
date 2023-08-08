@@ -32,7 +32,7 @@ def GetRandomQuote():
     return data
 
 #Fetches a quote with a known id
-@app.route('/quote/<slug>', methods = ['GET'])
+@app.route('/quotes/<slug>', methods = ['GET'])
 def Quote(slug):
     try:
         quote_id=ObjectId(slug)

@@ -1,26 +1,35 @@
-import { HStack, Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 
-import BookInfo from "../Components/BookInfo";
-import { useQuoteContext } from "../hooks/quoteProvider";
+import useGetQuote from "../hooks/useGetQuote";
 import "./styles.css";
 
 const LibraryPage = () => {
-  const { quote, error } = useQuoteContext();
-  if (error || !quote) throw error; //for testing purposes
+  //for testing purposes
+  let quoteList: string[] = [
+    "64d1e49a7e5e8e0f32664651",
+    "64d1e49a7e5e8e0f32664652",
+    "64d1e49a7e5e8e0f32664653",
+    "64d1e49a7e5e8e0f3266464f",
+  ];
+
+  const QuoteCard = ({ quoteId }: { quoteId: string }) => {
+    const { data, isLoading, error } = useGetQuote(quoteId!);
+    console.log(quoteId);
+    console.log(data);
+    if (error || !data) throw error;
+
+    return (
+      <Box gridColumnStart={2} py={10} width={"700px"}>
+        <Text>{data?.Quote}</Text>
+      </Box>
+    );
+  };
 
   return (
     <SimpleGrid py={5} columns={3}>
-      {/* <Heading py={5} gridColumn={2}>
-        Library
-      </Heading> */}
-      <Box py={10} width={"700px"} gridColumnStart={2}>
-        <HStack gap={8}>
-          <Text maxWidth={500} fontSize={20}>
-            {quote.Quote}
-          </Text>
-          <BookInfo />
-        </HStack>
-      </Box>
+      {quoteList.map((quoteId) => (
+        <QuoteCard key={quoteId} quoteId={quoteId} />
+      ))}
     </SimpleGrid>
   );
 };

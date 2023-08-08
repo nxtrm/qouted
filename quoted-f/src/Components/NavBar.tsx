@@ -14,19 +14,14 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <>
+    <HStack>
       <Menu>
-        <HStack>
-          <MenuButton
-            as={IconButton}
-            aria-label="Options"
-            icon={<RxHamburgerMenu />}
-            variant="outline"
-          />
-          <Link to={"/"}>
-            <Heading>Quoted.</Heading>
-          </Link>
-        </HStack>
+        <MenuButton
+          as={IconButton}
+          aria-label="Options"
+          icon={<RxHamburgerMenu />}
+          variant="outline"
+        />
 
         <MenuList>
           <Link to={"/"}>
@@ -38,7 +33,10 @@ const NavBar = () => {
           <MenuItem icon={<VscAccount />}>My Account</MenuItem>
         </MenuList>
       </Menu>
-    </>
+      <Link to={"/"}>
+        <Heading>Quoted.</Heading>
+      </Link>
+    </HStack>
   );
 };
 

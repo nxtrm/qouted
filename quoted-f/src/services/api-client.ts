@@ -21,16 +21,15 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-
   getRandomQuote = () => {
     return axiosInstance
       .get<T>(this.endpoint)
       .then((res) => res.data);
   };
 
-  getQuote =() => {
+  get = (id: number | string) => {
     return axiosInstance
-      .get<T>(this.endpoint)
+      .get<T>(this.endpoint + id)
       .then((res) => res.data);
   };
 
