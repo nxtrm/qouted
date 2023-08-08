@@ -10,6 +10,7 @@ import {
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiLibrary } from "react-icons/bi";
 import { VscAccount } from "react-icons/vsc";
+import { Link } from "react-router-dom";
 
 const HeadingMenu = () => {
   return (
@@ -25,9 +26,11 @@ const HeadingMenu = () => {
       </HStack>
 
       <MenuList>
-        <MenuItem icon={<BiLibrary />} command="⌘L">
-          My Library
-        </MenuItem>
+        <Link to={"/library"}>
+          <MenuItem icon={<BiLibrary />} command="⌘L">
+            My Library
+          </MenuItem>
+        </Link>
         <MenuItem icon={<VscAccount />} command="⌘A">
           My Account
         </MenuItem>

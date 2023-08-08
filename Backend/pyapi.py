@@ -2,6 +2,7 @@ from bson import ObjectId
 from flask import Flask
 from flask_cors import CORS
 
+
 import pymongo
   
 # creating a Flask app
@@ -19,7 +20,6 @@ def GetRandomQuote():
     quote = list(quotes.aggregate([{ '$sample': { 'size': 1 } }]))[0]
     book = list(books.find({"id": quote["bookId"]}))[0]
 
-    
     data = {
         "id": str(quote["_id"]),
         "Quote": quote["Quote"],

@@ -8,12 +8,10 @@ def remove_unicode(text):
 # remove any substrings
 def filter_quotes(quote, other_quotes):
     for other_quote in other_quotes:
-        if len(quote["Quote"]) > 200:
+        if len(quote["Quote"]) > 250:
              return True
         if quote != other_quote and quote['Quote'] in other_quote['Quote']:
             return True
-        # if quote == other_quote:
-        #      return True
         elif len(quote["Quote"]) == 0:
             return True
         

@@ -2,21 +2,22 @@ import {
   Box,
   Grid,
   GridItem,
+  Heading,
   SimpleGrid,
   Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import "./App.css";
-import BookInfo from "./Components/BookInfo";
-import EditButton from "./Components/EditButton";
-import ErrorComponent from "./Components/ErrorComponent";
-import HeadingMenu from "./Components/HeadingMenu";
-import LikeComponent from "./Components/LikeComponent";
-import NextButton from "./Components/NextButton";
-import { useQuoteContext } from "./hooks/quoteProvider";
+import "./HomePage.css";
+import BookInfo from "../Components/BookInfo";
+import EditButton from "../Components/EditButton";
+import LikeComponent from "../Components/LikeComponent";
+import NextButton from "../Components/NextButton";
+import { useQuoteContext } from "../hooks/quoteProvider";
+import HeadingMenu from "../Components/HeadingMenu";
+import ErrorComponent from "../Components/ErrorComponent";
 
-function App() {
+function HomePage() {
   const { quote, isLoading, error, refetch } = useQuoteContext();
 
   if (isLoading) return <Spinner />;
@@ -57,4 +58,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;
