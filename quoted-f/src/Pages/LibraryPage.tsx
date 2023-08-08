@@ -1,4 +1,4 @@
-import React from "react";
+import "./styles.css";
 
 const LibraryPage = () => {
   return <div>LibraryPage</div>;

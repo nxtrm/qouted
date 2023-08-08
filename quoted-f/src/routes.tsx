@@ -1,16 +1,20 @@
-import HomePage from "./Pages/HomePage";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+import Layout from "./Pages/Layout";
 import LibraryPage from "./Pages/LibraryPage";
+import HomePage from "./Pages/HomePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     //   errorElement: <ErrorPage />,
-    element: <HomePage />,
-  },
-  {
-    path: "/library",
-    element: <LibraryPage />,
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      {
+        path: "/library",
+        element: <LibraryPage />,
+      },
+    ],
   },
 ]);
 

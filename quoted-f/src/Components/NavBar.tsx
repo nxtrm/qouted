@@ -8,11 +8,11 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { BiLibrary } from "react-icons/bi";
+import { BiLibrary, BiHome } from "react-icons/bi";
 import { VscAccount } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 
-const HeadingMenu = () => {
+const NavBar = () => {
   return (
     <Menu>
       <HStack>
@@ -22,10 +22,17 @@ const HeadingMenu = () => {
           icon={<RxHamburgerMenu />}
           variant="outline"
         />
-        <Heading>Quoted.</Heading>
+        <Link to={"/"}>
+          <Heading>Quoted.</Heading>
+        </Link>
       </HStack>
 
       <MenuList>
+        <Link to={"/"}>
+          <MenuItem icon={<BiHome />} command="⌘H">
+            Home
+          </MenuItem>
+        </Link>
         <Link to={"/library"}>
           <MenuItem icon={<BiLibrary />} command="⌘L">
             My Library
@@ -39,4 +46,4 @@ const HeadingMenu = () => {
   );
 };
 
-export default HeadingMenu;
+export default NavBar;

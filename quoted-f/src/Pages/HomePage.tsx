@@ -2,20 +2,18 @@ import {
   Box,
   Grid,
   GridItem,
-  Heading,
   SimpleGrid,
   Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import "./HomePage.css";
 import BookInfo from "../Components/BookInfo";
 import EditButton from "../Components/EditButton";
+import ErrorComponent from "../Components/ErrorComponent";
 import LikeComponent from "../Components/LikeComponent";
 import NextButton from "../Components/NextButton";
 import { useQuoteContext } from "../hooks/quoteProvider";
-import HeadingMenu from "../Components/HeadingMenu";
-import ErrorComponent from "../Components/ErrorComponent";
+import "./styles.css";
 
 function HomePage() {
   const { quote, isLoading, error, refetch } = useQuoteContext();
@@ -25,13 +23,12 @@ function HomePage() {
 
   return (
     <Grid
-      h="600px"
       templateRows="repeat(2, 1fr)"
       templateColumns="repeat(7, 1fr)"
       gap={4}
     >
       <GridItem rowSpan={2} colSpan={1}>
-        <HeadingMenu />
+        <Box />
       </GridItem>
 
       <GridItem className="centered-container" colSpan={4}>
