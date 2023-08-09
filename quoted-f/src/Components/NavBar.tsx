@@ -20,7 +20,7 @@ const NavBar = () => {
           as={IconButton}
           aria-label="Options"
           icon={<RxHamburgerMenu />}
-          variant="outline"
+          variant="transparent"
         />
 
         <MenuList>

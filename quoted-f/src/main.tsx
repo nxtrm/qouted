@@ -4,7 +4,6 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RouterProvider } from "react-router-dom";
 import QuoteProvider from "./hooks/quoteProvider.tsx";
-import "./index.css";
 import router from "./routes";
 
 const queryClient = new QueryClient();
