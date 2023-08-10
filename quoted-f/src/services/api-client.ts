@@ -33,6 +33,12 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
+  delete = (id: number | string) => {
+    return axiosInstance
+      .get<T>(this.endpoint + id),
+      console.log("Quote deleted")
+  };
+
   like = (slug:string) => {
     return axiosInstance
     .post<T>(this.endpoint + slug)

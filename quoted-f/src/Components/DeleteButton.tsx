@@ -11,9 +11,20 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { BiTrashAlt } from "react-icons/bi";
+import useDelete from "../hooks/useDelete";
 
-function DeleteQuote() {
+interface Props {
+  slug: string;
+}
+
+function DeleteQuote({ slug }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  function handleDeletion() {
+    onClose();
+    useDelete(slug);
+    console.log("deleted" + slug);
+  }
 
   return (
     <>
@@ -37,7 +48,11 @@ function DeleteQuote() {
             <Button mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant={"outline"} colorScheme="red">
+            <Button
+              onClick={handleDeletion}
+              variant={"outline"}
+              colorScheme="red"
+            >
               Delete
             </Button>
           </ModalFooter>

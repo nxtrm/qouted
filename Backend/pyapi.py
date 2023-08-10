@@ -54,6 +54,12 @@ def Quote(slug):
     except Exception as e:
             return str(e), 500
 
+@app.route('/delete/<slug>', methods = ['GET'])
+def Delete(slug):
+    quote_id=ObjectId(slug)
+    quotes.Delete({"_id": quote_id})
+    
+
 #Adds one like to the quote provided
 @app.route("/like/<slug>", methods=["POST"])
 def Like(slug):

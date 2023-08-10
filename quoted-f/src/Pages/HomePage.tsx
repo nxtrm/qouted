@@ -14,6 +14,7 @@ import LikeComponent from "../Components/LikeComponent";
 import NextButton from "../Components/NextButton";
 import { useQuoteContext } from "../hooks/quoteProvider";
 import "./styles.css";
+import DeleteButton from "../Components/DeleteButton";
 
 function HomePage() {
   const { quote, isLoading, error, refetch } = useQuoteContext();
@@ -41,6 +42,7 @@ function HomePage() {
         <SimpleGrid columns={1} spacing={"5px"}>
           <BookInfo />
           <Box marginY={4}>
+            <DeleteButton slug={quote.id} />
             <EditButton />
             <LikeComponent />
             <NextButton onClick={refetch} />

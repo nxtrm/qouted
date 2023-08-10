@@ -1,4 +1,5 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { useQuoteContext } from "../hooks/quoteProvider";
 import "./styles.css";
 
 const LibraryPage = () => {
@@ -11,7 +12,7 @@ const LibraryPage = () => {
   ];
 
   const QuoteCard = ({ quoteId }: { quoteId: string }) => {
-    const { quote, error } = quotehook(quoteId!);
+    const { quote, error } = ;
     if (error || !quote) throw error;
 
     return (
