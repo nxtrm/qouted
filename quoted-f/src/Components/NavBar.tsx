@@ -11,6 +11,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BiLibrary, BiHome } from "react-icons/bi";
 import { VscAccount } from "react-icons/vsc";
 import { Link } from "react-router-dom";
+import ThemeButton from "./ThemeButton";
 
 const NavBar = () => {
   return (
@@ -20,7 +21,7 @@ const NavBar = () => {
           as={IconButton}
           aria-label="Options"
           icon={<RxHamburgerMenu />}
-          variant="transparent"
+          // variant="transparent"
         />
 
         <MenuList>
@@ -33,8 +34,9 @@ const NavBar = () => {
           <MenuItem icon={<VscAccount />}>My Account</MenuItem>
         </MenuList>
       </Menu>
+      <ThemeButton/>
       <Link to={"/"}>
-        <Heading>Quoted.</Heading>
+        <Heading padding={2}>Quoted.</Heading>
       </Link>
     </HStack>
   );
