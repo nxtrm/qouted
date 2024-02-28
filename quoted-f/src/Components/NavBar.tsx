@@ -12,6 +12,7 @@ import { BiLibrary, BiHome } from "react-icons/bi";
 import { VscAccount } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ThemeButton from "./ThemeButton";
+import SearchInput from "./SearchInput";
 
 const NavBar = () => {
   return (
@@ -41,6 +42,7 @@ const NavBar = () => {
       <Link to={"/"}>
         <Heading padding={2}>Quoted.</Heading>
       </Link>
+      <SearchInput/>
     </HStack>
   );
 };
