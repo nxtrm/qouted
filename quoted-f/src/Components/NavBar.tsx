@@ -1,4 +1,8 @@
 import {
+  AbsoluteCenter,
+  Flex,
+  Grid,
+  GridItem,
   HStack,
   Heading,
   IconButton,
@@ -6,6 +10,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Spacer,
 } from "@chakra-ui/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiLibrary, BiHome } from "react-icons/bi";
@@ -16,32 +21,42 @@ import SearchInput from "./SearchInput";
 
 function NavBar() {
   return (
-    <HStack>
-      <Menu>
-        <MenuButton
-          as={IconButton}
-          aria-label="Options"
-          icon={<RxHamburgerMenu />} />
+    <Flex>
+        <HStack>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={<RxHamburgerMenu />} />
 
-        <MenuList padding={0}>
+            <MenuList padding={0}>
+              <Link to={"/"}>
+                <MenuItem icon={<BiHome />}>Home</MenuItem>
+              </Link>
+              <Link to={"/library"}>
+                <MenuItem icon={<BiLibrary />}>Library</MenuItem>
+              </Link>
+              <Link to={"/account"}>
+                <MenuItem icon={<VscAccount />}>Account</MenuItem>
+              </Link>
+            </MenuList>
+          </Menu>
+          <SearchInput />
+        </HStack>
+
+        <Spacer/>
+
+        <AbsoluteCenter axis="horizontal">
           <Link to={"/"}>
-            <MenuItem icon={<BiHome />}>Home</MenuItem>
+            <Heading>Quoted.</Heading>
           </Link>
-          <Link to={"/library"}>
-            <MenuItem icon={<BiLibrary />}>Library</MenuItem>
-          </Link>
-          <Link to={"/account"}>
-            <MenuItem icon={<VscAccount />}>Account</MenuItem>
-          </Link>
-        </MenuList>
-      </Menu>
+        </AbsoluteCenter>
 
-      <ThemeButton />
-      <SearchInput />
-      <Link to={"/"}>
-        <Heading padding={2}>Quoted.</Heading>
-      </Link>
-    </HStack>
+        <Spacer/>
+
+        <ThemeButton />
+    
+    </Flex>
   );
 };
 
