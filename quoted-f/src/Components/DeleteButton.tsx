@@ -8,6 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { BiTrashAlt } from "react-icons/bi";
@@ -26,13 +27,15 @@ function DeleteQuote({ slug }: Props) {
     console.log("deleted" + slug);
   }
 
+  const red = useColorModeValue('red.300', 'red.100')
+
   return (
     <>
       <IconButton
         fontSize="25px"
         onClick={onOpen}
         aria-label="Edit"
-        color={"red.100"}
+        color={red}
         bgColor="transparent"
         icon={<BiTrashAlt />}
       />

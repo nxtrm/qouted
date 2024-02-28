@@ -1,4 +1,4 @@
-import { Badge, HStack, IconButton } from "@chakra-ui/react";
+import { Badge, HStack, IconButton, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { useQuoteContext } from "../hooks/quoteProvider";
@@ -35,9 +35,14 @@ const LikeComponent = () => {
     }
   }, [quote]);
 
+  const bg = useColorModeValue('gray.100', 'gray.700')
+  const gr = useColorModeValue('green.500', 'green.100')
+  const bgL = useColorModeValue('gray.200', '<gray className="7"></gray>00')
+
+
   return (
     <Badge
-      bgColor={"gray.700"}
+      bgColor={bg}
       variant="subtle"
       height={10}
       marginX={1}
@@ -45,10 +50,11 @@ const LikeComponent = () => {
     >
       <HStack>
         <IconButton
+          bgColor={bgL}
           height={8}
           width={8}
           marginY={1}
-          color={liked ? "green.100" : undefined}
+          color={liked ? gr : undefined}
           fontSize="24px"
           onClick={handleLikeClick}
           aria-label="Like"

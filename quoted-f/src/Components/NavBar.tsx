@@ -21,7 +21,7 @@ import SearchInput from "./SearchInput";
 
 function NavBar() {
   return (
-    <Flex>
+    <Flex paddingBottom={10}>
         <HStack>
           <Menu>
             <MenuButton
