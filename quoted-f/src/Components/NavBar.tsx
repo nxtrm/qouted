@@ -14,35 +14,33 @@ import { Link } from "react-router-dom";
 import ThemeButton from "./ThemeButton";
 import SearchInput from "./SearchInput";
 
-const NavBar = () => {
+function NavBar() {
   return (
     <HStack>
       <Menu>
         <MenuButton
           as={IconButton}
           aria-label="Options"
-          icon={<RxHamburgerMenu />}
-          // variant="transparent"
-        />
-          
-        <MenuList padding={0}> 
+          icon={<RxHamburgerMenu />} />
+
+        <MenuList padding={0}>
           <Link to={"/"}>
             <MenuItem icon={<BiHome />}>Home</MenuItem>
           </Link>
           <Link to={"/library"}>
             <MenuItem icon={<BiLibrary />}>Library</MenuItem>
-          </Link >
+          </Link>
           <Link to={"/account"}>
             <MenuItem icon={<VscAccount />}>Account</MenuItem>
           </Link>
         </MenuList>
       </Menu>
 
-      <ThemeButton/>
+      <ThemeButton />
+      <SearchInput />
       <Link to={"/"}>
         <Heading padding={2}>Quoted.</Heading>
       </Link>
-      <SearchInput/>
     </HStack>
   );
 };

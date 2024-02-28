@@ -1,20 +1,28 @@
-import { Kbd,HStack,IconButton, Input, InputGroup, InputLeftElement, InputRightElement, InputRightAddon } from "@chakra-ui/react"
+import { Kbd,HStack,InputLeftAddon,IconButton, Input, InputGroup, InputLeftElement, InputRightElement, InputRightAddon } from "@chakra-ui/react"
 import { FaSearch } from "react-icons/fa";
-const SearchInput = () => (
-    <InputGroup width={300}>
-        <InputLeftElement>
-            <IconButton width={40} aria-label="Search" variant="transparent" icon={<FaSearch />}/>
-        </InputLeftElement>
-        <Input variant="filled" placeholder="Search Quotes">
-        </Input>
-        {/* <InputRightElement width={50}>
-            <HStack>
-                <div>
-                <Kbd paddingX={1}>Shift</Kbd> <Kbd>F</Kbd>
-                </div>
-            </HStack>
-        </InputRightElement> */}
+import {useState} from "react";
 
-    </InputGroup>
+const SearchInput = () => {
+
+    const [isOpen, setOpen] = useState(false)
+
+    const handleClick = () => {
+        setOpen(prevState => !prevState);
+    }
+    return (
+        <HStack>
+
+            <IconButton width={10} onClick={handleClick} aria-label="Search" variant="solid" icon={<FaSearch />}/>
+           
+            {isOpen === true ? <Input variant="filled" placeholder="Search Quotes"/>:null }
+            {/* <HStack>
+            
+                <Kbd paddingX={1}>Shift</Kbd> <Kbd>F</Kbd>
+            
+            </HStack> */}
+        
+
+    </HStack>
 )
+}
 export default SearchInput
