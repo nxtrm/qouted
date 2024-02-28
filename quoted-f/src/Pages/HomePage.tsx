@@ -42,8 +42,8 @@ function HomePage() {
         <SimpleGrid columns={1} spacing={"5px"}>
           <BookInfo />
           <Box marginY={4}>
-            <DeleteButton slug={quote.id} />
-            <EditButton />
+            <DeleteButton slug={quote.id} onDeletion={refetch}/>
+            {/* <EditButton /> */}
             <LikeComponent />
             <NextButton onClick={refetch} />
           </Box>

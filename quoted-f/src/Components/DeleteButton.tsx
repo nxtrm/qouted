@@ -12,20 +12,31 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { BiTrashAlt } from "react-icons/bi";
-import useDelete from "../hooks/useDelete";
+import { Quote } from "../hooks/quoteProvider";
+import APIClient from "../services/api-client";
 
 interface Props {
   slug: string;
+  onDeletion: () => void
 }
 
-function DeleteQuote({ slug }: Props) {
+function DeleteQuote({ slug, onDeletion }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  function handleDeletion() {
-    onClose();
-    useDelete(slug);
-    console.log("deleted" + slug);
-  }
+  //the so far working delete method
+  const apiClient = new APIClient<Quote>("/delete/");
+  
+  const handleDeletion = async () => {
+    try {
+      await apiClient.get(slug);
+      console.log("deleted " + slug);
+    } catch (error) {
+      console.error("Error deleting quote:", error);
+    } finally {
+      onClose();
+    }
+    onDeletion()
+  };
 
   const red = useColorModeValue('red.300', 'red.100')
 

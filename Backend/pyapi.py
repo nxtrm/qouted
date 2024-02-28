@@ -1,5 +1,5 @@
 from bson import ObjectId
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
 
 
@@ -56,8 +56,17 @@ def Quote(slug):
 
 @app.route('/delete/<slug>', methods = ['GET'])
 def Delete(slug):
-    quote_id=ObjectId(slug)
-    quotes.Delete({"_id": quote_id})
+    try:
+        quote_id=ObjectId(slug)
+        result = quotes.delete_one({"_id": quote_id})
+
+        if result.deleted_count > 0:
+            return jsonify({"message": "Quote deleted successfully."}), 200
+        else:
+            return jsonify({"message": "Quote not found."}), 404
+
+    except Exception as e:
+        return str(e), 500
     
 
 #Adds one like to the quote provided

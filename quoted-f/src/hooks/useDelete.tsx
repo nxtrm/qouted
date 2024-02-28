@@ -7,6 +7,6 @@ const apiClient = new APIClient<Quote>("/delete/");
 const useDelete = (slug: string) =>
   useQuery({
     queryKey: ["quote", slug],
-    queryFn: () => apiClient.get(slug),
+    queryFn: () => apiClient.delete(slug),
   });
 export default useDelete;
