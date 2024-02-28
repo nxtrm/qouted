@@ -23,17 +23,20 @@ const NavBar = () => {
           icon={<RxHamburgerMenu />}
           // variant="transparent"
         />
-
-        <MenuList>
+          
+        <MenuList padding={0}> 
           <Link to={"/"}>
             <MenuItem icon={<BiHome />}>Home</MenuItem>
           </Link>
           <Link to={"/library"}>
-            <MenuItem icon={<BiLibrary />}>My Library</MenuItem>
+            <MenuItem icon={<BiLibrary />}>Library</MenuItem>
+          </Link >
+          <Link to={"/account"}>
+            <MenuItem icon={<VscAccount />}>Account</MenuItem>
           </Link>
-          <MenuItem icon={<VscAccount />}>My Account</MenuItem>
         </MenuList>
       </Menu>
+
       <ThemeButton/>
       <Link to={"/"}>
         <Heading padding={2}>Quoted.</Heading>

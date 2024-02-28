@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "./Pages/Layout";
-import HomePage from "./Pages/HomePage";
+import Account from "./Pages/Account";
 import ErrorPage from "./Pages/Errors/ErrorPage";
 import PageNotFound from "./Pages/Errors/PageNotFound";
-import LibraryPage from "./Pages/LibraryPage";
+import HomePage from "./Pages/HomePage";
+import Layout from "./Pages/Layout";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/library",
         element: <></>,
+      },
+      {
+        path: "/account",
+        element: <Account/>,
       },
     ],
   },
