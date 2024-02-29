@@ -18,6 +18,7 @@ import { VscAccount } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ThemeButton from "./ThemeButton";
 import SearchInput from "./SearchInput";
+import LoginButton from "./LoginButton";
 
 function NavBar() {
   return (
@@ -55,6 +56,10 @@ function NavBar() {
         <Spacer/>
 
         <ThemeButton />
+
+      <Link to={"/login"}>
+        <LoginButton/>
+      </Link>
     
     </Flex>
   );
