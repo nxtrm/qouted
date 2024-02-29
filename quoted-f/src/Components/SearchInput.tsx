@@ -1,23 +1,29 @@
-import { HStack, IconButton, Input, Spacer } from "@chakra-ui/react";
-import { useState } from "react";
+import { HStack, IconButton, Input, Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 
 const SearchInput = () => {
-
-    const [isOpen, setOpen] = useState(false)
-
-    const handleClick = () => {
-        setOpen(prevState => !prevState);
-    }
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
         <HStack>
             
-            <IconButton width={10} onClick={handleClick} aria-label="Search" variant="solid" icon={<FaSearch />}/>
+            <IconButton width={10} onClick={onOpen} aria-label="Search" variant="solid" icon={<FaSearch />}/>
            
-            {isOpen === true ? <Input variant="filled" placeholder="Search Quotes"/>:null }
+            {/* {isOpen === true ? <Input variant="filled" placeholder="Search Quotes"/>:null } */}
+            <Modal size={"lg"} isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay/>
+                <ModalContent>
+                    <ModalBody >
+                        <Input variant="unstyled" placeholder="Search Quotes"/>
+                    
+                    </ModalBody>
+                </ModalContent>
+
+                    
+            </Modal>
 
         </HStack>
+
 )
 }
 export default SearchInput

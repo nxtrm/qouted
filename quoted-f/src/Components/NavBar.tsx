@@ -55,12 +55,14 @@ function NavBar() {
 
         <Spacer/>
 
+      <HStack>
         <ThemeButton />
 
-      <Link to={"/login"}>
-        <LoginButton/>
-      </Link>
-    
+        <Link to={"/login"}>
+          <LoginButton/>
+        </Link>
+
+      </HStack>    
     </Flex>
   );
 };
