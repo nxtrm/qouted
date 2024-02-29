@@ -13,6 +13,7 @@ import { VscAccount } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ThemeButton from "./ThemeButton";
 import SearchInput from "./SearchInput";
+import LoginButton from "./LoginButton";
 
 function NavBar() {
   return (
@@ -38,9 +39,15 @@ function NavBar() {
 
       <ThemeButton />
       <SearchInput />
+
       <Link to={"/"}>
         <Heading padding={2}>Quoted.</Heading>
       </Link>
+
+      <Link to={"/login"}>
+        <LoginButton/>
+      </Link>
+
     </HStack>
   );
 };
