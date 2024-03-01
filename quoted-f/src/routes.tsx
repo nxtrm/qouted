@@ -5,6 +5,7 @@ import PageNotFound from "./Pages/Errors/PageNotFound";
 import HomePage from "./Pages/HomePage";
 import Layout from "./Pages/Layout";
 import Login from "./Pages/Login";
+import Register from "./Pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path:"/login",
         element: <Login/>,
+      },
+      {
+        path:"/register",
+        element: <Register/>,
       }
     ],
   },

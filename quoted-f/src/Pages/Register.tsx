@@ -1,15 +1,15 @@
-import { AbsoluteCenter, Text, Button, Divider, Heading, Input, InputGroup, InputLeftElement, InputRightElement, VStack, HStack } from "@chakra-ui/react";
+import { Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack } from "@chakra-ui/react";
 import React from "react";
+import { FaEye, FaEyeSlash, FaLink, FaRegUser } from "react-icons/fa";
+import { MdOutlinePassword, MdAlternateEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { FaRegUser,FaEyeSlash,FaEye,FaLink } from "react-icons/fa";
-import { MdOutlinePassword} from "react-icons/md";
 
-function Login(){
+function Register(){
     const [show, setShow] = React.useState(false)
 
     return (
         <VStack>
-            <Heading padding={5} size={"xl"}>Sign in</Heading>
+            <Heading padding={5} size={"xl"}>Sign up</Heading>
             <InputGroup maxWidth={400}>   
                 <InputLeftElement pointerEvents='none'>
                 <FaRegUser />
@@ -17,6 +17,16 @@ function Login(){
                 <Input type='username' placeholder='Username' />
                 
             </InputGroup>
+
+            <InputGroup maxWidth={400}>   
+                <InputLeftElement pointerEvents='none'>
+                <MdAlternateEmail />
+                </InputLeftElement>
+                <Input type='email' placeholder='email' />
+                
+            </InputGroup>
+            
+
             <InputGroup maxWidth={400} size='md'>
             <InputLeftElement pointerEvents='none'>
                 <MdOutlinePassword />      
@@ -40,13 +50,13 @@ function Login(){
             <Divider padding={3} maxWidth={400}/>
 
             <Text fontSize={"xs"} color={"gray.400"}>
-                new to Quoted?
+                have an account?
             </Text>
 
-            <Link to={"/register"}>
+            <Link to={"/login"}>
                 <HStack>
                     <Text as="u" fontSize={"sm"}>
-                        create an account 
+                        sign in 
                     </Text>
                     <FaLink />
                 </HStack>
@@ -55,4 +65,4 @@ function Login(){
         </VStack>
     )
 }
-export default Login
+export default Register
