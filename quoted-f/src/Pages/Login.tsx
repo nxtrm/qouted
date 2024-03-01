@@ -1,8 +1,8 @@
-import { AbsoluteCenter, Text, Button, Divider, Heading, Input, InputGroup, InputLeftElement, InputRightElement, VStack, HStack } from "@chakra-ui/react";
+import { Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack } from "@chakra-ui/react";
 import React from "react";
+import { FaEye, FaEyeSlash, FaLink, FaRegUser } from "react-icons/fa";
+import { MdOutlinePassword } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { FaRegUser,FaEyeSlash,FaEye,FaLink } from "react-icons/fa";
-import { MdOutlinePassword} from "react-icons/md";
 
 function Login(){
     const [show, setShow] = React.useState(false)
@@ -26,7 +26,7 @@ function Login(){
                 type={show ? 'text' : 'password'}
                 placeholder='Password'
             />
-                <InputRightElement width='3rem'>
+                <InputRightElement width='2.8rem'>
                     <Button h='2rem' size='sm' onClick={() => setShow(!show)}>
                     {show ? <FaEyeSlash/> : <FaEye/>}
                     </Button>
