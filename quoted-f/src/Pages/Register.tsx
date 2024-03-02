@@ -1,4 +1,4 @@
-import { Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaEye, FaEyeSlash, FaLink, FaRegCheckSquare, FaRegUser } from "react-icons/fa";
 import { MdAlternateEmail, MdOutlinePassword } from "react-icons/md";
@@ -80,7 +80,7 @@ function Register(){
                 <InputLeftElement pointerEvents='none'>
                 <MdAlternateEmail />
                 </InputLeftElement>
-                <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
+                <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
                 
             </InputGroup>
             
@@ -119,12 +119,14 @@ function Register(){
             </InputGroup>
 
             {error && <Text color="red.500">{error}</Text>}
+            
+            <Box paddingY={3}>
+                <Button onClick={handleRegister}>
+                    Continue
+                </Button>
+            </Box>
 
-            <Button onClick={handleRegister}>
-                Continue
-            </Button>
-
-            <Divider padding={3} maxWidth={400}/>
+            <Divider maxWidth={400}/>
 
             <Text fontSize={"xs"} color={"gray.400"}>
                 have an account?
