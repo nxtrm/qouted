@@ -48,6 +48,7 @@ function Register(){
             setVerifyPassword("");
             setError("");
             console.log("Registration successful:", response);
+
             toast({
                 title: 'Account created.',
                 description: "Registration successful",
@@ -71,7 +72,7 @@ function Register(){
                 <InputLeftElement pointerEvents='none'>
                 <FaRegUser />
                 </InputLeftElement>
-                <Input type='username' onChange={(e) => setUsername(e.target.value)} placeholder='Username' />
+                <Input type='username' value={username} onChange={(e) => setUsername(e.target.value)} placeholder='Username' />
                 
             </InputGroup>
 
@@ -79,7 +80,7 @@ function Register(){
                 <InputLeftElement pointerEvents='none'>
                 <MdAlternateEmail />
                 </InputLeftElement>
-                <Input type='email' onChange={(e) => setEmail(e.target.value)} placeholder='email' />
+                <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
                 
             </InputGroup>
             
@@ -93,6 +94,8 @@ function Register(){
                 type={show ? 'text' : 'password'}
                 placeholder='Password'
                 onChange={(e) => setPassword(e.target.value)}
+                value={password}
+            
             />
                 <InputRightElement width='2.8rem'>
                     <Button h='2rem' size='sm' onClick={() => setShow(!show)}>
@@ -110,11 +113,12 @@ function Register(){
                 type={'password'}
                 placeholder='Verify password'
                 onChange={(e) => setVerifyPassword(e.target.value)}
+                value={verifyPassword}
             />
                 
             </InputGroup>
 
-            {error && <Text color="red">{error}</Text>}
+            {error && <Text color="red.500">{error}</Text>}
 
             <Button onClick={handleRegister}>
                 Continue

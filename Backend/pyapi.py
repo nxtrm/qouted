@@ -127,6 +127,7 @@ def Register():
             "email": email,
             "password": password,
         }
+        
         users.insert_one(new_user)
         return jsonify({"message": "User registered successfully"}), 201
 
