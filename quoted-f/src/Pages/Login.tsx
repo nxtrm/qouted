@@ -5,6 +5,7 @@ import { MdOutlinePassword } from "react-icons/md";
 import { Link } from "react-router-dom";
 import APIClient from "../services/api-client";
 import { useUserContext } from "../hooks/UserProvider";
+import bcrypt from "bcryptjs";
 
 function Login(){
     const [show, setShow] = React.useState(false)
@@ -24,7 +25,7 @@ function Login(){
             setError("All fields are required");
             return;
           }
-        
+
         const userData = {
             username,
             password,

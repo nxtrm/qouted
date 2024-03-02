@@ -2,7 +2,7 @@ from bson import ObjectId
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-
+import bcrypt
 
 
 import pymongo
@@ -114,9 +114,10 @@ def Disike(slug):
 @app.route("/login", methods=["POST"])
 def Login():
     try:
-        data=request.json
+        data = request.json
         username = data.get("username")
         password = data.get("password")
+        
         # Form validation
         if not username or not password:
             return jsonify({"error": "All fields are required"}), 400
@@ -125,11 +126,12 @@ def Login():
         if not existing_user:
             return jsonify({"error": "This user does not exist"}), 400
         
-        if existing_user["password"] == password:
+        # Compare the hashed password
+        if existing_user and bcrypt.checkpw(password.encode('utf-8'), existing_user['password'].encode('utf-8')):
             access_token = create_access_token(identity=username)
             response = jsonify({"message": "Login successful"})
 
-            # Set the access token in a cookie
+            # Set access token
             response.set_cookie("access_token", value=access_token, httponly=True)
             return response, 200
         else:
@@ -146,7 +148,7 @@ def Register():
         email = data.get("email")
         password = data.get("password")
 
-        #Form validation
+        # Form validation
         if not username or not email or not password:
             return jsonify({"error": "All fields are required"}), 400
 
@@ -158,10 +160,15 @@ def Register():
         if existing_user:
             return jsonify({"error": "Username or email already exists"}), 400
 
+        # Hash the password using bcrypt
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+        hashed_password_str = hashed_password.decode('utf-8')
+
         new_user = {
             "username": username,
             "email": email,
-            "password": password,
+            "password": hashed_password_str,
         }
 
         users.insert_one(new_user)
