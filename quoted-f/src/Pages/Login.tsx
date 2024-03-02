@@ -1,11 +1,55 @@
-import { Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack } from "@chakra-ui/react";
-import React from "react";
+import { Button, Divider, HStack, Heading,Box, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack, useToast } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { FaEye, FaEyeSlash, FaLink, FaRegUser } from "react-icons/fa";
 import { MdOutlinePassword } from "react-icons/md";
 import { Link } from "react-router-dom";
+import APIClient from "../services/api-client";
 
 function Login(){
     const [show, setShow] = React.useState(false)
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+
+    const toast = useToast()
+
+    const apiClient = new APIClient("/login")
+
+    const handleLogin = () => {
+        //Frontend validation
+        if (!username || !password) {
+            setError("All fields are required");
+            return;
+          }
+        
+        const userData = {
+            username,
+            password,
+        };
+        
+        apiClient.register(userData)
+        .then((response) => {
+            setUsername("");
+            setPassword("");
+            setError("");
+            console.log(response);
+
+            toast({
+                title: 'Logged In.',
+                // description: "Registration successful",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+              })
+            
+        })
+        .catch((error) => {
+            setError(error.response.data.message);
+            console.log("Login error error:", error.response.data.message)
+        });
+    };
+
 
     return (
         <VStack>
@@ -14,7 +58,7 @@ function Login(){
                 <InputLeftElement pointerEvents='none'>
                 <FaRegUser />
                 </InputLeftElement>
-                <Input type='username' placeholder='Username' />
+                <Input type='username' onChange={(e) => setUsername(e.target.value)} value={username} placeholder='Username' />
                 
             </InputGroup>
             <InputGroup maxWidth={400} size='md'>
@@ -25,6 +69,8 @@ function Login(){
                 pr='4.5rem'
                 type={show ? 'text' : 'password'}
                 placeholder='Password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
             />
                 <InputRightElement width='2.8rem'>
                     <Button h='2rem' size='sm' onClick={() => setShow(!show)}>
@@ -33,11 +79,15 @@ function Login(){
                 </InputRightElement>
             </InputGroup>
 
-            <Button >
-                Continue
-            </Button>
+            {error && <Text color="red.500">{error}</Text>}
 
-            <Divider padding={3} maxWidth={400}/>
+            <Box paddingY={3}>
+                <Button onClick={handleLogin}>
+                    Continue
+                </Button>
+            </Box>
+
+            <Divider maxWidth={400}/>
 
             <Text fontSize={"xs"} color={"gray.400"}>
                 new to Quoted?

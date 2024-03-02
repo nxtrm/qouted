@@ -53,7 +53,7 @@ def Quote(slug):
         else:
             return "Quote not found", 404
     except Exception as e:
-            return str(e), 500
+            return jsonify({"error": str(e)}), 500
 
 @app.route('/delete/<slug>', methods = ['GET'])
 def Delete(slug):
@@ -67,7 +67,7 @@ def Delete(slug):
             return jsonify({"message": "Quote not found."}), 404
 
     except Exception as e:
-        return str(e), 500
+        return jsonify({"error": str(e)}), 500
     
 
 #Adds one like to the quote provided
@@ -84,7 +84,7 @@ def Like(slug):
         else:
             return "Quote not found", 404
     except Exception as e:
-        return str(e), 500
+        return jsonify({"error": str(e)}), 500
 
 #Removes a like from a quote provided
 @app.route("/dislike/<slug>", methods=["POST"])   
@@ -100,7 +100,30 @@ def Disike(slug):
         else:
             return "Quote not found", 404
     except Exception as e:
-        return str(e), 500
+        return jsonify({"error": str(e)}), 500
+    
+@app.route("/login", methods=["POST"])
+def Login():
+    try:
+        data=request.json
+        username = data.get("username")
+        password = data.get("password")
+        # Form validation
+        if not username or not password:
+            return jsonify({"error": "All fields are required"}), 400
+        
+        existing_user = users.find_one({"username": username})
+        if not existing_user:
+            return jsonify({"error": "This user does not exist"}), 400
+        
+        if existing_user["password"] == password:
+            # Password matched, user logged in successfully
+            return jsonify({"message": "Login successful"}), 200
+        else:
+            return jsonify({"error": "Incorrect password"}), 400
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/register", methods=["POST"])
 def Register():
