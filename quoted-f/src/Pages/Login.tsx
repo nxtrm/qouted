@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash, FaLink, FaRegUser } from "react-icons/fa";
 import { MdOutlinePassword } from "react-icons/md";
 import { Link } from "react-router-dom";
 import APIClient from "../services/api-client";
+import { useUserContext } from "../hooks/UserProvider";
 
 function Login(){
     const [show, setShow] = React.useState(false)
@@ -13,7 +14,8 @@ function Login(){
     const [error, setError] = useState("");
 
     const toast = useToast()
-
+    
+    const { login } = useUserContext();
     const apiClient = new APIClient("/login")
 
     const handleLogin = () => {
@@ -35,15 +37,25 @@ function Login(){
             setError("");
             console.log(response);
 
-            toast({
-                title: 'Logged In.',
-                // description: "Registration successful",
-                status: 'success',
-                duration: 5000,
-                isClosable: true,
-              })
+        // Check if the response has the access token
+        if (response.data && response.data.access_token) {
+            localStorage.setItem("access_token", response.data.access_token);
             
+            login(username);
+            //add redirect
+            toast({
+              title: "Logged In",
+              description: "Login successful",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
+
+          } else {
+            setError("Login failed. Please try again.");
+          }
         })
+
         .catch((error) => {
             setError(error.response.data.message);
             console.log("Login error error:", error.response.data.message)

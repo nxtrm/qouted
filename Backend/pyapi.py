@@ -1,12 +1,21 @@
 from bson import ObjectId
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+
 
 
 import pymongo
   
 # creating a Flask app
 app = Flask(__name__)
+
+#Cookies
+app.config['JWT_SECRET_KEY'] = '!z#x#QZh8ZVACnDHK%U4'
+app.config['JWT_TOKEN_LOCATION'] = ['cookies']
+app.config['JWT_ACCESS_COOKIE_PATH'] = '/'
+jwt = JWTManager(app)
+
 CORS(app)
 
 client=pymongo.MongoClient("mongodb://localhost:27017/")
@@ -117,10 +126,14 @@ def Login():
             return jsonify({"error": "This user does not exist"}), 400
         
         if existing_user["password"] == password:
-            # Password matched, user logged in successfully
-            return jsonify({"message": "Login successful"}), 200
+            access_token = create_access_token(identity=username)
+            response = jsonify({"message": "Login successful"})
+
+            # Set the access token in a cookie
+            response.set_cookie("access_token", value=access_token, httponly=True)
+            return response, 200
         else:
-            return jsonify({"error": "Incorrect password"}), 400
+            return jsonify({"error": "Invalid credentials"}), 401
         
     except Exception as e:
         return jsonify({"error": str(e)}), 500
