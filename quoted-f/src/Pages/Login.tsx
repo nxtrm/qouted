@@ -1,11 +1,10 @@
-import { Button, Divider, HStack, Heading,Box, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash, FaLink, FaRegUser } from "react-icons/fa";
 import { MdOutlinePassword } from "react-icons/md";
-import { Link } from "react-router-dom";
-import APIClient from "../services/api-client";
+import { Link, redirect } from "react-router-dom";
 import { useUserContext } from "../hooks/UserProvider";
-import bcrypt from "bcryptjs";
+import APIClient from "../services/api-client";
 
 function Login(){
     const [show, setShow] = React.useState(false)
@@ -15,6 +14,7 @@ function Login(){
     const [error, setError] = useState("");
 
     const toast = useToast()
+
     
     const { login } = useUserContext();
     const apiClient = new APIClient("/login")
@@ -37,15 +37,11 @@ function Login(){
             setPassword("");
             setError("");
 
-            // console.log("Response", response);
-            // console.log("Access token:", response.data.access_token);
-
-            // Check if the response has the access token
             if (response.access_token) {
                 localStorage.setItem("access_token", response.access_token);
 
                 login(username);
-                // Redirect or show success message
+                
                 toast({
                     title: "Logged In",
                     description: "Login successful",
@@ -53,6 +49,7 @@ function Login(){
                     duration: 5000,
                     isClosable: true,
                 });
+
 
             } else {
                 setError("Login failed. Please try again.");

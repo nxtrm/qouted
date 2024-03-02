@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 interface UserContextType {
   username: string | null;
+  isLoggedIn: boolean;
   login: (username: string) => void;
   logout: () => void;
 }
@@ -31,8 +32,10 @@ export const UserProvider = ({ children }: Props) => {
     setUsername(null);
   };
 
+  const isLoggedIn = !!username; 
+
   return (
-    <UserContext.Provider value={{ username, login, logout }}>
+    <UserContext.Provider value={{ username, isLoggedIn, login, logout }}>
       {children}
     </UserContext.Provider>
   );

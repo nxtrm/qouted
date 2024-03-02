@@ -1,4 +1,4 @@
-import { IconButton } from "@chakra-ui/react"
+import { IconButton } from "@chakra-ui/react";
 import { FiLogIn } from "react-icons/fi";
 
 const LoginButton = () => {

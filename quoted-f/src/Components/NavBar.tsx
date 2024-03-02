@@ -1,8 +1,7 @@
 import {
   AbsoluteCenter,
+  Button,
   Flex,
-  Grid,
-  GridItem,
   HStack,
   Heading,
   IconButton,
@@ -10,17 +9,21 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Spacer,
+  Spacer
 } from "@chakra-ui/react";
+import { BiHome, BiLibrary } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { BiLibrary, BiHome } from "react-icons/bi";
 import { VscAccount } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import ThemeButton from "./ThemeButton";
-import SearchInput from "./SearchInput";
+import { useUserContext } from "../hooks/UserProvider";
 import LoginButton from "./LoginButton";
+import SearchInput from "./SearchInput";
+import ThemeButton from "./ThemeButton";
+import ProfileButton from "./ProfileButton";
 
 function NavBar() {
+  const { isLoggedIn } = useUserContext();
+
   return (
     <Flex paddingBottom={10}>
         <HStack>
@@ -37,9 +40,7 @@ function NavBar() {
               <Link to={"/library"}>
                 <MenuItem icon={<BiLibrary />}>Library</MenuItem>
               </Link>
-              <Link to={"/account"}>
-                <MenuItem icon={<VscAccount />}>Account</MenuItem>
-              </Link>
+
             </MenuList>
           </Menu>
           <SearchInput />
@@ -57,11 +58,11 @@ function NavBar() {
 
       <HStack>
         <ThemeButton />
-
-        <Link to={"/login"}>
-          <LoginButton/>
-        </Link>
-
+        {isLoggedIn ? (<ProfileButton/>) : (
+          <Link to={"/login"}>
+            <LoginButton/>
+          </Link> 
+        )}
       </HStack>    
     </Flex>
   );
