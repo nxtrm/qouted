@@ -59,8 +59,8 @@ function Register(){
             
         })
         .catch((error) => {
-            setError("Registration failed. Error: "+error);
-            console.error("Registration error:", error);
+            setError(error.response.data.message);
+            console.log("Registration error:", error.response.data.message)
         });
     };
 
