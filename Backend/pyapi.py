@@ -16,7 +16,7 @@ app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 app.config['JWT_ACCESS_COOKIE_PATH'] = '/'
 jwt = JWTManager(app)
 
-CORS(app)
+CORS(app, supports_credentials=True)
 
 client=pymongo.MongoClient("mongodb://localhost:27017/")
 mydb=client["quotes"]
@@ -126,19 +126,17 @@ def Login():
         if not existing_user:
             return jsonify({"error": "This user does not exist"}), 400
         
-        # Compare the hashed password
         if existing_user and bcrypt.checkpw(password.encode('utf-8'), existing_user['password'].encode('utf-8')):
             access_token = create_access_token(identity=username)
-            response = jsonify({"message": "Login successful"})
+            response = jsonify({"access_token": access_token})
 
-            # Set access token
-            response.set_cookie("access_token", value=access_token, httponly=True)
             return response, 200
         else:
             return jsonify({"error": "Invalid credentials"}), 401
         
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 @app.route("/register", methods=["POST"])
 def Register():

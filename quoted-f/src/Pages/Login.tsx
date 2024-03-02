@@ -36,33 +36,37 @@ function Login(){
             setUsername("");
             setPassword("");
             setError("");
-            console.log(response);
 
-        // Check if the response has the access token
-        if (response.data && response.data.access_token) {
-            localStorage.setItem("access_token", response.data.access_token);
-            
-            login(username);
-            //add redirect
-            toast({
-              title: "Logged In",
-              description: "Login successful",
-              status: "success",
-              duration: 5000,
-              isClosable: true,
-            });
+            // console.log("Response", response);
+            // console.log("Access token:", response.data.access_token);
 
-          } else {
-            setError("Login failed. Please try again.");
-          }
+            // Check if the response has the access token
+            if (response.access_token) {
+                localStorage.setItem("access_token", response.access_token);
+
+                login(username);
+                // Redirect or show success message
+                toast({
+                    title: "Logged In",
+                    description: "Login successful",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                });
+
+            } else {
+                setError("Login failed. Please try again.");
+            }
         })
-
         .catch((error) => {
-            setError(error.response.data.message);
-            console.log("Login error error:", error.response.data.message)
+            console.error("Login error:", error);
+            if (error.response && error.response.data) {
+                setError(error.response.data.error);
+            } else {
+                setError("An error occurred");
+            }
         });
-    };
-
+    }
 
     return (
         <VStack>
@@ -118,4 +122,5 @@ function Login(){
         </VStack>
     )
 }
+
 export default Login
