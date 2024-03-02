@@ -1,5 +1,5 @@
 from bson import ObjectId
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 
@@ -14,6 +14,7 @@ mydb=client["quotes"]
 
 quotes=mydb.quotes_data
 books=mydb.book_data
+users = mydb.users
 
 #Returns a random quote from the quotes table
 @app.route('/getrandomquote', methods = ['GET'])
@@ -101,6 +102,36 @@ def Disike(slug):
     except Exception as e:
         return str(e), 500
 
+@app.route("/register", methods=["POST"])
+def Register():
+    try:
+        data = request.json
+        username = data.get("username")
+        email = data.get("email")
+        password = data.get("password")
+
+        #Form validation
+        if not username or not email or not password:
+            return jsonify({"error": "All fields are required"}), 400
+
+        if len(password) < 8:
+            return jsonify({"error": "Password must be at least 8 characters long"}), 400
+
+        # Check if username or email already exists in the database
+        existing_user = users.find_one({"$or": [{"username": username}, {"email": email}]})
+        if existing_user:
+            return jsonify({"error": "Username or email already exists"}), 400
+
+        new_user = {
+            "username": username,
+            "email": email,
+            "password": password,
+        }
+        users.insert_one(new_user)
+        return jsonify({"message": "User registered successfully"}), 201
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 
