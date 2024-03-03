@@ -1,6 +1,5 @@
 import {
   AbsoluteCenter,
-  Button,
   Flex,
   HStack,
   Heading,
@@ -13,13 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { BiHome, BiLibrary } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { VscAccount } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../hooks/UserProvider";
 import LoginButton from "./LoginButton";
+import ProfileButton from "./ProfileButton";
 import SearchInput from "./SearchInput";
 import ThemeButton from "./ThemeButton";
-import ProfileButton from "./ProfileButton";
 
 function NavBar() {
   const { isLoggedIn } = useUserContext();
@@ -58,11 +56,7 @@ function NavBar() {
 
       <HStack>
         <ThemeButton />
-        {isLoggedIn ? (<ProfileButton/>) : (
-          <Link to={"/login"}>
-            <LoginButton/>
-          </Link> 
-        )}
+        {isLoggedIn ? (<ProfileButton/>) : (<LoginButton/>)}
       </HStack>    
     </Flex>
   );

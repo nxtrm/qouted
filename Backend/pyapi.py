@@ -42,7 +42,7 @@ def GetRandomQuote():
     return data
 
 #Fetches a quote with a known id
-@app.route('/quotes/<slug>', methods = ['GET'])
+@app.route('/quote/<slug>', methods=['GET'])
 def Quote(slug):
     try:
         quote_id=ObjectId(slug)
@@ -63,6 +63,43 @@ def Quote(slug):
             return "Quote not found", 404
     except Exception as e:
             return jsonify({"error": str(e)}), 500
+
+@app.route('/quotes', methods=['GET'])
+def search_quotes():
+    try:
+        book_name = request.args.get('bookName')
+        quote_text = request.args.get('quote')
+
+        query = {}
+        if book_name:
+            query['BookName'] = book_name
+        if quote_text:
+            query['Quote'] = {"$regex": quote_text, "$options": "i"}
+
+        results = []
+        if query:
+            results = list(quotes.find(query))
+
+        if results:
+            formatted_results = []
+            for quote in results:
+                book = list(books.find({"id": quote["bookId"]}))[0]
+                data = {
+                    "id": str(quote["_id"]),
+                    "Quote": quote["Quote"],
+                    "DateAdded": quote["DateAdded"],
+                    "BookName": book["Name"],
+                    "AuthorName": book["Author"],
+                    "Likes": quote["Likes"]
+                }
+                formatted_results.append(data)
+
+            return jsonify(formatted_results), 200
+        else:
+            return "No quotes found", 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 @app.route('/delete/<slug>', methods = ['GET'])
 def Delete(slug):
