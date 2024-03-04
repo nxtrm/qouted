@@ -1,9 +1,9 @@
 import { Box, Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack, useToast } from "@chakra-ui/react";
-https://laughing-succotash-q56qwpr9qwf4p7x-5173.app.github.dev/
 import { FaEye, FaEyeSlash, FaLink, FaRegCheckSquare, FaRegUser } from "react-icons/fa";
 import { MdAlternateEmail, MdOutlinePassword } from "react-icons/md";
 import { Link } from "react-router-dom";
 import APIClient from "../services/api-client";
+import { useState } from "react";
 
 function Register(){
     const [show, setShow] = useState(false);

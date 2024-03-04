@@ -64,11 +64,12 @@ def Quote(slug):
     except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-@app.route('/quotes', methods=['GET'])
+@app.route('/search', methods=['POST'])
 def search_quotes():
     try:
-        book_name = request.args.get('bookName')
-        quote_text = request.args.get('quote')
+        data = request.json
+        book_name = data.get('bookName')
+        quote_text = data.get('quote')
 
         query = {}
         if book_name:

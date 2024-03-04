@@ -55,6 +55,12 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
+  find = (searchQuery: any) => {
+    return axiosInstance
+      .post<T>(this.endpoint, searchQuery)
+      .then((res) => res.data);
+  };
+
 }
 
 export default APIClient;

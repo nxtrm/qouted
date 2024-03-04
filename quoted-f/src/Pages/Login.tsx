@@ -2,7 +2,7 @@ import { Box, Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElem
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash, FaLink, FaRegUser } from "react-icons/fa";
 import { MdOutlinePassword } from "react-icons/md";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUserContext } from "../hooks/UserProvider";
 import APIClient from "../services/api-client";
 
