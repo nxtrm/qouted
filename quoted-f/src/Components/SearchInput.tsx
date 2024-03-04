@@ -1,8 +1,11 @@
 import { HStack, IconButton, Input, Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
+import SearchBody from "./SearchBody";
 
 const SearchInput = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [searching, setSearching] = useState(true)
 
     return (
         <HStack>
@@ -17,6 +20,7 @@ const SearchInput = () => {
                         <Input variant="unstyled" placeholder="Search Quotes"/>
                     
                     </ModalBody>
+                    {searching && <SearchBody/>}
                 </ModalContent>
 
                     
