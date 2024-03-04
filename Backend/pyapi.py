@@ -64,22 +64,20 @@ def Quote(slug):
     except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-@app.route('/search', methods=['POST'])
-def search_quotes():
+@app.route('/search/<qtype>/<query>', methods=['GET'])
+def search_quotes(qtype, query):
+    
+    #currently only working correctly for types:quote
     try:
-        data = request.json
-        book_name = data.get('bookName')
-        quote_text = data.get('quote')
-
-        query = {}
-        if book_name:
-            query['BookName'] = book_name
-        if quote_text:
-            query['Quote'] = {"$regex": quote_text, "$options": "i"}
+        query_params = {}
+        if qtype == "book":
+            query_params['BookName'] = query
+        elif qtype == "quote":
+            query_params['Quote'] = {"$regex": query, "$options": "i"}
 
         results = []
-        if query:
-            results = list(quotes.find(query))
+        if query_params:
+            results = list(quotes.find(query_params))
 
         if results:
             formatted_results = []
@@ -97,9 +95,10 @@ def search_quotes():
 
             return jsonify(formatted_results), 200
         else:
-            return "No quotes found", 404
+            return "No resultsfound", 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 @app.route('/delete/<slug>', methods = ['GET'])

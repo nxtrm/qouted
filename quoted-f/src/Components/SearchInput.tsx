@@ -1,42 +1,44 @@
-import { Box, Divider, HStack, IconButton, Input, Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, IconButton, Input, Modal, ModalBody, ModalContent, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import QuoteCard from "./QuoteCard";
 import APIClient from "../services/api-client";
+import QuoteCard from "./QuoteCard";
 
 
 const SearchInput = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [searching, setSearching] = useState(false);
-    const [quote, setQuote] = useState("");
-    const bookName = ""
+    const [searching, setSearching] = useState(true); //default false
+    const [query, setQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    const [type, setType] = useState("quote");
 
     const apiClient = new APIClient("/search");
 
-    const searchQuery = {
-        quote,
-        bookName,
-    };
 
     const handleSearch = () => (
-        apiClient.find(searchQuery)
+        
+        apiClient.search(type, query)
         .then((response:any) => {
-            setSearchResults(response); // Assuming response is an array of quotes
+            console.log(response)
+            setSearchResults(response); 
         })
         .catch((error) => {
             console.error("Error fetching search results:", error);
         })
     )
+    // 
+    // useEffect(() => {
+    //     if (quote !== "") {
+    //         setSearching(true)
+    //         handleSearch()
+    //     } else {
+    //         setSearching(false);
+    //     }
+    // }, [quote]);
 
     useEffect(() => {
-        if (quote !== "") {
-            setSearching(true)
-            handleSearch()
-        } else {
-            setSearching(false);
-        }
-    }, [quote]);
+        console.log(type)
+    }, [type]);
 
     return (
         <HStack >
@@ -44,9 +46,18 @@ const SearchInput = () => {
            
             <Modal  size={"lg"} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay/>
-                <ModalContent padding={3}>
+                <ModalContent paddingY={2}>
                     <ModalBody >
-                        <Input  onChange={(e) => setQuote(e.target.value)} value={quote} variant="unstyled" placeholder="Search Quotes"/>
+                        <HStack spacing={5}>
+                        <Select value={type} onChange={(e) => setType(e.target.value)} padding={0} variant='filled' width={150} >
+                            <option value='quote'>Quote</option>
+                            <option value='book'>Book</option>
+                            <option value='author'>Author</option>
+                        </Select>
+                            <Input onChange={(e) => setQuery(e.target.value)} value={query} variant="unstyled" placeholder="Search Quotes"/>
+                            {/* replace later */}
+                            <Button onClick={handleSearch}>E</Button> 
+                        </HStack>
                     </ModalBody>
                     {searching && (
                         <Box paddingY={2}>
