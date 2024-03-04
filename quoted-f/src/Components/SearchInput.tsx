@@ -8,14 +8,14 @@ const SearchInput = () => {
     const [searching, setSearching] = useState(true)
 
     return (
-        <HStack>
+        <HStack >
             
             <IconButton width={10} onClick={onOpen} aria-label="Search" variant="solid" icon={<FaSearch />}/>
            
             {/* {isOpen === true ? <Input variant="filled" placeholder="Search Quotes"/>:null } */}
-            <Modal size={"lg"} isOpen={isOpen} onClose={onClose}>
+            <Modal  size={"lg"} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay/>
-                <ModalContent>
+                <ModalContent padding={3}>
                     <ModalBody >
                         <Input variant="unstyled" placeholder="Search Quotes"/>
                     
