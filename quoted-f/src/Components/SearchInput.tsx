@@ -1,4 +1,4 @@
-import { Box, Button, Divider, HStack, IconButton, Input, Modal, ModalBody, ModalContent, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, IconButton, Input, Kbd, Modal, ModalBody, ModalContent, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import APIClient from "../services/api-client";
@@ -27,6 +27,12 @@ const SearchInput = () => {
             })
         }
     
+    const handleInputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+    };
+    
     // useEffect(() => {
     //     if (query !== "") {
     //         setSearching(true)
@@ -51,23 +57,21 @@ const SearchInput = () => {
                 <ModalContent>
                     <ModalBody padding={2}>
                         <HStack spacing={5}>
-                        <Select value={type} onChange={(e) => setType(e.target.value)} padding={0} variant='filled' width={150} >
+                        <Select height={9} value={type} onChange={(e) => setType(e.target.value)} padding={0} variant='filled' width={150} >
                             <option value='quote'>Quote</option>
                             <option value='book'>Book</option>
                             <option value='author'>Author</option>
                         </Select>
-                            <Input onChange={(e) => setQuery(e.target.value)} value={query} variant="unstyled" placeholder="Search Quotes"/>
+                            <Input onKeyDown={handleInputKeyPress} onChange={(e) => setQuery(e.target.value)} value={query} variant="unstyled" placeholder="Search Quotes"/>
                  
-                            <Button onClick={handleSearch}>E</Button> //replace later
+                            <Kbd >ENTER</Kbd>
                         </HStack>
                     </ModalBody>
                     
                     {searching && (
-
-                        <Box paddingX={2}>
-                            
+                        <>
                             {searchResults.map((quote, index) => (
-                                <Box paddingY={1}>
+                                <Box paddingY={1} paddingX={2}>
                                     <QuoteCard
                                         key={index}
                                         type="quote"
@@ -77,7 +81,7 @@ const SearchInput = () => {
                                     />
                                 </Box>
                             ))}
-                        </Box>
+                        </>
                     )}
                 </ModalContent>
             </Modal>
