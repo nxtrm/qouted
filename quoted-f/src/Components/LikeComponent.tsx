@@ -6,6 +6,7 @@ import useLike from "../hooks/useLike";
 import LikeCount from "./LikeCount";
 import useDislike from "../hooks/useDislike";
 import ErrorComponent from "./ErrorComponent";
+import LikeButton from "./LikeButton";
 
 const LikeComponent = () => {
   const { quote, error } = useQuoteContext();
@@ -36,8 +37,6 @@ const LikeComponent = () => {
   }, [quote]);
 
   const bg = useColorModeValue('gray.100', 'gray.700')
-  const gr = useColorModeValue('green.500', 'green.100')
-  const bgL = useColorModeValue('gray.200', '<gray className="7"></gray>00')
 
 
   return (
@@ -49,17 +48,7 @@ const LikeComponent = () => {
       borderRadius={6}
     >
       <HStack>
-        <IconButton
-          bgColor={bgL}
-          height={8}
-          width={8}
-          marginY={1}
-          color={liked ? gr : undefined}
-          fontSize="24px"
-          onClick={handleLikeClick}
-          aria-label="Like"
-          icon={liked ? <AiFillLike /> : <AiOutlineLike />}
-        />
+        <LikeButton liked={liked} handleClick={handleLikeClick}/>
         <LikeCount likes={likesCount} />
       </HStack>
     </Badge>

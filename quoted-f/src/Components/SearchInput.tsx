@@ -3,42 +3,44 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import APIClient from "../services/api-client";
 import QuoteCard from "./QuoteCard";
+import { Quote } from "../hooks/quoteProvider";
 
 
 const SearchInput = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [searching, setSearching] = useState(true); //default false
+    const [searching, setSearching] = useState(false); //default false
     const [query, setQuery] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState<Quote[]>([]);
     const [type, setType] = useState("quote");
 
     const apiClient = new APIClient("/search");
 
 
-    const handleSearch = () => (
-        
-        apiClient.search(type, query)
-        .then((response:any) => {
-            console.log(response)
-            setSearchResults(response); 
-        })
-        .catch((error) => {
-            console.error("Error fetching search results:", error);
-        })
-    )
-    // 
+    const handleSearch = () => {
+            setSearching(true)
+            apiClient.search(type, query)
+            .then((response:any) => {
+                setSearchResults(response); 
+            })
+            .catch((error) => {
+                console.error("Error fetching search results:", error);
+            })
+        }
+    
     // useEffect(() => {
-    //     if (quote !== "") {
+    //     if (query !== "") {
     //         setSearching(true)
     //         handleSearch()
     //     } else {
     //         setSearching(false);
     //     }
-    // }, [quote]);
+    // }, [query]);
 
     useEffect(() => {
-        console.log(type)
-    }, [type]);
+        if (query === "") {
+            setSearching(false)
+        }
+    }, [query]);
 
     return (
         <HStack >
@@ -67,6 +69,7 @@ const SearchInput = () => {
                                     key={index}
                                     type="quote"
                                     isLiked={false}
+                                    id={quote?.id}
                                     text={quote?.Quote} // Assuming "Quote" is the field containing the quote text
                                 />
                             ))}
