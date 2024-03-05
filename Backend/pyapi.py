@@ -72,30 +72,49 @@ def search_quotes(qtype, query):
         query_params = {}
         if qtype == "book":
             query_params['BookName'] = query
+            results = []
+            if query_params:
+                results=list(books.find(query_params))
+
+                if results:
+                    formatted_results = []
+                    for book in results
+                        data = {
+                            "id" : str(book["_id"])
+                            "bookName": book["bookName"]
+                            "authorName" : book["authorName"]
+                        }
+                        formatted_results.append(data)
+                    
+                    return jsonify(formatted_results), 200
+            else:
+                return "No books found", 404
+
+
         elif qtype == "quote":
             query_params['Quote'] = {"$regex": query, "$options": "i"}
 
-        results = []
-        if query_params:
-            results = list(quotes.find(query_params))
+            results = []      
+            if query_params:
+                results = list(quotes.find(query_params))
 
-        if results:
-            formatted_results = []
-            for quote in results:
-                book = list(books.find({"id": quote["bookId"]}))[0]
-                data = {
-                    "id": str(quote["_id"]),
-                    "Quote": quote["Quote"],
-                    "DateAdded": quote["DateAdded"],
-                    "BookName": book["Name"],
-                    "AuthorName": book["Author"],
-                    "Likes": quote["Likes"]
-                }
-                formatted_results.append(data)
+            if results:
+                formatted_results = []
+                for quote in results:
+                    book = list(books.find({"id": quote["bookId"]}))[0]
+                    data = {
+                        "id": str(quote["_id"]),
+                        "Quote": quote["Quote"],
+                        "DateAdded": quote["DateAdded"],
+                        "BookName": book["Name"],
+                        "AuthorName": book["Author"],
+                        "Likes": quote["Likes"]
+                    }
+                    formatted_results.append(data)
 
-            return jsonify(formatted_results), 200
-        else:
-            return "No resultsfound", 404
+                return jsonify(formatted_results), 200
+            else:
+                return "No quotes found", 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
