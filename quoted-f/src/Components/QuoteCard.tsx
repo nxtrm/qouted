@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, HStack, Heading, Text } from "@chakra-ui/react";
+import { Box, Card, CardBody, HStack, Heading, Spacer, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaBookOpen, FaQuoteLeft } from "react-icons/fa";
 import useDislike from "../hooks/useDislike";
@@ -34,14 +34,14 @@ const QuoteCard = ({type,text,isLiked, id}:Props) => {
 
     return(
         <Card size={"sm"} variant="filled">
-            <CardBody>
+            <CardBody >
                 <HStack paddingX={1.5} spacing={4}>
                     {type === "book" ? (
                     <>
                     <Box>
                         <FaBookOpen size={"1.25rem"} />
                     </Box>
-
+                    <Spacer/>
                     <Heading maxWidth={400} noOfLines={1} fontSize={"2xl"}>{text}</Heading>
                     </>
                     ) : (
@@ -50,6 +50,7 @@ const QuoteCard = ({type,text,isLiked, id}:Props) => {
                         <FaQuoteLeft size={"1.25rem"}/>
                     </Box>
                     <Text maxWidth={400} noOfLines={[1, 2]}>{text}</Text>
+                    <Spacer/>
                     <LikeButton liked={liked} handleClick={handleLikeClick}/>
                     </>  
                     )}

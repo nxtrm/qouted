@@ -46,10 +46,10 @@ const SearchInput = () => {
         <HStack >
             <IconButton width={10} onClick={onOpen} aria-label="Search" variant="solid" icon={<FaSearch />}/>
            
-            <Modal  size={"lg"} isOpen={isOpen} onClose={onClose}>
+            <Modal size={"xl"} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay/>
-                <ModalContent paddingY={2}>
-                    <ModalBody >
+                <ModalContent>
+                    <ModalBody padding={2}>
                         <HStack spacing={5}>
                         <Select value={type} onChange={(e) => setType(e.target.value)} padding={0} variant='filled' width={150} >
                             <option value='quote'>Quote</option>
@@ -57,21 +57,25 @@ const SearchInput = () => {
                             <option value='author'>Author</option>
                         </Select>
                             <Input onChange={(e) => setQuery(e.target.value)} value={query} variant="unstyled" placeholder="Search Quotes"/>
-                            {/* replace later */}
-                            <Button onClick={handleSearch}>E</Button> 
+                 
+                            <Button onClick={handleSearch}>E</Button> //replace later
                         </HStack>
                     </ModalBody>
+                    
                     {searching && (
-                        <Box paddingY={2}>
-                            <Divider/>
+
+                        <Box paddingX={2}>
+                            
                             {searchResults.map((quote, index) => (
-                                <QuoteCard
-                                    key={index}
-                                    type="quote"
-                                    isLiked={false}
-                                    id={quote?.id}
-                                    text={quote?.Quote} // Assuming "Quote" is the field containing the quote text
-                                />
+                                <Box paddingY={1}>
+                                    <QuoteCard
+                                        key={index}
+                                        type="quote"
+                                        isLiked={false}
+                                        id={quote?.id}
+                                        text={quote?.Quote} // Assuming "Quote" is the field containing the quote text
+                                    />
+                                </Box>
                             ))}
                         </Box>
                     )}

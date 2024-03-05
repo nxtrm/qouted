@@ -78,10 +78,10 @@ def search_quotes(qtype, query):
 
                 if results:
                     formatted_results = []
-                    for book in results
+                    for book in results:
                         data = {
-                            "id" : str(book["_id"])
-                            "bookName": book["bookName"]
+                            "id" : str(book["_id"]),
+                            "bookName": book["bookName"],
                             "authorName" : book["authorName"]
                         }
                         formatted_results.append(data)
