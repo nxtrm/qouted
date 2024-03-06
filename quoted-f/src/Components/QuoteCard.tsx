@@ -8,11 +8,12 @@ import LikeButton from "./LikeButton";
 interface Props {
     type:string
     text:string
+    alttext:string
     isLiked:boolean
     id:string
 }
 
-const QuoteCard = ({type,text,isLiked, id}:Props) => {
+const QuoteCard = ({type,text,alttext,isLiked, id}:Props) => {
     //Replace this later
     const [liked, setLiked] = useState(false);
     const { likeQuote } = useLike();
@@ -41,8 +42,9 @@ const QuoteCard = ({type,text,isLiked, id}:Props) => {
                     <Box>
                         <FaBookOpen size={"1.25rem"} />
                     </Box>
-                    <Spacer/>
                     <Heading maxWidth={400} noOfLines={1} fontSize={"2xl"}>{text}</Heading>
+                    <Spacer/>
+                    <Text maxWidth={400} noOfLines={[1, 2]}>{alttext}</Text>
                     </>
                     ) : (
                     <>

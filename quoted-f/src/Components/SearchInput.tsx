@@ -21,6 +21,7 @@ const SearchInput = () => {
             apiClient.search(type, query)
             .then((response:any) => {
                 setSearchResults(response); 
+
             })
             .catch((error) => {
                 console.error("Error fetching search results:", error);
@@ -45,8 +46,14 @@ const SearchInput = () => {
     useEffect(() => {
         if (query === "") {
             setSearching(false)
+
         }
     }, [query]);
+
+    useEffect(() => {
+        setSearchResults([]) //wiping an drefetching data for a different category
+        handleSearch()
+    }, [type]);
 
     return (
         <HStack >
@@ -68,21 +75,39 @@ const SearchInput = () => {
                         </HStack>
                     </ModalBody>
                     
-                    {searching && (
+                    
+                     {searching && ( //map different components for different
                         <>
-                            {searchResults.map((quote, index) => (
-                                <Box paddingY={1} paddingX={2}>
+                            {searchResults.map((result, index) => (
+                                <Box paddingY={1} paddingX={2} key={index}>
+                                    {type === "quote" && 
                                     <QuoteCard
+                                        alttext={""}
                                         key={index}
                                         type="quote"
                                         isLiked={false}
-                                        id={quote?.id}
-                                        text={quote?.Quote} // Assuming "Quote" is the field containing the quote text
+                                        id={result?.id}
+                                        text={result?.Quote} 
                                     />
+                                    
+                                    }
+                                    {type === "book" && 
+                                    <QuoteCard
+                                        key={index}
+                                        type="book"
+                                        isLiked={false}
+                                        id={result?.id}
+                                        alttext={result?.AuthorName}
+                                        text={result?.BookName} 
+                                    />
+                                    }
+                                    {/* {type === "author" && <AuthorResult author={result} />} */}
                                 </Box>
                             ))}
                         </>
                     )}
+                    
+
                 </ModalContent>
             </Modal>
         </HStack>

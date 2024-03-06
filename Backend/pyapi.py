@@ -71,7 +71,7 @@ def search_quotes(qtype, query):
     try:
         query_params = {}
         if qtype == "book":
-            query_params['BookName'] = query
+            query_params['Name'] = {"$regex": query, "$options": "i"}
             results = []
             if query_params:
                 results=list(books.find(query_params))
@@ -81,14 +81,14 @@ def search_quotes(qtype, query):
                     for book in results:
                         data = {
                             "id" : str(book["_id"]),
-                            "bookName": book["bookName"],
-                            "authorName" : book["authorName"]
+                            "BookName": book["Name"],
+                            "AuthorName" : book["Author"]
                         }
                         formatted_results.append(data)
                     
                     return jsonify(formatted_results), 200
-            else:
-                return "No books found", 404
+                else:
+                    return "No books found", 404
 
 
         elif qtype == "quote":
