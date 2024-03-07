@@ -1,9 +1,9 @@
-import { Box, Button, Divider, HStack, IconButton, Input, Kbd, Modal, ModalBody, ModalContent, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
+import { Box, HStack, IconButton, Input, Kbd, Modal, ModalBody, ModalContent, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaBookOpen, FaQuoteLeft, FaSearch } from "react-icons/fa";
+import { Quote } from "../hooks/quoteProvider";
 import APIClient from "../services/api-client";
 import QuoteCard from "./QuoteCard";
-import { Quote } from "../hooks/quoteProvider";
 
 
 const SearchInput = () => {
@@ -82,12 +82,12 @@ const SearchInput = () => {
                                 <Box paddingY={1} paddingX={2} key={index}>
                                     {type === "quote" && 
                                     <QuoteCard
-                                        alttext={""}
                                         key={index}
+                                        icon={<FaQuoteLeft size={"1.25rem"}/>}
                                         type="quote"
-                                        isLiked={false}
                                         id={result?.id}
                                         text={result?.Quote} 
+                                        alttext={result?.AuthorName}
                                     />
                                     
                                     }
@@ -95,7 +95,7 @@ const SearchInput = () => {
                                     <QuoteCard
                                         key={index}
                                         type="book"
-                                        isLiked={false}
+                                        icon={<FaBookOpen size={"1.25rem"} />}
                                         id={result?.id}
                                         alttext={result?.AuthorName}
                                         text={result?.BookName} 
