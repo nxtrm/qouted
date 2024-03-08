@@ -29,6 +29,7 @@ const ProfileButton = () => {
         </MenuButton>
         <MenuList padding={0}>
         <MenuGroup title='Profile'>
+        <MenuDivider />
 
             <Link to="/account">
                 <MenuItem icon={<VscAccount />}>Account</MenuItem >
@@ -39,10 +40,10 @@ const ProfileButton = () => {
             </Link>
             
         </MenuGroup>
+        {/* <MenuGroup title='Help'>
         <MenuDivider />
-        <MenuGroup title='Help'>
             <MenuItem>FAQ</MenuItem>
-        </MenuGroup>
+        </MenuGroup> */}
         </MenuList>
     </Menu>
 

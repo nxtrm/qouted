@@ -1,5 +1,4 @@
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
-import { useQuoteContext } from "../hooks/quoteProvider";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 import "./styles.css";
 
 const LibraryPage = () => {
@@ -11,21 +10,13 @@ const LibraryPage = () => {
     "64d1e49a7e5e8e0f3266464f",
   ];
 
-  const QuoteCard = ({ quoteId }: { quoteId: string }) => {
-    const { quote, error } = ;
-    if (error || !quote) throw error;
-
-    return (
-      <Box gridColumnStart={2} py={10} width={"700px"}>
-        <Text>{quote?.Quote}</Text>
-      </Box>
-    );
-  };
-
   return (
     <SimpleGrid py={5} columns={3}>
       {quoteList.map((quoteId) => (
-        <QuoteCard key={quoteId} quoteId={quoteId} />
+        <Text>
+
+          quoteIdP
+        </Text>
       ))}
     </SimpleGrid>
   );

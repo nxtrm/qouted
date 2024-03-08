@@ -10,8 +10,6 @@ interface Props {
 }
 
 const QuoteCard = ({type,text,alttext, id, icon}:Props) => {
-    //Replace this later
-
 
     return(
         <Card size={"sm"} variant="filled">

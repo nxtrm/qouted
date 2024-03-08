@@ -223,6 +223,7 @@ def Register():
             "username": username,
             "email": email,
             "password": hashed_password_str,
+            "liked-quotes" : []
         }
 
         users.insert_one(new_user)
