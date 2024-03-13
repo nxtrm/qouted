@@ -17,16 +17,17 @@ const SearchInput = () => {
 
 
     const handleSearch = () => {
-            setSearching(true)
+        if (query.trim() !== "") {
+            setSearching(true);
             apiClient.search(type, query)
-            .then((response:any) => {
-                setSearchResults(response); 
-
-            })
-            .catch((error) => {
-                console.error("Error fetching search results:", error);
-            })
+                .then((response: any) => {
+                    setSearchResults(response);
+                })
+                .catch((error) => {
+                    console.error("Error fetching search results:", error);
+                });
         }
+    };
     
     const handleInputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === 'Enter') {
@@ -34,14 +35,6 @@ const SearchInput = () => {
             }
     };
     
-    // useEffect(() => {
-    //     if (query !== "") {
-    //         setSearching(true)
-    //         handleSearch()
-    //     } else {
-    //         setSearching(false);
-    //     }
-    // }, [query]);
 
     useEffect(() => {
         if (query === "") {

@@ -1,18 +1,12 @@
 import axios from 'axios';
+
 export interface FetchResponse<T> {
   results: T[];
 }
 
 const axiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:5000',
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': '*',
-    'Access-Control-Allow-Credentials': 'true',
-    'Access-Control-Allow-Methods': ' GET'
-  }
 });
-
 
 class APIClient<T> {
   endpoint: string;
@@ -33,15 +27,15 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
-  like = (slug:string) => {
+  like = (slug: string) => {
     return axiosInstance
-    .post<T>(this.endpoint + slug)
-  }
+      .post<T>(this.endpoint + slug);
+  };
 
-  dislike = (slug:string) => {
+  dislike = (slug: string) => {
     return axiosInstance
-    .post<T>(this.endpoint + slug)
-  }
+      .post<T>(this.endpoint + slug);
+  };
 
   register = (userData: any) => {
     return axiosInstance
@@ -55,12 +49,11 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
-  search = (type:string, query:any) => {
+  search = (type: string, query: any) => {
     return axiosInstance
-      .get<T>(this.endpoint+`/${type}/${query}`)
+      .get<T>(`${this.endpoint}/${type}/${query}`)
       .then((res) => res.data);
   };
-
 }
 
 export default APIClient;

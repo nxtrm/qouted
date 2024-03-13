@@ -6,6 +6,8 @@ import HomePage from "./Pages/HomePage";
 import Layout from "./Pages/Layout";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import QuotePage from "./Pages/QuotePage";
+import LibraryPage from "./Pages/LibraryPage";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
       { path: "*", element: <PageNotFound /> },
       {
         path: "/library",
-        element: <></>,
+        element: <LibraryPage/>,
       },
       {
         path: "/account",
@@ -30,10 +32,10 @@ const router = createBrowserRouter([
       {
         path:"/register",
         element: <Register/>,
-      }
+      },
       // {
-      //   path:"/quotes/:slug"
-      //   element:
+      //   path:"/quote/:slug",
+      //   element: <QuotePage/>,
       // }
     ],
   },

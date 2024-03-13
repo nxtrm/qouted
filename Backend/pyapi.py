@@ -16,7 +16,8 @@ app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 app.config['JWT_ACCESS_COOKIE_PATH'] = '/'
 jwt = JWTManager(app)
 
-CORS(app, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+
 
 client=pymongo.MongoClient("mongodb://localhost:27017/")
 mydb=client["quotes"]

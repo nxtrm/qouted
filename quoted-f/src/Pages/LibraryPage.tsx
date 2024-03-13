@@ -1,24 +1,54 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Heading, Text, VStack } from "@chakra-ui/react";
 import "./styles.css";
+import { useEffect, useState } from "react";
+import APIClient from "../services/api-client";
+import { Quote } from "../hooks/quoteProvider";
 
 const LibraryPage = () => {
+  const [quotes, setQuotes] = useState<any[]>([]);
+  const apiClient = new APIClient<Quote>('/quote/');
+
   //for testing purposes
   let quoteList: string[] = [
-    "64d1e49a7e5e8e0f32664651",
-    "64d1e49a7e5e8e0f32664652",
-    "64d1e49a7e5e8e0f32664653",
-    "64d1e49a7e5e8e0f3266464f",
+    "65df6663f61144567de2ae4d",
   ];
 
-  return (
-    <SimpleGrid py={5} columns={3}>
-      {quoteList.map((quoteId) => (
-        <Text>
+  const fetchQuotes = async () => {
+    try {
+      const fetchedQuotes = await Promise.all(
+        quoteList.map(async (quoteId) => {
+          try {
+            const quote = await apiClient.get(quoteId);
+            return quote;
+          } catch (error) {
+            console.error(`Error fetching quote with ID ${quoteId}:`, error);
+            return null;
+          }
+        })
+      );
+      setQuotes(fetchedQuotes.filter((quote) => quote !== null));
+    } catch (error) {
+      console.error("Error fetching quotes:", error);
+    }
+  };
 
-          quoteIdP
-        </Text>
-      ))}
-    </SimpleGrid>
+  // fetchQuotes()
+
+  return (
+    <>
+      <Heading paddingY={5}>Library</Heading>
+      <VStack>
+        {quotes.map((quote) => (
+          <Text key={quote.id}>
+            <strong>Quote:</strong> {quote.Quote} <br />
+            <strong>Date Added:</strong> {quote.DateAdded} <br />
+            <strong>Book Name:</strong> {quote.BookName} <br />
+            <strong>Author Name:</strong> {quote.AuthorName} <br />
+            <strong>Likes:</strong> {quote.Likes}
+          </Text>
+        ))}
+      </VStack>
+    </>
   );
 };
 
