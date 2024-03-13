@@ -6,8 +6,6 @@ import HomePage from "./Pages/HomePage";
 import Layout from "./Pages/Layout";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import QuotePage from "./Pages/QuotePage";
-import LibraryPage from "./Pages/LibraryPage";
 
 const router = createBrowserRouter([
   {
@@ -17,10 +15,6 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "*", element: <PageNotFound /> },
-      {
-        path: "/library",
-        element: <LibraryPage/>,
-      },
       {
         path: "/account",
         element: <Account/>,
