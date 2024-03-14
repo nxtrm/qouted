@@ -6,6 +6,7 @@ import useLike from "../hooks/useLike";
 import ErrorComponent from "./ErrorComponent";
 import LikeButton from "./LikeButton";
 import LikeCount from "./LikeCount";
+import { useUserContext } from "../hooks/UserProvider";
 
 const LikeComponent = () => {
   const { quote, error } = useQuoteContext();
@@ -17,11 +18,14 @@ const LikeComponent = () => {
   const { likeQuote } = useLike();
   const { dislikeQuote } = useDislike();
 
+  const { isLoggedIn } = useUserContext()
+
   const handleLikeClick = async () => {
     if (!liked) {
       await likeQuote(quote.id);
       setLiked(true);
       setLikesCount(likesCount + 1);
+      if (isLoggedIn) {}
     } else {
       await dislikeQuote(quote.id);
       setLiked(false);

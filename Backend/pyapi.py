@@ -138,7 +138,7 @@ def Delete(slug):
 
 #Adds one like to the quote provided
 @app.route("/like/<slug>", methods=["POST"])
-def Like(slug):
+def Like(slug): #old like system
     try:
         quote_id = ObjectId(slug)
         quote = quotes.find_one({"_id": quote_id})
@@ -185,8 +185,8 @@ def Login():
         
         if existing_user and bcrypt.checkpw(password.encode('utf-8'), existing_user['password'].encode('utf-8')):
             access_token = create_access_token(identity=username)
-            response = jsonify({"access_token": access_token})
-
+            response = jsonify({"access_token": access_token, "userId": str(existing_user["_id"]), "liked_quotes": existing_user['liked-quotes']})
+ 
             return response, 200
         else:
             return jsonify({"error": "Invalid credentials"}), 401

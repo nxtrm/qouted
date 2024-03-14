@@ -27,9 +27,9 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
-  like = (slug: string) => {
+  like = (likeData: any) => {
     return axiosInstance
-      .post<T>(this.endpoint + slug);
+      .post<T>(this.endpoint, likeData);
   };
 
   dislike = (slug: string) => {
@@ -40,12 +40,6 @@ class APIClient<T> {
   register = (userData: any) => {
     return axiosInstance
       .post(this.endpoint, userData)
-      .then((res) => res.data);
-  };
-
-  login = (userData: any) => {
-    return axiosInstance
-      .get<T>(this.endpoint, userData)
       .then((res) => res.data);
   };
 
