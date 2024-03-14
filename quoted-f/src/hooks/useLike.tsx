@@ -1,18 +1,22 @@
-import { useMutation } from "react-query";
 import APIClient from "../services/api-client";
 import { Quote } from "./quoteProvider";
 
-const apiClient = new APIClient<Quote>("/like/");
+interface LikeParams {
+  quoteId: string;
+  userId: string | null;
+}
+
+const apiClient = new APIClient("/like");
 
 const useLike = (): {
-  likeQuote: (slug: string) => Promise<void>;
+  likeQuote: (params: LikeParams) => Promise<void>;
 } => {
-  const likeMutation = useMutation((slug: string) => apiClient.like(slug));
-
-  const likeQuote = async (slug: string): Promise<void> => {
+  const likeQuote = async (params: LikeParams): Promise<void> => {
     try {
-      await likeMutation.mutateAsync(slug);
-    } catch (error) {}
+      await apiClient.like(params);
+    } catch (error) {
+      // Handle errors later
+    }
   };
 
   return {

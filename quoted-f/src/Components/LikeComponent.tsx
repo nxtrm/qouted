@@ -18,14 +18,19 @@ const LikeComponent = () => {
   const { likeQuote } = useLike();
   const { dislikeQuote } = useDislike();
 
-  const { isLoggedIn } = useUserContext()
+  const { userId, } = useUserContext()
 
   const handleLikeClick = async () => {
     if (!liked) {
-      await likeQuote(quote.id);
+
+      const likeData ={
+          "quoteId": quote.id,
+          "userId": userId 
+        }
+
+      await likeQuote(likeData);
       setLiked(true);
       setLikesCount(likesCount + 1);
-      if (isLoggedIn) {}
     } else {
       await dislikeQuote(quote.id);
       setLiked(false);

@@ -29,7 +29,8 @@ class APIClient<T> {
 
   like = (likeData: any) => {
     return axiosInstance
-      .post<T>(this.endpoint, likeData);
+      .post<T>(this.endpoint, likeData)
+      .then((res) => res.data);
   };
 
   dislike = (slug: string) => {

@@ -137,15 +137,20 @@ def Delete(slug):
     
 
 #Adds one like to the quote provided
-@app.route("/like/<slug>", methods=["POST"])
-def Like(slug): #old like system
+@app.route("/like", methods=["POST"])
+def Like(): #old like system
     try:
-        quote_id = ObjectId(slug)
+        data = request.json
+        quote_id = ObjectId(data.get("quoteId"))
         quote = quotes.find_one({"_id": quote_id})
 
         if quote:
             quote["Likes"] = quote.get("Likes", 0) + 1
             quotes.update_one({"_id": quote_id}, {"$set": quote})
+            user_id = ObjectId(data.get("userId"))
+            if user_id:
+                user = users.find_one({"_id" :user_id})
+                user["liked-quotes"].append(quote_id)
             return "Quote Liked Successfully"
         else:
             return "Quote not found", 404
