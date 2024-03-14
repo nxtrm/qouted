@@ -18,7 +18,7 @@ const LikeComponent = () => {
   const { likeQuote } = useLike();
   const { dislikeQuote } = useDislike();
 
-  const { userId, } = useUserContext()
+  const { userId, update, liked_quotes } = useUserContext()
 
   const handleLikeClick = async () => {
     if (!liked) {
@@ -28,7 +28,11 @@ const LikeComponent = () => {
           "userId": userId 
         }
 
-      await likeQuote(likeData);
+      const response = await likeQuote(likeData);
+      if (response.liked_quotes) {
+        update(null, response.liked_quotes);
+      }
+      console.log(liked_quotes)
       setLiked(true);
       setLikesCount(likesCount + 1);
     } else {

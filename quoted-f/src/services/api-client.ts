@@ -29,7 +29,7 @@ class APIClient<T> {
 
   like = (likeData: any) => {
     return axiosInstance
-      .post<T>(this.endpoint, likeData)
+      .post(this.endpoint, likeData)
       .then((res) => res.data);
   };
 

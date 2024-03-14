@@ -137,26 +137,41 @@ def Delete(slug):
     
 
 #Adds one like to the quote provided
-@app.route("/like", methods=["POST"])
-def Like(): #old like system
+@app.route('/like', methods = ['POST'])
+def Like():
     try:
         data = request.json
         quote_id = ObjectId(data.get("quoteId"))
+
+        # Convert ObjectId to string for serialization
+        str_quote_id = str(quote_id)
+
         quote = quotes.find_one({"_id": quote_id})
 
         if quote:
             quote["Likes"] = quote.get("Likes", 0) + 1
             quotes.update_one({"_id": quote_id}, {"$set": quote})
             user_id = ObjectId(data.get("userId"))
+            liked_quotes = None
             if user_id:
-                user = users.find_one({"_id" :user_id})
-                user["liked-quotes"].append(quote_id)
-            return "Quote Liked Successfully"
+                user = users.find_one({"_id": user_id})
+                if user:
+                    # Update users liked quotes
+                    users.update_one(
+                        {"_id": user_id},
+                        {"$addToSet": {"liked-quotes": str_quote_id}}
+                    ) 
+                    updated_user = users.find_one({"_id": user_id})
+                    if updated_user :
+                        liked_quotes = updated_user["liked-quotes"]
+
+            response = jsonify({"message": "Quote Liked Successfully", "liked_quotes": liked_quotes})
+            return response, 200
         else:
-            return "Quote not found", 404
+            return jsonify({"error": "Failed to update liked quotes"}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
+    
 #Removes a like from a quote provided
 @app.route("/dislike/<slug>", methods=["POST"])   
 def Disike(slug):
@@ -190,7 +205,10 @@ def Login():
         
         if existing_user and bcrypt.checkpw(password.encode('utf-8'), existing_user['password'].encode('utf-8')):
             access_token = create_access_token(identity=username)
-            response = jsonify({"access_token": access_token, "userId": str(existing_user["_id"]), "liked_quotes": existing_user['liked-quotes']})
+            liked_quotes = []
+            for i in existing_user['liked-quotes']:
+                liked_quotes.append(str(i))
+            response = jsonify({"access_token": access_token, "userId": str(existing_user["_id"]), "liked_quotes": liked_quotes })
  
             return response, 200
         else:

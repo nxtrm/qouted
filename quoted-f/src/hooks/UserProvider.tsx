@@ -5,7 +5,8 @@ interface UserContextType {
   userId: string | null
   liked_quotes: [] | null
   isLoggedIn: boolean;
-  login: (username: string, userId: string, liked_quotes:[]) => void;
+  login: (username: string , userId: string, liked_quotes:[]) => void;
+  update: (newUsername: string| null, newliked_quotes: []| null) =>void
   logout: () => void;
 }
 
@@ -37,6 +38,16 @@ export const UserProvider = ({ children }: Props) => {
 
   };
 
+  const update = (newUsername: string| null, newliked_quotes: []| null) => {
+    if (newUsername) {
+      setUsername(newUsername);
+    }
+    if (newliked_quotes) {
+      setliked_quotes(newliked_quotes)
+    }
+
+  };
+
   const logout = () => {
     setUsername(null);
     setUserId(null)
@@ -46,7 +57,7 @@ export const UserProvider = ({ children }: Props) => {
   const isLoggedIn = !!username; 
 
   return (
-    <UserContext.Provider value={{ username, isLoggedIn, userId, liked_quotes, login, logout }}>
+    <UserContext.Provider value={{ username, isLoggedIn, userId, liked_quotes, login, update, logout }}>
       {children}
     </UserContext.Provider>
   );
