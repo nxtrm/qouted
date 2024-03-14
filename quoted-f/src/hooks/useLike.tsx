@@ -16,7 +16,6 @@ type LikeResponse = {
 const useLike = (): {
   likeQuote: (params: LikeParams) => Promise<LikeResponse>;
 } => {
-  const { update } = useUserContext();
 
   const likeQuote = async (params: LikeParams): Promise<LikeResponse> => {
     try {

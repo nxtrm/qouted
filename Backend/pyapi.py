@@ -159,11 +159,13 @@ def Like():
                     # Update users liked quotes
                     users.update_one(
                         {"_id": user_id},
-                        {"$addToSet": {"liked-quotes": str_quote_id}}
+                        {"$addToSet": {"liked-quotes": quote_id}}
                     ) 
                     updated_user = users.find_one({"_id": user_id})
                     if updated_user :
-                        liked_quotes = updated_user["liked-quotes"]
+                        liked_quotes= []
+                        for i in updated_user["liked-quotes"]:
+                            liked_quotes.append(str(i))
 
             response = jsonify({"message": "Quote Liked Successfully", "liked_quotes": liked_quotes})
             return response, 200

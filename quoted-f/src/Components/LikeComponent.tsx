@@ -30,9 +30,8 @@ const LikeComponent = () => {
 
       const response = await likeQuote(likeData);
       if (response.liked_quotes) {
-        update(null, response.liked_quotes);
+        update(null, response.liked_quotes); //check if up to date quotes are recieved
       }
-      console.log(liked_quotes)
       setLiked(true);
       setLikesCount(likesCount + 1);
     } else {
