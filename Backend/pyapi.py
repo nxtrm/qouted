@@ -175,20 +175,47 @@ def Like():
         return jsonify({"error": str(e)}), 500
     
 #Removes a like from a quote provided
-@app.route("/dislike/<slug>", methods=["POST"])   
-def Disike(slug):
+@app.route("/dislike", methods=["POST"])   
+def Dislike():
     try:
-        quote_id = ObjectId(slug)
+        data = request.json
+        quote_id = ObjectId(data.get("quoteId"))
+        # str_quote_id = str(quote_id)
         quote = quotes.find_one({"_id": quote_id})
 
         if quote:
-            quote["Likes"] = quote.get("Likes", 0) - 1
-            quotes.update_one({"_id": quote_id}, {"$set": quote})
-            return "Like removed"
+            # Decrease the like count for the quote
+            quote_likes = quote.get("Likes", 0)
+            if quote_likes > 0:
+                quote_likes -= 1
+                quotes.update_one({"_id": quote_id}, {"$set": {"Likes": quote_likes}})
+
+            user_id = ObjectId(data.get("userId"))
+            if user_id:
+                user = users.find_one({"_id": user_id})
+                if user:
+
+                    users.update_one(
+                        {"_id": user_id},
+                        {"$pull": {"liked-quotes": quote_id}}
+                    )
+                    updated_user = users.find_one({"_id": user_id})
+                    if updated_user:
+                        liked_quotes = [str(i) for i in updated_user.get("liked-quotes", [])]
+                    else:
+                        liked_quotes = []
+
+                    response = jsonify({"message": "Quote Unliked Successfully", "liked_quotes": liked_quotes})
+                    return response, 200
+                else:
+                    return jsonify({"error": "User not found"}), 404
+            else:
+                return jsonify({"error": "User ID not provided"}), 400
         else:
-            return "Quote not found", 404
+            return jsonify({"error": "Quote not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
     
 @app.route("/login", methods=["POST"])
 def Login():

@@ -1,20 +1,31 @@
-import { useMutation } from "react-query";
 import APIClient from "../services/api-client";
-import { Quote } from "./quoteProvider";
+import { useUserContext } from "./UserProvider";
 
-const apiClient = new APIClient<Quote>("/dislike/");
+interface DisLikeParams {
+  quoteId: string;
+  userId: string | null;
+}
 
-const useDislike = (): {
-  dislikeQuote: (slug: string) => Promise<void>;
+const apiClient = new APIClient("/dislike");
+
+type DisLikeResponse = {
+  message: string;
+  liked_quotes: [] | null;
+};
+
+const useDisLike = (): {
+  dislikeQuote: (params: DisLikeParams) => Promise<DisLikeResponse>;
 } => {
-  const dislikeMutation = useMutation((slug: string) =>
-    apiClient.dislike(slug)
-  );
 
-  const dislikeQuote = async (slug: string): Promise<void> => {
+  const dislikeQuote = async (params: DisLikeParams): Promise<DisLikeResponse> => {
     try {
-      await dislikeMutation.mutateAsync(slug);
-    } catch (error) {}
+      const response = await apiClient.like(params);
+
+      return response;
+    } catch (error) {
+      // Handle errors later
+      throw error;
+    }
   };
 
   return {
@@ -22,4 +33,4 @@ const useDislike = (): {
   };
 };
 
-export default useDislike;
+export default useDisLike;

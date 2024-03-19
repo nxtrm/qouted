@@ -21,21 +21,24 @@ const LikeComponent = () => {
   const { userId, update, liked_quotes } = useUserContext()
 
   const handleLikeClick = async () => {
+    const quoteData ={
+      "quoteId": quote.id,
+      "userId": userId 
+    }
+
     if (!liked) {
 
-      const likeData ={
-          "quoteId": quote.id,
-          "userId": userId 
-        }
-
-      const response = await likeQuote(likeData);
+      const response = await likeQuote(quoteData);
       if (response.liked_quotes) {
-        update(null, response.liked_quotes); //check if up to date quotes are recieved
+        update(null, response.liked_quotes);
       }
       setLiked(true);
       setLikesCount(likesCount + 1);
     } else {
-      await dislikeQuote(quote.id);
+      const response = await dislikeQuote(quoteData);
+      if (response.liked_quotes) {
+        update(null, response.liked_quotes);
+      }
       setLiked(false);
       setLikesCount(likesCount - 1);
     }

@@ -2,7 +2,7 @@ import { Box, Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElem
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash, FaLink, FaRegUser } from "react-icons/fa";
 import { MdOutlinePassword } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../hooks/UserProvider";
 import APIClient from "../services/api-client";
 
@@ -15,9 +15,10 @@ function Login(){
 
     const toast = useToast()
 
-    
     const { login } = useUserContext();
     const apiClient = new APIClient("/login")
+
+    const navigate = useNavigate();
 
     const handleLogin = () => {
         //Frontend validation
@@ -41,7 +42,7 @@ function Login(){
                 localStorage.setItem("access_token", response.access_token);
                 // localStorage.setItem("liked_quotes", response.liked_quotes)
                 login(username, response.userId, response.liked_quotes)
-                
+                navigate("/")
                 toast({
                     title: "Logged In",
                     description: "Login successful",
