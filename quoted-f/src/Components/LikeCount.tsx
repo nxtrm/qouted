@@ -4,7 +4,7 @@ interface Props {
   likes: number;
 }
 
-const CriticScore = ({ likes: likes }: Props) => {
+const LikeCount = ({ likes: likes }: Props) => {
   return (
     <Badge
       height={8}
@@ -20,4 +20,4 @@ const CriticScore = ({ likes: likes }: Props) => {
   );
 };
 
-export default CriticScore;
+export default LikeCount;
