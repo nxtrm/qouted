@@ -4,6 +4,7 @@ import { FaBookOpen, FaQuoteLeft, FaSearch } from "react-icons/fa";
 import { Quote } from "../hooks/quoteProvider";
 import APIClient from "../services/api-client";
 import QuoteCard from "./QuoteCard";
+import LikeButton from "./LikeButton";
 
 
 const SearchInput = () => {
@@ -44,7 +45,7 @@ const SearchInput = () => {
     }, [query]);
 
     useEffect(() => {
-        setSearchResults([]) //wiping an drefetching data for a different category
+        setSearchResults([]) //wiping and refetching data for a different category
         handleSearch()
     }, [type]);
 
@@ -52,7 +53,7 @@ const SearchInput = () => {
         <HStack >
             <IconButton width={10} onClick={onOpen} aria-label="Search" variant="solid" icon={<FaSearch />}/>
            
-            <Modal size={"xl"} isOpen={isOpen} onClose={onClose}>
+            <Modal size={"2xl"} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay/>
                 <ModalContent>
                     <ModalBody padding={2}>
@@ -80,7 +81,7 @@ const SearchInput = () => {
                                         type="quote"
                                         id={result?.id}
                                         text={result?.Quote} 
-                                        alttext={result?.AuthorName}
+                                        alttext={result?.BookName}
                                     />
                                     
                                     }
@@ -94,6 +95,7 @@ const SearchInput = () => {
                                         text={result?.BookName} 
                                     />
                                     }
+                                    
                                     {/* {type === "author" && <AuthorResult author={result} />} */}
                                 </Box>
                             ))}

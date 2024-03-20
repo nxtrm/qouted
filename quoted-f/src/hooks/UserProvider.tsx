@@ -28,8 +28,7 @@ export const UserProvider = ({ children }: Props) => {
   const [username, setUsername] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [liked_quotes, setliked_quotes] = useState<[] | null>(null);
-
-
+  
 
   const login = (newUsername: string, newUserId:string, newliked_quotes: []) => {
     setUsername(newUsername);
