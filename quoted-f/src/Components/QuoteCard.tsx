@@ -15,7 +15,7 @@ interface Props {
 }
 
 const QuoteCard = ({type,text,alttext, id, icon}:Props) => {
-    const { userId, liked_quotes, isLoggedIn, update } = useUserContext();
+    const { userId, isLoggedIn, update } = useUserContext();
     const [liked, setLiked] = useState(false);
 
     const { likeQuote } = useLike();

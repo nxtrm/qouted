@@ -1,4 +1,4 @@
-import { Center, Divider, HStack, Heading, SimpleGrid, Text, VStack, useColorModeValue, useToast } from "@chakra-ui/react";
+import { Center, Divider, HStack, Heading, Text, VStack, useColorModeValue, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ErrorComponent from "../Components/ErrorComponent";
 import LikeButton from "../Components/LikeButton";
@@ -71,14 +71,14 @@ function Account() {
                 {/* <Image borderRadius="full" boxSize="150px" src="" alt="Account"/> */}
                 <Heading size="xl">@{username}</Heading>
                 <Divider size="4xl"/>
-                {/* <Heading paddingY={5}>Library</Heading> */}
-
                 {quotes.map((quote) => (
-                <SimpleGrid paddingLeft={100} columns={2} spacing={10} key={quote.id}>
-                    <Text maxWidth={500} fontSize={18} paddingY={10}> {quote.Quote} </Text>
-                    <HStack>
-                        <VStack padding={5}>
-                            <Heading maxWidth={200} textColor={text} fontSize={18}>
+                <HStack paddingLeft={100} spacing={10} key={quote.id}>
+                    <Text width={400} fontSize={18} paddingY={10}> {quote.Quote} </Text>
+
+                    <HStack padding={5}>
+                        
+                        <VStack>
+                            <Heading width={200} textColor={text} fontSize={18}>
                                 {quote.BookName}
                             </Heading>
                             <Heading textColor={"gray.500"} fontSize={17}>
@@ -89,7 +89,7 @@ function Account() {
                         <LikeCount likes={quote.Likes}/>
                         <LikeButton liked={true} handleClick={() => handleDislike(quote.id)}/>
                     </HStack>
-                </SimpleGrid>
+                </HStack>
                 ))}
             </VStack>
         </Center>

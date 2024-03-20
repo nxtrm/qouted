@@ -18,7 +18,7 @@ const LikeComponent = () => {
   const { likeQuote } = useLike();
   const { dislikeQuote } = useDislike();
 
-  const { userId, update, liked_quotes } = useUserContext()
+  const { userId, update} = useUserContext()
 
   const handleLikeClick = async () => {
     const quoteData ={
