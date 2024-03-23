@@ -1,7 +1,8 @@
-import { Button, useToast } from '@chakra-ui/react';
+import { Box, Button, Input, InputGroup, InputLeftElement, VStack, useToast } from '@chakra-ui/react';
 import { useUserContext } from '../hooks/UserProvider';
 import APIClient from '../services/api-client';
 import { useState } from 'react';
+import { FaRegUser } from 'react-icons/fa';
 
 function SettingsPage() {
     const { username, userId, update } = useUserContext();
@@ -10,16 +11,15 @@ function SettingsPage() {
     const [newUsername, setNewUsername] = useState("")
 
     const handleUpdate = async () => {
-        setNewUsername("chips") 
 
         const userData = {
             "username": username,
-            "newUsername": "chips"
+            "newUsername": newUsername
           }
         
         apiClient.updateUser(userData)
         .then((response) => {
-            if (response) {
+            if (response.message) {
                 update(newUsername , null);
                 toast({
                     title: "Updated username",
@@ -34,10 +34,21 @@ function SettingsPage() {
     }
 
   return (
-    <div>
+    <VStack>
         USERNAME: {username}
-        <Button padding={5} onClick={handleUpdate}>Update</Button>
-    </div>
+        <InputGroup maxWidth={400}>   
+                <InputLeftElement pointerEvents='none'>
+                <FaRegUser />
+                </InputLeftElement>
+                <Input type='newUsername' onChange={(e) => setNewUsername(e.target.value)} value={newUsername} placeholder='New username' />
+        </InputGroup>
+
+        <Box paddingY={3}>
+                <Button onClick={handleUpdate}>
+                    Continue
+                </Button>
+        </Box>
+    </VStack>
   )
 }
 export default SettingsPage
