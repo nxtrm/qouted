@@ -245,6 +245,33 @@ def Login():
         
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route("/update/user", methods=["POST"])
+def UpdateUser():
+    try:
+        data = request.json
+        username = data.get("username")
+        new_username = data.get("newUsername")
+        #add email update here
+
+        if not username or not new_username:
+            return jsonify({"error": "No usernames specified"}), 400
+        
+        existing_user = users.find_one({"username": username})
+        if not existing_user:
+            return jsonify({"error": "This user does not exist"}), 400
+        
+        # Update the username
+        users.update_one(
+            {"_id": existing_user["_id"]},
+            {"$set": {"username": new_username}}
+        )
+
+        return jsonify({"message": "User updated successfully"}), 201
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 
 @app.route("/register", methods=["POST"])

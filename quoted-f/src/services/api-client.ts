@@ -45,6 +45,12 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
+  updateUser = (userData: any) => {
+    return axiosInstance
+      .post(this.endpoint, userData)
+      .then((res) => res.data);
+  };
+
   search = (type: string, query: any) => {
     return axiosInstance
       .get<T>(`${this.endpoint}/${type}/${query}`)

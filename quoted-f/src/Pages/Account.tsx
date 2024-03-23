@@ -26,7 +26,7 @@ function Account() {
     }, [liked_quotes]);
 
     const handleDislike = async (quoteId: string) => {
-        const quoteData ={
+        const quoteData = {
             "quoteId": quoteId,
             "userId": userId 
           }

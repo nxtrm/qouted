@@ -4,8 +4,6 @@ import { FaBookOpen, FaQuoteLeft, FaSearch } from "react-icons/fa";
 import { Quote } from "../hooks/quoteProvider";
 import APIClient from "../services/api-client";
 import QuoteCard from "./QuoteCard";
-import LikeButton from "./LikeButton";
-
 
 const SearchInput = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
