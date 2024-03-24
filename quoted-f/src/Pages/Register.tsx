@@ -23,6 +23,11 @@ function Register(){
             setError("All fields are required");
             return;
           }
+
+        if (username.length < 4) {
+            setError("Username must be at least 4 characters long");
+            return;
+          }
         
         if (password.length < 8) {
             setError("Password must be at least 8 characters long");
