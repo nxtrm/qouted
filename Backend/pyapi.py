@@ -237,7 +237,7 @@ def Login():
             liked_quotes = []
             for i in existing_user['liked-quotes']:
                 liked_quotes.append(str(i))
-            response = jsonify({"access_token": access_token, "userId": str(existing_user["_id"]), "liked_quotes": liked_quotes })
+            response = jsonify({"access_token": access_token, "userId": str(existing_user["_id"]), "liked_quotes": liked_quotes, "email": existing_user["email"] })
  
             return response, 200
         else:
@@ -250,24 +250,29 @@ def Login():
 def UpdateUser():
     try:
         data = request.json
-        username = data.get("username")
+        user_id = ObjectId(data.get("userId"))
         new_username = data.get("newUsername")
-        #add email update here
+        new_email = data.get("newEmail")
 
-        if not username or not new_username:
-            return jsonify({"error": "No usernames specified"}), 400
-        
-        existing_user = users.find_one({"username": username})
-        if not existing_user:
-            return jsonify({"error": "This user does not exist"}), 400
-        
-        # Update the username
-        users.update_one(
-            {"_id": existing_user["_id"]},
-            {"$set": {"username": new_username}}
-        )
-
-        return jsonify({"message": "User updated successfully"}), 201
+        if user_id:
+                user = users.find_one({"_id": user_id})
+                if not user:
+                    return jsonify({"error": "User not found"}), 400
+                else:
+                    if len(new_username)> 3:
+                        if new_username != user["username"]:
+                            users.update_one(
+                                {"_id": user["_id"]},
+                                {"$set": {"username": new_username}}
+                            )
+                    if len(new_email)> 3:
+                        if new_email != user["email"]:
+                            users.update_one(
+                                {"_id": user["_id"]},
+                                {"$set": {"email": new_email}}
+                            )
+                    return jsonify({"message": "User updated successfully"}), 201
+        return jsonify({"error": "No user ID specified"}), 400
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500

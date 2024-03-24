@@ -41,7 +41,7 @@ function Login(){
             if (response.access_token) {
                 localStorage.setItem("access_token", response.access_token);
                 // localStorage.setItem("liked_quotes", response.liked_quotes)
-                login(username, response.userId, response.liked_quotes)
+                login(username, response.userId, response.liked_quotes, response.email)
                 navigate("/")
                 toast({
                     title: "Logged In",

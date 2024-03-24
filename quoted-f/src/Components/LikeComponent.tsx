@@ -30,14 +30,14 @@ const LikeComponent = () => {
 
       const response = await likeQuote(quoteData);
       if (response.liked_quotes) {
-        update(null, response.liked_quotes);
+        update(null, null, response.liked_quotes);
       }
       setLiked(true);
       setLikesCount(likesCount + 1);
     } else {
       const response = await dislikeQuote(quoteData);
       if (response.liked_quotes) {
-        update(null, response.liked_quotes);
+        update(null, null, response.liked_quotes);
       }
       setLiked(false);
       setLikesCount(likesCount - 1);
