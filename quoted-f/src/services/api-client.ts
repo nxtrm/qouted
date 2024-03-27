@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { UserDataResponse } from '../hooks/UserProvider';
 
 export interface FetchResponse<T> {
   results: T[];
@@ -44,6 +45,19 @@ class APIClient<T> {
       .post(this.endpoint, userData)
       .then((res) => res.data);
   };
+
+  getUser = (token: string): Promise<UserDataResponse> => {
+    return axiosInstance
+      .get<UserDataResponse>("/userdata", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => res.data)
+      .catch((error) => {
+        throw new Error("Error getting user data: " + error.message);
+      });
+    }
 
   updateUser = (userData: any) => {
     return axiosInstance

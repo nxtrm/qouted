@@ -245,7 +245,37 @@ def Login():
         
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route("/userdata", methods=["GET"])
+@jwt_required(optional=True)
+def GetUserData():
+    try:
+        current_user = get_jwt_identity() #Returns None for some reason
+        if not current_user:
+            return jsonify({"error": "No user identity found in JWT token"}), 400
+
+        user = users.find_one({"username": current_user})
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+        
+        # Check if required fields are present in the user document
+        if "username" not in user or "email" not in user or "liked-quotes" not in user:
+            return jsonify({"error": "Incomplete user document"}), 500
+
+        liked_quotes = [str(quote) for quote in user.get("liked-quotes", [])]
+        
+        user_data = {
+            "username": user["username"],
+            "userId": str(user["_id"]),
+            "email": user["email"],
+            "liked_quotes": liked_quotes
+        }
+        
+        return jsonify(user_data), 200
     
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 @app.route("/update/user", methods=["POST"])
 def UpdateUser():
     try:

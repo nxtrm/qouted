@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import APIClient from "../services/api-client";
 
 interface UserContextType {
   username: string | null;
@@ -10,6 +11,13 @@ interface UserContextType {
   login: (username: string , userId: string, liked_quotes:[], email: string| null) => void;
   update: (newUsername: string| null, newEmail: string |null, newliked_quotes: []| null) =>void
   logout: () => void;
+}
+
+export interface UserDataResponse {
+  username: string;
+  userId: string;
+  email: string;
+  liked_quotes: string[]; 
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -33,7 +41,7 @@ export const UserProvider = ({ children }: Props) => {
   const [liked_quotes, setliked_quotes] = useState<[] | null>(null);
   
 
-  const login = (esername: string, userId:string, liked_quotes: [] , email: string| null) => {
+  const login = (username: string, userId:string, liked_quotes: [] , email: string| null) => {
     setUsername(username);
     setEmail(email)
     setUserId(userId);
@@ -64,6 +72,36 @@ export const UserProvider = ({ children }: Props) => {
   };
 
   const isLoggedIn = !!username; 
+
+  const apiClient = new APIClient("/userdata")
+
+  useEffect(() => {
+    if (Cookies.get("access_token")) {
+      fetchUserData()
+    }
+}, []);
+
+const fetchUserData = async () => {
+  try {
+    const token = Cookies.get("access_token");
+    if (!token) {
+      throw new Error("No access token found");
+    }
+
+    apiClient.getUser(token)
+      .then((userData) => {
+        setUsername(userData.username);
+        setEmail(userData.email);
+        setUserId(userData.userId);
+        setliked_quotes(userData.liked_quotes);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+  }
+};
 
   return (
     <UserContext.Provider value={{ username, email, isLoggedIn, userId, liked_quotes, login, update, logout }}>
