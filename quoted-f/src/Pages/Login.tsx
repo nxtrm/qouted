@@ -1,10 +1,11 @@
 import { Box, Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Text, VStack, useToast } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash, FaLink, FaRegUser } from "react-icons/fa";
 import { MdOutlinePassword } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../hooks/UserProvider";
 import APIClient from "../services/api-client";
+import Cookies from "js-cookie";
 
 function Login(){
     const [show, setShow] = React.useState(false)
@@ -19,6 +20,16 @@ function Login(){
     const apiClient = new APIClient("/login")
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Check if there's a token in cookies on component mount
+        const token = Cookies.get("access_token");
+        // if (token) {
+        //     // You might want to fetch user data using the token here
+        //     // For now, let's just navigate to the homepage
+        //     navigate("/");
+        // }
+    })
 
     const handleLogin = () => {
         //Frontend validation
@@ -39,7 +50,7 @@ function Login(){
             setError("");
 
             if (response.access_token) {
-                localStorage.setItem("access_token", response.access_token);
+                Cookies.set("access_token", response.access_token, { expires: 1 }); // Expires in one day
                 // localStorage.setItem("liked_quotes", response.liked_quotes)
                 login(username, response.userId, response.liked_quotes, response.email)
                 navigate("/")

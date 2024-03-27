@@ -1,6 +1,10 @@
 {
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "framer-motion": "^11.0.6"
+    "framer-motion": "^11.0.6",
+    "js-cookie": "^3.0.5"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6"
   }
 }

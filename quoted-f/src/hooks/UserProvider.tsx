@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+import Cookies from "js-cookie";
 
 interface UserContextType {
   username: string | null;
@@ -6,7 +7,7 @@ interface UserContextType {
   userId: string | null
   liked_quotes: [] | null
   isLoggedIn: boolean;
-  login: (username: string , userId: string, liked_quotes:[], newEmail: string| null) => void;
+  login: (username: string , userId: string, liked_quotes:[], email: string| null) => void;
   update: (newUsername: string| null, newEmail: string |null, newliked_quotes: []| null) =>void
   logout: () => void;
 }
@@ -32,11 +33,11 @@ export const UserProvider = ({ children }: Props) => {
   const [liked_quotes, setliked_quotes] = useState<[] | null>(null);
   
 
-  const login = (newUsername: string, newUserId:string, newliked_quotes: [] , newEmail: string| null) => {
-    setUsername(newUsername);
-    setEmail(newEmail)
-    setUserId(newUserId);
-    setliked_quotes(newliked_quotes)
+  const login = (esername: string, userId:string, liked_quotes: [] , email: string| null) => {
+    setUsername(username);
+    setEmail(email)
+    setUserId(userId);
+    setliked_quotes(liked_quotes)
 
   };
 
@@ -58,6 +59,8 @@ export const UserProvider = ({ children }: Props) => {
     setEmail(null);
     setUserId(null)
     setliked_quotes(null)
+
+    Cookies.remove("access_token");
   };
 
   const isLoggedIn = !!username; 
