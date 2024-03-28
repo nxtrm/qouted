@@ -6,7 +6,7 @@ interface UserContextType {
   username: string | null;
   email:string | null
   userId: string | null
-  liked_quotes: [] | null
+  liked_quotes: string[] | null
   isLoggedIn: boolean;
   login: (username: string , userId: string, liked_quotes:[], email: string| null) => void;
   update: (newUsername: string| null, newEmail: string |null, newliked_quotes: []| null) =>void
@@ -38,10 +38,10 @@ export const UserProvider = ({ children }: Props) => {
   const [username, setUsername] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
-  const [liked_quotes, setliked_quotes] = useState<[] | null>(null);
+  const [liked_quotes, setliked_quotes] = useState<string[] | null>(null);
   
 
-  const login = (username: string, userId:string, liked_quotes: [] , email: string| null) => {
+  const login = (username: string, userId:string, liked_quotes: string[] , email: string| null) => {
     setUsername(username);
     setEmail(email)
     setUserId(userId);
@@ -49,7 +49,7 @@ export const UserProvider = ({ children }: Props) => {
 
   };
 
-  const update = (newUsername: string| null, newEmail: string| null, newliked_quotes: []| null) => {
+  const update = (newUsername: string| null, newEmail: string| null, newliked_quotes: string[]| null) => {
     if (newUsername) {
       setUsername(newUsername);
     }
@@ -77,7 +77,7 @@ export const UserProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (Cookies.get("access_token")) {
-      fetchUserData()
+        fetchUserData()
     }
 }, []);
 
@@ -87,8 +87,8 @@ const fetchUserData = async () => {
     if (!token) {
       throw new Error("No access token found");
     }
-
-    apiClient.getUser(token)
+    if (!userId) {
+      apiClient.getUser(token)
       .then((userData) => {
         setUsername(userData.username);
         setEmail(userData.email);
@@ -98,6 +98,8 @@ const fetchUserData = async () => {
       .catch((error) => {
         console.error("Error fetching user data:", error);
       });
+    }
+
   } catch (error) {
     console.error("Error fetching user data:", error);
   }

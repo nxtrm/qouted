@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 #Cookies
 app.config['JWT_SECRET_KEY'] = '!z#x#QZh8ZVACnDHK%U4'
-app.config['JWT_TOKEN_LOCATION'] = ['cookies']
+# app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 app.config['JWT_ACCESS_COOKIE_PATH'] = '/'
 jwt = JWTManager(app)
 
