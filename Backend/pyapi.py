@@ -190,8 +190,9 @@ def Dislike():
                 quote_likes -= 1
                 quotes.update_one({"_id": quote_id}, {"$set": {"Likes": quote_likes}})
 
-            user_id = ObjectId(data.get("userId"))
-            if user_id:
+            user_id = data.get("userId")
+            if user_id != None:
+                user_id = ObjectId(data.get("userId"))
                 user = users.find_one({"_id": user_id})
                 if user:
 
@@ -210,7 +211,8 @@ def Dislike():
                 else:
                     return jsonify({"error": "User not found"}), 404
             else:
-                return jsonify({"error": "User ID not provided"}), 400
+                response = jsonify({"message": "Quote Unliked Successfully"})
+                return response, 200
         else:
             return jsonify({"error": "Quote not found"}), 404
     except Exception as e:

@@ -21,37 +21,40 @@ const LikeComponent = () => {
   const { userId, update} = useUserContext()
 
   const handleLikeClick = async () => {
-    const quoteData ={
-      "quoteId": quote.id,
-      "userId": userId 
-    }
+    if (!quote) return;
 
-    if (!liked) {
+    const quoteData = {
+        "quoteId": quote.id,
+        "userId": userId
+    };
 
-      const response = await likeQuote(quoteData);
-      if (response.liked_quotes) {
-        update(null, null, response.liked_quotes);
-      }
-      setLiked(true);
-      setLikesCount(likesCount + 1);
-    } else {
-      const response = await dislikeQuote(quoteData);
-      if (response.liked_quotes) {
-        update(null, null, response.liked_quotes);
-      }
-      setLiked(false);
-      setLikesCount(likesCount - 1);
+    try {
+        let response;
+        if (!liked) {
+            response = await likeQuote(quoteData);
+        } else {
+            response = await dislikeQuote(quoteData);
+        }
+
+        if (response.liked_quotes) {
+            update(null, null, response.liked_quotes);
+        }
+        console.log("chips")
+        setLiked(!liked);
+        setLikesCount(liked ? likesCount - 1 : likesCount + 1);
+    } catch (error) {
+        console.error("Error:", error);
     }
-  };
-  useEffect(() => {
+};
+
+useEffect(() => {
     if (quote) {
-      setLiked(false);
-      setLikesCount(quote.Likes);
+        setLiked(false);
+        setLikesCount(quote.Likes);
     }
-  }, [quote]);
+}, [quote]);
 
   const bg = useColorModeValue('gray.100', 'gray.700')
-
 
   return (
     <Badge

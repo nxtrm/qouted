@@ -1,4 +1,4 @@
-import { IconButton, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList } from '@chakra-ui/react';
+import { IconButton, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, useToast } from '@chakra-ui/react';
 import { VscAccount } from 'react-icons/vsc';
 import { Link } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
@@ -9,7 +9,7 @@ import { MdOutlineSettings } from "react-icons/md";
 const ProfileButton = () => {
 
   const { logout } = useUserContext();
-
+  const toast = useToast()
   const handleLogOut  = () => {
     logout()
     
@@ -56,7 +56,3 @@ const ProfileButton = () => {
 }
 
 export default ProfileButton
-
-function toast(_arg0: { title: string; description: string; status: string; duration: number; isClosable: boolean; }) {
-    throw new Error('Function not implemented.');
-}
