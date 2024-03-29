@@ -1,10 +1,10 @@
 import { Center, Divider, HStack, Heading, Text, VStack, useColorModeValue, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import ErrorComponent from "../Components/ErrorComponent";
-import LikeButton from "../Components/LikeButton";
-import LikeCount from "../Components/LikeCount";
-import { useUserContext } from "../hooks/UserProvider";
-import { Quote } from "../hooks/quoteProvider";
+import ErrorComponent from "./Errors/ErrorComponent";
+import LikeButton from "../Components/Like/LikeButton";
+import LikeCount from "../Components/Like/LikeCount";
+import { useUserContext } from "../Providers/UserProvider";
+import { Quote } from "../Providers/quoteProvider";
 import useDislike from "../hooks/useDislike";
 import APIClient from "../services/api-client";
 

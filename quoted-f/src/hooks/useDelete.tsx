@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import APIClient from "../services/api-client";
-import { Quote } from "./quoteProvider";
+import { Quote } from "../Providers/quoteProvider";
 
 const apiClient = new APIClient<Quote>("/delete/");
 

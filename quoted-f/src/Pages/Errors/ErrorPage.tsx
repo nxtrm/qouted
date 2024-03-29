@@ -1,5 +1,5 @@
 import { Heading } from "@chakra-ui/react";
-import NavBar from "../../Components/NavBar";
+import NavBar from "../../Components/NavBar/NavBar";
 
 const ErrorPage = () => {
   return (

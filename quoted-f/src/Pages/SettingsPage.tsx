@@ -1,5 +1,5 @@
 import { Box,Text, HStack, Button, Input, InputGroup, InputLeftElement, VStack, useToast, Heading, SimpleGrid, Grid, GridItem } from '@chakra-ui/react';
-import { useUserContext } from '../hooks/UserProvider';
+import { useUserContext } from '../Providers/UserProvider';
 import APIClient from '../services/api-client';
 import { useEffect, useState } from 'react';
 import { FaRegUser, FaSave } from 'react-icons/fa';

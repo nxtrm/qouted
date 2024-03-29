@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import APIClient from '../services/api-client';
-import QuoteScreen from '../Components/QuoteScreen';
+import QuoteScreen from '../Components/Quote/QuoteScreen';
 import { useState } from 'react';
 
 const apiClient = new APIClient("/quote/")

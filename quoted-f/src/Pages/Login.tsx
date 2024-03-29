@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash, FaLink, FaRegUser } from "react-icons/fa";
 import { MdOutlinePassword } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import { useUserContext } from "../hooks/UserProvider";
+import { useUserContext } from "../Providers/UserProvider";
 import APIClient from "../services/api-client";
 import Cookies from "js-cookie";
 

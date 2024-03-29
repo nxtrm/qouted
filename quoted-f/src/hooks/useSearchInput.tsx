@@ -1,6 +1,6 @@
 import { useState } from "react";
 import APIClient from "../services/api-client";
-import { Quote } from "./quoteProvider";
+import { Quote } from "../Providers/quoteProvider";
 
 const useSearch = () => {
     const [searchResults, setSearchResults] = useState<Quote[]>([]);

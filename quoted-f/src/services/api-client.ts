@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserDataResponse } from '../hooks/UserProvider';
+import { UserDataResponse } from '../Providers/UserProvider';
 
 export interface FetchResponse<T> {
   results: T[];

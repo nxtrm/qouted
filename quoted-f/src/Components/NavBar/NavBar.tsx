@@ -6,7 +6,7 @@ import {
   Spacer
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useUserContext } from "../hooks/UserProvider";
+import { useUserContext } from "../../Providers/UserProvider";
 import LoginButton from "./LoginButton";
 import ProfileButton from "./ProfileButton";
 import SearchInput from "./SearchInput";

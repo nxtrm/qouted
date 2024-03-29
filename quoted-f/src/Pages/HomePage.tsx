@@ -1,9 +1,9 @@
 import {
   Spinner
 } from "@chakra-ui/react";
-import ErrorComponent from "../Components/ErrorComponent";
-import QuoteScreen from "../Components/QuoteScreen";
-import { useQuoteContext } from "../hooks/quoteProvider";
+import ErrorComponent from "./Errors/ErrorComponent";
+import QuoteScreen from "../Components/Quote/QuoteScreen";
+import { useQuoteContext } from "../Providers/quoteProvider";
 import "./styles.css";
 
 function HomePage() {

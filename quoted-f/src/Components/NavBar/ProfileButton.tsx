@@ -3,7 +3,7 @@ import { VscAccount } from 'react-icons/vsc';
 import { Link } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
-import { useUserContext } from '../hooks/UserProvider';
+import { useUserContext } from '../../Providers/UserProvider';
 import { MdOutlineSettings } from "react-icons/md";
 
 const ProfileButton = () => {

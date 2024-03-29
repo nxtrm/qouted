@@ -12,8 +12,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { BiTrashAlt } from "react-icons/bi";
-import { Quote } from "../hooks/quoteProvider";
-import APIClient from "../services/api-client";
+import { Quote } from "../../Providers/quoteProvider";
+import APIClient from "../../services/api-client";
 
 interface Props {
   slug: string;

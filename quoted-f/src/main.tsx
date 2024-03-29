@@ -3,9 +3,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RouterProvider } from "react-router-dom";
-import QuoteProvider from "./hooks/quoteProvider.tsx";
+import QuoteProvider from "./Providers/quoteProvider.tsx";
 import router from "./routes";
-import { UserProvider } from "./hooks/UserProvider.tsx";
+import { UserProvider } from "./Providers/UserProvider.tsx";
 
 const queryClient = new QueryClient();
 

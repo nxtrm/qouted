@@ -1,9 +1,9 @@
 import { Box, Card, CardBody, HStack, Heading, Spacer, Text } from "@chakra-ui/react";
-import LikeButton from "./LikeButton";
+import LikeButton from "../Like/LikeButton";
 import { useState } from "react";
-import useDislike from "../hooks/useDislike";
-import useLike from "../hooks/useLike";
-import { useUserContext } from "../hooks/UserProvider";
+import useDislike from "../../hooks/useDislike";
+import useLike from "../../hooks/useLike";
+import { useUserContext } from "../../Providers/UserProvider";
 
 interface Props {
     id:string
@@ -31,13 +31,13 @@ const QuoteCard = ({type,text,alttext, id, icon}:Props) => {
     
           const response = await likeQuote(quoteData);
           if (response.liked_quotes) {
-            update(null, response.liked_quotes);
+            update(null, null, response.liked_quotes);
           }
           setLiked(true);
         } else {
           const response = await dislikeQuote(quoteData);
           if (response.liked_quotes) {
-            update(null, response.liked_quotes);
+            update(null, null, response.liked_quotes);
           }
           setLiked(false);
         }

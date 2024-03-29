@@ -1,8 +1,8 @@
 import { Box, HStack, IconButton, Input, Kbd, Modal, ModalBody, ModalContent, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaBookOpen, FaQuoteLeft, FaSearch } from "react-icons/fa";
-import QuoteCard from "./QuoteCard";
-import useSearch from "../hooks/useSearchInput";
+import QuoteCard from "../Quote/QuoteCard";
+import useSearch from "../../hooks/useSearchInput";
 
 const SearchInput = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();

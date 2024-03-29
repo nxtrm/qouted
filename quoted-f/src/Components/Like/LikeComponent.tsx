@@ -1,12 +1,12 @@
 import { Badge, HStack, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useQuoteContext } from "../hooks/quoteProvider";
-import useDislike from "../hooks/useDislike";
-import useLike from "../hooks/useLike";
-import ErrorComponent from "./ErrorComponent";
+import { useQuoteContext } from "../../Providers/quoteProvider";
+import useDislike from "../../hooks/useDislike";
+import useLike from "../../hooks/useLike";
+import ErrorComponent from "../../Pages/Errors/ErrorComponent";
 import LikeButton from "./LikeButton";
 import LikeCount from "./LikeCount";
-import { useUserContext } from "../hooks/UserProvider";
+import { useUserContext } from "../../Providers/UserProvider";
 
 const LikeComponent = () => {
   const { quote, error } = useQuoteContext();

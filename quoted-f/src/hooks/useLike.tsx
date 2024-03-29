@@ -1,5 +1,5 @@
 import APIClient from "../services/api-client";
-import { useUserContext } from "./UserProvider";
+import { useUserContext } from "../Providers/UserProvider";
 
 interface LikeParams {
   quoteId: string;

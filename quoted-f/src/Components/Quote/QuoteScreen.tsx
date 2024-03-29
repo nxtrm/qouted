@@ -1,8 +1,8 @@
 import { Grid, GridItem, SimpleGrid, VStack, Text, Box } from '@chakra-ui/react'
-import BookInfo from './BookInfo'
-import DeleteButton from './DeleteButton'
-import LikeComponent from './LikeComponent'
-import NextButton from './NextButton'
+import BookInfo from '../QuoteConfig/BookInfo'
+import DeleteButton from '../QuoteConfig/DeleteButton'
+import LikeComponent from '../Like/LikeComponent'
+import NextButton from '../QuoteConfig/NextButton'
 
 interface Props {
     quote : string,
