@@ -21,27 +21,25 @@ const QuoteCard = ({type,text,alttext, id, icon}:Props) => {
     const { likeQuote } = useLike();
     const { dislikeQuote } = useDislike();
 
-    const handleLikeClick = async () => {
-        const quoteData ={
+    const handleLikeClick = async () => {   //try replace thjis with like button
+      const quoteData = {
           "quoteId": id,
-          "userId": userId 
-        }
-    
-        if (!liked) {
-    
-          const response = await likeQuote(quoteData);
-          if (response.liked_quotes) {
-            update(null, null, response.liked_quotes);
-          }
-          setLiked(true);
-        } else {
-          const response = await dislikeQuote(quoteData);
-          if (response.liked_quotes) {
-            update(null, null, response.liked_quotes);
-          }
-          setLiked(false);
-        }
+          "userId": userId
       };
+  
+      try {
+          const response = liked ? await dislikeQuote(quoteData) : await likeQuote(quoteData);
+  
+          if (response.liked_quotes) {
+              update(null, null, response.liked_quotes);
+          }
+  
+          setLiked(!liked);
+      } catch (error) {
+          console.error("Error:", error);
+      }
+  };
+  
 
     return(
         <Card size={"sm"} variant="filled">

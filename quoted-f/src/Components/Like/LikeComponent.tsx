@@ -20,6 +20,7 @@ const LikeComponent = () => {
 
   const { userId, update} = useUserContext()
 
+
   const handleLikeClick = async () => {
     if (!quote) return;
 
@@ -27,8 +28,8 @@ const LikeComponent = () => {
         "quoteId": quote.id,
         "userId": userId
     };
-
-    try {
+    
+    try { 
         let response;
         if (!liked) {
             response = await likeQuote(quoteData);
@@ -39,7 +40,7 @@ const LikeComponent = () => {
         if (response.liked_quotes) {
             update(null, null, response.liked_quotes);
         }
-        console.log("chips")
+
         setLiked(!liked);
         setLikesCount(liked ? likesCount - 1 : likesCount + 1);
     } catch (error) {

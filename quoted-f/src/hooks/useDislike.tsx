@@ -1,5 +1,4 @@
 import APIClient from "../services/api-client";
-import { useUserContext } from "../Providers/UserProvider";
 
 interface DisLikeParams {
   quoteId: string;
