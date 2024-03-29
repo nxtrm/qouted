@@ -57,6 +57,6 @@ const ProfileButton = () => {
 
 export default ProfileButton
 
-function toast(arg0: { title: string; description: string; status: string; duration: number; isClosable: boolean; }) {
+function toast(_arg0: { title: string; description: string; status: string; duration: number; isClosable: boolean; }) {
     throw new Error('Function not implemented.');
 }

@@ -1,51 +1,31 @@
 import { Box, HStack, IconButton, Input, Kbd, Modal, ModalBody, ModalContent, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaBookOpen, FaQuoteLeft, FaSearch } from "react-icons/fa";
-import { Quote } from "../hooks/quoteProvider";
-import APIClient from "../services/api-client";
 import QuoteCard from "./QuoteCard";
+import useSearch from "../hooks/useSearchInput";
 
 const SearchInput = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [searching, setSearching] = useState(false); //default false
     const [query, setQuery] = useState("");
-    const [searchResults, setSearchResults] = useState<Quote[]>([]);
     const [type, setType] = useState("quote");
+    const [searching, setSearching] = useState(false);
 
-    const apiClient = new APIClient("/search");
-
-
-    const handleSearch = () => {
-        if (query.trim() !== "") {
-            setSearching(true);
-            apiClient.search(type, query)
-                .then((response: any) => {
-                    setSearchResults(response);
-                })
-                .catch((error) => {
-                    console.error("Error fetching search results:", error);
-                });
-        }
-    };
+    const { searchResults, setSearchResults, handleSearch } = useSearch();
     
     const handleInputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === 'Enter') {
-                handleSearch();
+                setSearching(true)
+                handleSearch(type, query);
             }
     };
-    
 
     useEffect(() => {
         if (query === "") {
-            setSearching(false)
-
+            setSearching(false);
+            setSearchResults([])
         }
     }, [query]);
 
-    useEffect(() => {
-        setSearchResults([]) //wiping and refetching data for a different category
-        handleSearch()
-    }, [type]);
 
     return (
         <HStack >

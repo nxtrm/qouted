@@ -33,7 +33,7 @@ function Account() {
 
         const response = await dislikeQuote(quoteData);
         if (response.liked_quotes) {
-            update(null, response.liked_quotes);
+            update(null, null, response.liked_quotes);
             toast({
                 title: "Removed quote from library",
                 status: "warning",
