@@ -43,8 +43,8 @@ const QuoteCard = ({type,text,alttext, id, icon}:Props) => {
 
     return(
         <Card size={"sm"} variant="filled">
-            <CardBody >
-                <HStack paddingX={1.5} spacing={4}>
+            <CardBody>
+                <HStack height={51} paddingX={1.5} spacing={4}>
                         <Box>
                             {icon}
                         </Box>
