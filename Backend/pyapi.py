@@ -67,10 +67,10 @@ def Quote(slug):
 
 @app.route('/search/<qtype>/<query>', methods=['GET'])
 def search_quotes(qtype, query):
-    
-    #currently only working correctly for types:quote
+
     try:
         query_params = {}
+
         if qtype == "book":
             query_params['Name'] = {"$regex": query, "$options": "i"}
             results = []
@@ -116,6 +116,7 @@ def search_quotes(qtype, query):
                 return jsonify(formatted_results), 200
             else:
                 return "No quotes found", 404
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

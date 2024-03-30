@@ -48,7 +48,7 @@ const SearchInput = () => {
                     </ModalBody>
                     
                     
-                     {searching && ( //map different components for different
+                     {searching && ( //map different components for different types
                         <>
                             {searchResults.map((result, index) => (
                                 <Box paddingY={1} paddingX={2} key={index}>

@@ -21,7 +21,7 @@ const QuoteCard = ({type,text,alttext, id, icon}:Props) => {
     const { likeQuote } = useLike();
     const { dislikeQuote } = useDislike();
 
-    const handleLikeClick = async () => {   //try replace thjis with like button
+    const handleLikeClick = async () => {   //try replace this with like button
       const quoteData = {
           "quoteId": id,
           "userId": userId
