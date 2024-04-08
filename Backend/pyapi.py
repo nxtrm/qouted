@@ -138,35 +138,27 @@ def Delete(slug):
     
 
 #Adds one like to the quote provided
-@app.route('/like', methods = ['POST'])
+@app.route('/like', methods=['POST'])
 def Like():
     try:
         data = request.json
         quote_id = ObjectId(data.get("quoteId"))
-
-        # Convert ObjectId to string for serialization
-        str_quote_id = str(quote_id)
-
         quote = quotes.find_one({"_id": quote_id})
 
         if quote:
             quote["Likes"] = quote.get("Likes", 0) + 1
             quotes.update_one({"_id": quote_id}, {"$set": quote})
+
             user_id = ObjectId(data.get("userId"))
             liked_quotes = None
+
             if user_id:
                 user = users.find_one({"_id": user_id})
                 if user:
-                    # Update users liked quotes
-                    users.update_one(
-                        {"_id": user_id},
-                        {"$addToSet": {"liked-quotes": quote_id}}
-                    ) 
+                    users.update_one({"_id": user_id}, {"$addToSet": {"liked-quotes": quote_id}})
                     updated_user = users.find_one({"_id": user_id})
-                    if updated_user :
-                        liked_quotes= []
-                        for i in updated_user["liked-quotes"]:
-                            liked_quotes.append(str(i))
+                    if updated_user:
+                        liked_quotes = [str(i) for i in updated_user["liked-quotes"]]
 
             response = jsonify({"message": "Quote Liked Successfully", "liked_quotes": liked_quotes})
             return response, 200

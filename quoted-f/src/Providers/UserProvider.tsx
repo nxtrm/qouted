@@ -88,18 +88,12 @@ const fetchUserData = async () => {
       throw new Error("No access token found");
     }
     if (!userId) {
-      apiClient.getUser(token)
-      .then((userData) => {
-        setUsername(userData.username);
-        setEmail(userData.email);
-        setUserId(userData.userId);
-        setliked_quotes(userData.liked_quotes);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
+      const userData = await apiClient.getUser(token);
+      setUsername(userData.username);
+      setEmail(userData.email);
+      setUserId(userData.userId);
+      setliked_quotes(userData.liked_quotes);
     }
-
   } catch (error) {
     console.error("Error fetching user data:", error);
   }

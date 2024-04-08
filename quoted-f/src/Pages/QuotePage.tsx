@@ -1,27 +1,51 @@
 import { useParams } from 'react-router-dom';
 import APIClient from '../services/api-client';
 import QuoteScreen from '../Components/Quote/QuoteScreen';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const apiClient = new APIClient("/quote/")
+const apiClient = new APIClient<Quote>("/quote/")
 
-const QuotePage = () => {
-  //   const { id } = useParams()
-  //   const [quote, setQuote] = useState([])
+interface Quote {
+  id: string;
+  Quote: string;
+  DateAdded: string;
+  BookName: string;
+  AuthorName: string;
+  Likes: number;
+}
 
-  //   apiClient.get(id)
-  //   .then((response) => {
-  //       setQuote(response.)
-  //   })
-  //   .catch((error) => {})
+function QuotePage() {
+  const { id } = useParams();
+  const [quote, setQuote] = useState<Quote|undefined>();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiClient.getQuote(id as string);
+        if (response) {
+          setQuote(response);
+        }
+      } catch (error) {
+        // Handle errors later
+      }
+    };
 
+    fetchData();
+  }, [id]);
 
+  return (
+    <div>
+      {quote && (
+        <QuoteScreen
+          quote={quote.Quote}
+          dateAdded={quote.DateAdded}
+          id={quote.id}
+          refetch={function (): void {}}
+        />
+      )}
+    </div>
+  );
 
-  // return (
-  //   <QuoteScreen quote={''} dateAdded={''} id={response} refetch={function (): void {
-  //     } }/>
-  // )
 }
 
 export default QuotePage

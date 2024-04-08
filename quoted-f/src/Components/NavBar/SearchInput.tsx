@@ -1,29 +1,12 @@
-import { Box, HStack, Badge, IconButton, Input, Kbd, Modal, ModalBody, ModalContent, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { FaBookOpen, FaQuoteLeft, FaSearch, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Badge, Box, HStack, IconButton, Input, Kbd, Modal, ModalBody, ModalContent, ModalOverlay, Select } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { FaBookOpen, FaChevronLeft, FaChevronRight, FaQuoteLeft, FaSearch } from "react-icons/fa";
+import useSearchInputLogic from "../../hooks/useSearchInputLogic";
 import QuoteCard from "../Quote/QuoteCard";
-import useSearch from "../../hooks/useSearchInput";
+import { Link } from "react-router-dom";
 
 const SearchInput = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const [query, setQuery] = useState("");
-    const [type, setType] = useState("quote");
-    const [searching, setSearching] = useState(false);
-
-    
-    const [currentPage, setCurrentPage] = useState(1);
-    const [resultsPerPage, setResultsPerPage] = useState(5); //Maybe add options to change the number of results later
-    
-    const { searchResults, setSearchResults, handleSearch } = useSearch();
-    
-    
-    const handleInputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            setSearching(true);
-            setCurrentPage(1)
-            handleSearch(type, query);
-        }
-    };
+    const { isOpen, onOpen, onClose, query, type, searching, currentPage, resultsPerPage, searchResults, setQuery, setType, setSearching, setCurrentPage, setResultsPerPage, setSearchResults, handleSearch, handleInputKeyPress } = useSearchInputLogic();
     
     useEffect(() => {
         if (query === "") {
@@ -73,24 +56,28 @@ const SearchInput = () => {
                             {currentResults.map((result, index) => (
                                 <Box paddingY={1} paddingX={2} key={index}>
                                     {type === "quote" &&
-                                        <QuoteCard
-                                            key={index}
-                                            icon={<FaQuoteLeft size={"1.25rem"} />}
-                                            type="quote"
-                                            id={result?.id}
-                                            text={result?.Quote}
-                                            alttext={result?.BookName}
-                                        />
+                                        <Link to={`/quote/${result?.id}`}>
+                                            <QuoteCard
+                                                key={index}
+                                                icon={<FaQuoteLeft size={"1.25rem"} />}
+                                                type="quote"
+                                                id={result?.id}
+                                                text={result?.Quote}
+                                                alttext={result?.BookName}
+                                            />
+                                        </Link>
                                     }
                                     {type === "book" &&
-                                        <QuoteCard
-                                            key={index}
-                                            type="book"
-                                            icon={<FaBookOpen size={"1.25rem"} />}
-                                            id={result?.id}
-                                            alttext={result?.AuthorName}
-                                            text={result?.BookName}
-                                        />
+                                        <Link to={`/book/${result?.id}`}>
+                                            <QuoteCard
+                                                key={index}
+                                                type="book"
+                                                icon={<FaBookOpen size={"1.25rem"} />}
+                                                id={result?.id}
+                                                alttext={result?.AuthorName}
+                                                text={result?.BookName}
+                                            />
+                                        </Link> 
                                     }
                                 </Box>
                             ))}

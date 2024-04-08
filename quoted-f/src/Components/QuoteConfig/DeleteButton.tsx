@@ -30,7 +30,6 @@ function DeleteQuote({ slug, onDeletion }: Props) {
   const handleDeletion = async () => {
     try {
       await apiClient.get(slug);
-      console.log("deleted " + slug);
     } catch (error) {
       console.error("Error deleting quote:", error);
     } finally {

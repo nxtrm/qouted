@@ -22,7 +22,7 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
-  get = (id: number | string) => {
+  getQuote = (id: string) => {
     return axiosInstance
       .get<T>(this.endpoint + id)
       .then((res) => res.data);

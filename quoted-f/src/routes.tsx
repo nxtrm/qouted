@@ -7,6 +7,7 @@ import Layout from "./Pages/Layout";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import SettingsPage from "./Pages/SettingsPage";
+import QuotePage from "./Pages/QuotePage";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,12 @@ const router = createBrowserRouter([
       {
         path:"/settings",
         element: <SettingsPage/>,
+      },
+      {
+        path:"/quote/:id",
+        element: <QuotePage/>,
       }
+
       // {
       //   path:"/quote/:slug",
       //   element: <QuotePage/>,
